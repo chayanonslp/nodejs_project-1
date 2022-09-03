@@ -16,11 +16,11 @@ const {
 // });
 
 router.get('/', function (req, res, next) {
-  db.query("SELECT * FROM users", (err, result) => {
+  db.query("SELECT * FROM users", (err, results) => {
     if (err) {
       console.log(err);
     } else {
-      res.render('users', { title: 'User' + result[0].User_id + result[0].User_name });
+      res.render('users', { title: 'User' + results[0].User_id + results[0].User_name });
     }
   });
 })

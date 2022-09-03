@@ -4,12 +4,12 @@ const db = require('../lib/connect.js')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 /* GET users listing. */
-// router.get('/', function (req, res, next) {
-//   db.query('SELECT * FROM users');
+router.get('/', function (req, res, next) {
+  db.query('SELECT * FROM employee');
 
-//   console.log(db)
-//   res.render('users', { title: 'User' + id });
-// });
+  console.log(db)
+  res.render('employees/employeepage', { title: 'employee' +result[0].Employee_id + result[0].Employee_name });
+});
 
 // router.get('/', function (req, res, next) {
 //   db.query("SELECT * FROM users", (err, result) => {

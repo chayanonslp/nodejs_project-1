@@ -9,6 +9,13 @@
           <%})%>
   </ul>
   <%}%>
+  <% if(locals.mailers){ %>
+    <ul class="alert alert-danger">
+      <li>
+        <%= mailers %>
+    </li>
+    </ul>
+    <%}%>
 <div class="wrapper fadeInDown">
  <div id="formContent">
    <!-- Tabs Titles -->
