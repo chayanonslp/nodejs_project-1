@@ -2,30 +2,48 @@ var express = require('express');
 var router = express.Router();
 const db = require('../lib/connect.js')
 const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 const {
   check,
   validationResult
 } = require('express-validator');
 
 /* GET users listing. */
-// router.get('/', function (req, res, next) {
-//   db.query('SELECT * FROM users');
 
-//   console.log(db)
-//   res.render('users', { title: 'User' + id });
-// });
-
-router.get('/', function (req, res, next) {
-  db.query("SELECT * FROM users", (err, results) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('users', { title: 'User' + results[0].User_id + results[0].User_name });
+router.get('/:id', function (req, res, next) {
+  const id = req.params.id
+  db.query(`SELECT * FROM users WHERE User_id = ${db.escape(id)};`,
+  (err, result) => {
+    if(err){
+      console.log(err)
+    }else{
+      const role = 1;
+      return res.render('users/user',{result,role});
     }
-  });
+   
+    })
+  }
+)
+
+router.get('/useProfiles/:id', function (req, res, next) {
+    const id = req.params.id;
+    db.query(`SELECT * FROM users WHERE User_id = ${db.escape(id)};`,
+    (err, result) => {
+      if(err){
+        console.log(err)
+      }else{
+        const role = 1;
+        return res.render('users/useProfile',{result,role});
+      }
+     
+      })
 })
-router.get('/register', function (req, res, next) {
-  res.render('users/registers', { title: 'User_register' });
+router.get('/page/s', function (req, res, next) {
+  res.render('users/page');
+});
+
+router.get('/register/s', function (req, res, next) {
+  res.render('users/register');
 });
 // เพิ่ม Users
 router.post('/register',
@@ -42,7 +60,7 @@ router.post('/register',
     var errors = result.errors;
 
     if (!result.isEmpty()) {
-      res.render('users/registers', {
+      res.render('users/register', {
         errors: errors
       })
       return res.status(400).send({ error: true, message: "Please provide user username and password." });
@@ -54,15 +72,18 @@ router.post('/register',
     const Email = req.body.inputEmail;
     const Address = req.body.inputAddress;
     const Passwordhash = bcrypt.hashSync(Password, 10);
-
+    const role = 1;
     //  console.log(Name,Password,Phone,Address, Email)
     //  console.log(Password)
     //  console.log(Passwordhash)
-
+    db.query('INSERT INTO email_pass (email,password,role) VALUES(?,?,?)',
+    [Email, Passwordhash, role], (error, results, fields) => {
+      if (error) throw error;
+    })
     db.query('INSERT INTO users (User_name,User_password,User_phone,User_email,User_address) VALUES(?,?,?,?,?)', [Name, Passwordhash, Phone, Email, Address], (error, results, fields) => {
       if (error) throw error;
 
-      return res.render('users/registers', { error: false, data: results, message: "create success" })
+      return res.render('users/register', { error: false, data: results, message: "create success" })
 
     })
   }

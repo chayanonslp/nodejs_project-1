@@ -4,17 +4,35 @@ const db = require('../lib/connect')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const JWT_SECRET =
+  "goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
+//******upload รูปภาพ ***********/
+
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//         cb(null, './public/images');
+//   },
+//   filename: function (req, file, cb) {
+//         cb(null, Date.now() + ".jpg");
+//   }
+// });
+
+// var upload = multer({
+//   storage: storage
+// });
+
+// ****** จบการ upload รูปภาพ ***********/
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  // var vr = con.query("SELECT * From user")
-
   res.render('index', { title: 'Express' });
 });
 router.get('/login', function (req, res, next) {
   // var vr = con.query("SELECT * From user")
-
-  res.render('logins', { title: 'Express' });
+  res.render('logins');
 });
+
+
 router.post('/login',
   [
     check('email', 'ใส่ E-mail').not().isEmpty(),
@@ -74,39 +92,41 @@ router.post('/login',
               }
               if (bResult === true) {
                 if (result[0].role === 1) {
-                  console.log(result[0].email, '1')
-
+                  const role = result[0].role
                   db.query(`SELECT * FROM users WHERE User_email = ${db.escape(email)};`,
-                    (err, resultd) => {
-                      const token = jwt.sign({ id: resultd[0].User_id }, 'the-super-strong-secrect', { expiresIn: '1h' });
+                    (err, result) => {
+                      token = jwt.sign({ id: result[0].User_id }, JWT_SECRET, { expiresIn: '1h' });
                       db.query(
-                        `UPDATE users SET last_login = now() WHERE User_id = '${resultd[0].User_id}'`,
-
+                        `UPDATE users SET last_login = now() WHERE User_id = '${result[0].User_id}'`,
                       );
-                      return res.render('users/users', {
+                      return res.render('users/user', {
                         token,
-                        resultd
-
+                        result,
+                        role
+                       
                       });
+
                     }
                   )
                 }
                 if (result[0].role === 2) {
-                  console.log(result[0].email, '1')
+                  const role = result[0].role
                   db.query(`SELECT * FROM employee WHERE Employee_email = ${db.escape(email)};`,
-                  (err, resultEM) => {
-                    const token = jwt.sign({ id: resultEM[0].Employee_id }, 'the-super-strong-secrect', { expiresIn: '1h' });
-                    db.query(
-                      `UPDATE employee SET Employee_login = now() WHERE Employee_id = '${resultEM[0].Employee_id}'`
-                    );
-                    return res.render('employees/employeepage', {
-                      token,
-                      resultEM
+                    (err, result) => {
+                      token = jwt.sign({ id: result[0].Employee_id }, JWT_SECRET, { expiresIn: '1h' });
+                      db.query(
+                        `UPDATE employee SET Employee_login = now() WHERE Employee_id = '${result[0].Employee_id}'`
+                      );
+                      return res.render('employees/employeepage', {
+                        token,
+                        result,
+                        role
+                      }
+                      );
                     }
-                    );
-                  }
 
-          )}
+                  )
+                }
 
               }
 
@@ -119,80 +139,14 @@ router.post('/login',
       )
 
     }
-
-    // if (email || password) {
-    //   db.query(
-    //     `SELECT * FROM employee WHERE Employee_email = ${db.escape(req.body.email)};`,
-    //     (err, result) => {
-    //       console.log(result, 'check')
-    //       // user does not exists
-    //       if (err) {
-    //         throw err;
-    //         return res.status(400).send({
-    //           msg: err
-    //         });
-    //       }
-    //       if (!result.length) {
-    //         console.log(!result.length, 'check')
-    //         const mailers = "Email ไม่ถูกต้อง_2"
-    //         return res.render('logins', {
-    //           mailers
-
-    //         });
-
-    //         // res.status(401).send({
-    //         //   msg: 'Email is incorrect!_1'
-
-    //         // });
-    //       }
-    //       // check password
-    //       bcrypt.compare(req.body.password, result[0].Employee_password,
-    //         // console.log(result[0]),
-    //         (bErr, bResult) => {
-    //           console.log(bResult)
-    //           // wrong password
-    //           if (bErr) {
-    //             throw bErr;
-    //             return res.status(401).send({
-    //               msg: 'Email or password is incorrect!_2'
-    //             });
-    //           }
-    //           if (bResult) {
-
-    //             const token = jwt.sign({ id: result[0].Employee_id }, 'the-super-strong-secrect', { expiresIn: '1h' });
-    //             db.query(
-    //               `UPDATE employee SET Employee_login = now() WHERE Employee_id = '${result[0].Employee_id}'`
-    //             );
-    //             return res.render('employees/employeepage', {
-    //               token,
-    //               result
-    //             });
-
-
-    //             // res.status(200).send({
-    //             //   User: result[0]
-    //             //   // render('logins'{})
-
-    //             // });
-    //           }
-    //           const mailers = "Password ไม่ถูกต้อง_2"
-    //           return res.render('logins', {
-    //             mailers
-
-    //           }, console.log(mailers));
-
-
-    //           // res.status(401).send({
-    //           //   msg: 'password is incorrect!_3'
-    //           // });
-    //         }
-    //       );
-    //     }
-
-    //   )
-    // }
-
-
-
   })
+
+router.get('/logout', function (req, res, next) {
+  const tokens = req.params.token
+  console.log(tokens)
+  const token = null;
+  console.log(token)
+  res.render('logins');
+
+})
 module.exports = router;

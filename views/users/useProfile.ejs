@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= result[0].Employee_name %></title>
+    <title><%= result[0].User_name %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <%- include("../navbar") %>
-    <h1> หน้าแรก <%= result[0].Employee_name %> </h1>
-   
+
+    <h1><%= result[0].User_email %></h1>
+    <p>Welcome to <%= result[0].User_id %></p>
+    <p>Welcome to <%= result[0].User_password %></p>
+    <p>Welcome to <%= result[0].role %></p>
     <a  type="button" class="btn btn-danger" href="/logout">Logout</a>
   </body>
 </html>
