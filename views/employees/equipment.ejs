@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>อุปกรณ์</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <%- include("../navbar") %>
+    <div class="container mt-3">
+      <h2>อุปกรณ์</h2>
+      <a type="text" href="/employees/re_equipment/s/<%= result[0].Employee_id %>" name="Employee_id" id="Employee_id "
+        class="btn btn-primary">เพิ่มอุปกรณ์</a>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ยี่ห้อ</th>
+            <th>รายละเอียดอุปกรณ์</th>
+            <th>จำนวน</th>
+            <th>ราคา</th>
+            <th></th>
+
+          </tr>
+        </thead>
+        <% Object.values(result_eq).forEach(function(result_eqs){%>
+          <tbody>
+            <tr>
+              <td>
+                <%= result_eqs.Equipment_id %>
+              </td>
+              <td>
+                <%= result_eqs.Equipment_name %>
+              </td>
+              <td>
+                <%= result_eqs.Device_details %>
+              </td>
+              <td>
+                <%= result_eqs.Equipmentnum %>
+              </td>
+              <td>
+                <%= result_eqs.Price %> บาท
+              </td>
+              <td>
+                <a type="button " class="btn btn-danger "
+                  href="/employees/de_equipment/s/<%= result_eqs.Equipment_id %>/<%= result[0].Employee_id %>">ลบ</a>
+                <a type="button " class="btn btn-warning "
+                  href="/employees/edit_equipment/s/<%= result_eqs.Equipment_id %>/<%= result[0].Employee_id %>">แก้ไข</a>
+              </td>
+            </tr>
+          </tbody>
+          <%})%>
+      </table>
+    </div>
+
+</body>
+
+</html>

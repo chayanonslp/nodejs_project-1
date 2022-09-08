@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+เพิ่มอุปกรณ์
+  </title>
+</head>
+<body>
+
+  <%- include("../navbar") %>
+    <% if(locals.errors){ %>
+      <ul class="alert alert-danger">
+        <% Object.values(errors).forEach(function(error){%>
+          <li>
+            <%= error.msg %>
+          </li>
+          <%})%>
+      </ul>
+      <%}%>
+     
+        <form class="row g-3" action="/employees/re_equipment" method="post" >
+            <label for="inputEquipment_name" class="form-label">ยี่ห้อ</label>
+            <input type="Name" class="form-control" name="inputEquipment_name" id="inputEmName">
+          </div>
+          <div class="col-md-6">
+            <label for="Device_details" class="form-label">รายละเอียดอุปกรณ์  </label>
+            <input type="text" class="form-control" name="Device_details" id="Device_details">
+          </div>
+          <div class="col-md-6">
+            <label for="Equipmentnum" class="form-label">จำนวน</label>
+            <input type="text" class="form-control" name="Equipmentnum" id="Equipmentnum" placeholder="Number">
+          </div> 
+          <div class="col-12">
+            <label for="Price" class="form-label">ราคา</label>
+            <input type="text" class="form-control" name="Price" id="Price"
+              placeholder="1234 Main St">
+          </div> 
+            <input type="hidden"  name="Employee_id" id="Employee_id " value="<%= result[0].Employee_id %>">
+                                            
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </div>
+        </form>
+</body>
+
+</html>

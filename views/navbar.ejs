@@ -97,10 +97,7 @@
           </li>  -->
 
               </ul>
-              <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
+              <a type="button" class="btn btn-danger d-flex" href="/logout">Logout</a>
             </div>
           </div>
         </nav>
@@ -112,7 +109,7 @@
           <% if(locals.role===2){ %>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <div class="container-fluid">
-                <a class="navbar-brand" href="#">Employees</a>
+                <a class="navbar-brand" href="#"><%= result[0].Employee_name %></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                   aria-label="Toggle navigation">
@@ -122,10 +119,13 @@
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page"
-                        href="/employees/<%= result[0].Employee_id %>">Home</a>
+                        href="/employees/<%= result[0].Employee_id %>">หน้าแรก</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/employees/emProfiles/<%= result[0].Employee_id %>">Profile</a>
+                      <a class="nav-link" href="/employees/emProfiles/<%= result[0].Employee_id %>">ข้อมูลพนักงาน</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/employees/equipment/s/<%= result[0].Employee_id %>">อุปกรณ์</a>
                     </li>
 
                     <!-- <li class="nav-item dropdown">
@@ -142,10 +142,9 @@
           </li>  -->
 
                   </ul>
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
+                 
+                    <a type="button" class="btn btn-danger d-flex" href="/logout">Logout</a>
+               
                 </div>
               </div>
 
