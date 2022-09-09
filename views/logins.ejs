@@ -1,7 +1,9 @@
 <link rel='stylesheet' href='/stylesheets/login.css' />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
 <%- include("./navbar") %> 
 <% if(locals.errors){ %>
   <ul class="alert alert-danger">
+    
       <% Object.values(errors).forEach(function(error){%>
           <li>
               <%= error.msg %>
@@ -17,14 +19,15 @@
     </ul>
     <%}%>
 <div class="wrapper fadeInDown">
+  
  <div id="formContent">
    <!-- Tabs Titles -->
                                               
-   <!-- Icon -->
+   <!-- Icon --><br><br>
  <div class="fadeIn first">
-  <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+  <img src="/image/0011.png" id="icon" alt="User Icon" />
  </div>
-                                                
+ <br>                                      
  <!-- Login Form -->
  <form action="/login"method="post">
     <input type="text" id="email" class="fadeIn second" name="email" placeholder="E-mail">

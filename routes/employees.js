@@ -74,7 +74,7 @@ router.get('/re_equipment/s/:id', function (req, res, next) {
     })
 });
 
-// หน้า Equipment  /method get
+// หน้าแสดง อุปกรณ์ Equipment  /method get
 router.get('/equipment/s/:id', function (req, res, next) {
   const id = req.params.id;
   db.query(`SELECT Employee_id,Employee_name FROM employee WHERE Employee_id = ${db.escape(id)};`,

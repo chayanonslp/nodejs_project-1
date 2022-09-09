@@ -12,15 +12,20 @@ const {
 
 router.get('/:id', function (req, res, next) {
   const id = req.params.id
+  const role = 1;
   db.query(`SELECT * FROM users WHERE User_id = ${db.escape(id)};`,
   (err, result) => {
     if(err){
       console.log(err)
-    }else{
-      const role = 1;
-      return res.render('users/user',{result,role});
+    }else{ 
+      db.query(`SELECT * FROM equipment`,
+      (err, result_eq) => {
+        if (err) {
+          console.log(err)
+        }
+        return res.render('users/user', { result, result_eq, role });
+      })
     }
-   
     })
   }
 )
@@ -65,7 +70,6 @@ router.post('/register',
       })
       return res.status(400).send({ error: true, message: "Please provide user username and password." });
     }
-
     const Name = req.body.inputName;
     const Password = req.body.inputPassword;
     const Phone = req.body.inputPhone;

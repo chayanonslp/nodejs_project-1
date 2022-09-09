@@ -1,3 +1,13 @@
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!--Fonts/Icons CSS-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="fonts/stylesheet.css">
+
 <!DOCTYPE html>
 <html>
 
@@ -9,40 +19,348 @@
 
 <body>
   <%- include("../navbar") %>
-  <% if(locals.errors){ %>
-    <ul class="alert alert-danger">
+    <% if(locals.errors){ %>
+      <ul class="alert alert-danger">
         <% Object.values(errors).forEach(function(error){%>
-            <li>
-                <%= error.msg %>
-            </li>
-            <%})%>
-    </ul>
-    <%}%>
-  <form action="/users/register"method="post" class="row g-3">
-    <div class="col-md-6">
-      <label for="inputName" class="form-label">Name</label>
-      <input type="Name" Name='inputName'class="form-control" id="inputName">
-    </div>
-    <div class="col-md-6">
-      <label for="inputPassword" class="form-label">Password</label>
-      <input type="password" class="form-control"Name='inputPassword' id="inputPassword">
-    </div>
-    <div class="col-12">
-      <label for="inputPhone" class="form-label">Phone</label>
-      <input type="text" class="form-control" id="inputPhone" Name='inputPhone' placeholder="Number">
-    </div>
-    <div class="col-md-6">
-      <label for="inputEmail" class="form-label">Email</label>
-      <input type="email" class="form-control" Name='inputEmail' id="inputEmail">
-    </div>
-    <div class="col-12">
-      <label for="inputAddress" class="form-label">Address</label>
-      <input type="text" class="form-control"  Name='inputAddress'id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
-  </form>
+          <li>
+            <%= error.msg %>
+          </li>
+          <%})%>
+      </ul>
+      <%}%>
+       <br><br>
+        <div id="main-carousel" class="carousel slide" data-ride="carousel">
+
+          <section class="home__form">
+            <div class="container">
+              <div class="home__form-container text-center">
+                <h3>สมาชิกผู้ใช้งาน</h3>
+                <p>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</p>
+                <br>
+                <form action="/users/register" method="post" class="row g-3">
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <h4>Name</h4>
+                        <div class="input-box ">
+                          <input  placeholder="Name *" aria-label="Name"
+                            aria-describedby="name" type="Name" Name='inputName' class="form-control" id="inputName">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <h4>Password</h4>
+                        <div class="input-box ">
+                          <input  
+                            placeholder="Password"aria-label="Password" aria-describedby="Password" type="password" class="form-control" Name='inputPassword' id="inputPassword">
+                          <i class="fa fa-solid fa-key" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="col-12">
+                      <div class="form-group">
+                        <h4>phone</h4>
+                        <div class="input-box ">
+                          <input  aria-label="phone" 
+                            aria-describedby="phone"type="text" class="form-control" id="inputPhone" Name='inputPhone' placeholder="Number">
+                          <i class="fa fa-phone" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <h4>Email</h4>
+                        <div class="input-box ">
+                          <input  placeholder="email" aria-label="email"
+                            aria-describedby="email"type="email" class="form-control" Name='inputEmail' id="inputEmail">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <h4>Address</h4>
+                        <div class="input-box ">
+                          <input  aria-label="phone"
+                            aria-describedby="phone" type="text" class="form-control" Name='inputAddress' id="inputAddress" placeholder="1234 Main St">
+                          <i class="fa fa-address-book" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary d-flex">Sign in</button>
+                    </div>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
 </body>
 
 </html>
+
+<style>
+  #main-carousel {
+    margin-top: 20px;
+    text-shadow: 1px 2px 3px #0000001f;
+  }
+
+  #main-carousel h5 {
+    font-size: 3rem;
+    font-family: inherit;
+    font-weight: 300;
+    -webkit-animation: leftToRight 1s ease-in-out .5s;
+    animation: leftToRight 1s ease-in-out .5s;
+  }
+
+  #main-carousel h2 {
+    font-size: 6.6rem;
+    font-weight: 900;
+    font-family: inherit;
+    letter-spacing: 2px;
+    -webkit-animation: topToBottom 1s linear .3s;
+    animation: topToBottom 1s linear .3s;
+  }
+
+  #main-carousel .carousel-caption {
+    right: 15%;
+    bottom: unset;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: left;
+  }
+
+  #main-carousel .carousel-control-next,
+  #main-carousel .carousel-control-prev {
+    top: 50%;
+    bottom: unset;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 4%;
+    font-size: 3.5rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    -webkit-transition: 5s all;
+    transition: 5s all;
+  }
+
+  #main-carousel .carousel-control-next {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+
+  #main-carousel .carousel-control-prev {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+
+  #main-carousel .btn-info {
+    background: transparent;
+    text-transform: uppercase;
+    border: 0;
+    font-family: "helveticaregular";
+    font-size: 1.8rem;
+    position: relative;
+    padding: 20px 0 0;
+    margin: 20px 0 0;
+  }
+
+  #main-carousel .btn-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 63px;
+    height: 5px;
+    background-color: #fff;
+  }
+
+  .home__form {
+    padding: 1.5rem;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    top: -50px;
+    font-size: 1.6rem;
+    width: 80%;
+    margin: auto;
+  }
+
+  .home__form h3 {
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+
+  .home__form p {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .home__form form {
+    text-align: left;
+  }
+
+  .home__form form label {
+    font-size: 1.4rem;
+    color: rgba(0, 0, 0, 0.7);
+    font-family: "helveticaregular";
+  }
+
+  .home__form form .input-box {
+    position: relative;
+  }
+
+  .home__form form .input-box .fa {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-left: 1px solid #cdcdcd;
+    padding: 3px 15px 3px 10px;
+    color: #898989;
+  }
+
+  .home__form form .input-box input {
+    height: 45px;
+  }
+
+  .home__form form .input-box textarea,
+  .home__form form .input-box input {
+    border-color: #efefef;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    font-size: 1.6rem;
+    padding: 10px;
+    caret-color: #fc5546;
+  }
+
+  .home__form form .input-box textarea:focus+.fa,
+  .home__form form .input-box input:focus+.fa {
+    color: #fc5546;
+    border-color: #fc5546;
+  }
+
+  .home__form form .input-box textarea:not(:placeholder-shown),
+  .home__form form .input-box input:not(:placeholder-shown) {
+    border-color: green;
+  }
+
+  .btn.btn-danger {
+    width: 100%;
+    height: 45px;
+    font-size: 1.7rem;
+    background-color: #fc5546;
+    text-transform: uppercase;
+    border-radius: 5px;
+    border-color: transparent;
+    -webkit-transition: .3s all;
+    transition: .3s all;
+  }
+
+  .btn.btn-danger:hover {
+    background: #231833;
+  }
+
+  .btn-more {
+    font-size: 1.6rem;
+    color: #000;
+    font-family: "helveticaregular";
+  }
+
+  .btn-more span {
+    border-bottom: 1px dotted #000;
+  }
+
+
+  @-webkit-keyframes leftToRight {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(-80px);
+      transform: translateX(-80px);
+    }
+
+    80% {
+      -webkit-transform: translateX(20px);
+      transform: translateX(20px);
+      opacity: .7;
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes leftToRight {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(-80px);
+      transform: translateX(-80px);
+    }
+
+    80% {
+      -webkit-transform: translateX(20px);
+      transform: translateX(20px);
+      opacity: .7;
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+
+  @-webkit-keyframes topToBottom {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(-50px);
+      transform: translateY(-50px);
+    }
+
+    80% {
+      -webkit-transform: translateY(10px);
+      transform: translateY(10px);
+      opacity: .7;
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes topToBottom {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(-50px);
+      transform: translateY(-50px);
+    }
+
+    80% {
+      -webkit-transform: translateY(10px);
+      transform: translateY(10px);
+      opacity: .7;
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -99,12 +99,13 @@ router.post('/login',
                       db.query(
                         `UPDATE users SET last_login = now() WHERE User_id = '${result[0].User_id}'`,
                       );
-                      return res.render('users/user', {
-                        token,
-                        result,
-                        role
-                       
-                      });
+                      db.query(`SELECT * FROM equipment`,
+                        (err, result_eq) => {
+                          if (err) {
+                            console.log(err)
+                          }
+                          return res.render('users/user', {  token, result,result_eq, role });
+                        })
 
                     }
                   )
