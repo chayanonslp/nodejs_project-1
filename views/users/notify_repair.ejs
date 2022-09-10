@@ -1,0 +1,47 @@
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    แจ้งซ่อม
+  </title>
+</head>
+
+<body>
+
+  <%- include("../navbar") %>
+    <% if(locals.errors){ %>
+      <ul class="alert alert-danger">
+        <% Object.values(errors).forEach(function(error){%>
+          <li>
+            <%= error.msg %>
+          </li>
+          <%})%>
+      </ul>
+      <%}%>
+
+        <form class="row g-3" action="/users/notify_repairs" method="post">
+          <div class="col-md-6">
+            <label for="Device_details" class="form-label">รายละเอียดอุปกรณ์ </label>
+            <input type="text" class="form-control" name="Repair_details_num" id="Repair_details_num" >
+            <input type="hidden" class="form-control" name="Equipment_id" id="Equipment_id" value="<%= result_eq[0].Equipment_id %>">
+            <input type="hidden" class="form-control" name="inputUseid" id="inputUseid" value="<%= result%>">
+            
+            
+          
+   
+          </div>
+            <button type="submit" onclick="AlertSuccess()" class="btn btn-primary" alerd>Sign in</button>
+          </div>
+        </form>
+</body>
+
+</html>
+<script>
+  function AlertSuccess() {
+    alert("แก้ไข สำเร็จ / Edit Success")
+  }
+</script>

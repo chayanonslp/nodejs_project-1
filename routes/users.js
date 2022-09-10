@@ -43,9 +43,22 @@ router.get('/useProfiles/:id', function (req, res, next) {
      
       })
 })
-router.get('/page/s', function (req, res, next) {
-  res.render('users/page');
-});
+router.get('/notify_repair/s/:id/:useid', function (req, res, next) {
+  const id = req.params.id;
+  const useid = req.params.useid;
+  const role = 1;
+const result = useid;
+console.log(result)
+      db.query(`SELECT Equipment_id FROM equipment WHERE Equipment_id = ${db.escape(id)};`,
+      (err, result_eq) => {
+        if (err) {
+          console.log(err)
+        }
+        return  res.render('users/notify_repair', { result, result_eq, role });
+      })
+    })
+ 
+
 
 router.get('/register/s', function (req, res, next) {
   res.render('users/register');
@@ -93,6 +106,27 @@ router.post('/register',
   }
 );
 
+router.post('/notify_repairs', function (req, res, next) {
+  const Eq_id = req.body.Equipment_id;
+  const use_id = req.body.inputUseid;
+  const Rdn = req.body.Repair_details_num;
+  const date = new Date();
+  const result = use_id;
+  const role = 1;
+  db.query(`INSERT INTO hotify_repaiv (Equipment_id,User_id ,Repair_details_num ,Repair_noticedate) VALUES(?,?,?,?)`,[Eq_id, use_id, Rdn, date], (error, results, fields) => {
+    if (error) throw error;
+    
+    db.query(`SELECT * FROM equipment`,
+    (err, result_eq) => {
+      if (err) {
+        console.log(err)
+      }
+      return res.render('users/user', { result, result_eq, role });
+    })
+
+  })
+ 
+})
 
 
 

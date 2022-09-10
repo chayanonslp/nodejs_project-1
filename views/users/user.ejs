@@ -1,14 +1,58 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
 
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= result[0].User_name %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <%- include("../navbar") %>
-    <h1><%= result[0].User_email %></h1>
-    <a  type="button" class="btn btn-danger" href="/logout">Logout</a>
-  </body>
+
+<head>
+  <title>อุปกรณ์</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <%- include("../navbar") %>
+    <div class="container mt-3">
+      <h2>อุปกรณ์</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ยี่ห้อ</th>
+            <th>รายละเอียดอุปกรณ์</th>
+            <th>จำนวน</th>
+            <th>ราคา</th>
+            <th></th>
+
+          </tr>
+        </thead>
+        <% Object.values(result_eq).forEach(function(result_eqs){%>
+          <tbody>
+            <tr>
+              <td>
+                <%= result_eqs.Equipment_id %>
+              </td>
+              <td>
+                <%= result_eqs.Equipment_name %>
+              </td>
+              <td>
+                <%= result_eqs.Device_details %>
+              </td>
+              <td>
+                <%= result_eqs.Equipmentnum %>
+              </td>
+              <td>
+                <%= result_eqs.Price %> บาท
+              </td>
+              <td>
+                <a type="button " class="btn btn-warning "
+                  href="/users/notify_repair/s/<%= result_eqs.Equipment_id %>/<%= result[0].User_id %>">แจ้งซ่อม</a>
+              </td>
+            </tr>
+          </tbody>
+          <%})%>
+      </table>
+    </div>
+
+</body>
+
 </html>
