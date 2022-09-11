@@ -146,7 +146,7 @@ router.post('/register', upload.single("inputEmPhoto"),
     check('inputEmAddress', 'ใส่ ที่อยู่').not().isEmpty(),
     check('inputEmlgbt', 'เลือกเพศ').not().isEmpty(),
     check('inputEmail', 'ใส่ E-mail').not().isEmpty(),
-    check('inputEmstatus', 'ใส่ สถานะ').not().isEmpty(),
+  
 
   ],
   function (req, res, next) {
@@ -165,7 +165,7 @@ router.post('/register', upload.single("inputEmPhoto"),
     const EmAddress = req.body.inputEmAddress;
     const Emlgbt = req.body.inputEmlgbt;
     const Email = req.body.inputEmail;
-    const Emstatus = req.body.inputEmstatus;
+
     const date = "1-1-2000"
     const EmPhoto = req.file.filename
     const EmPasswordhash = bcrypt.hashSync(EmPassword, 10);
@@ -176,8 +176,8 @@ router.post('/register', upload.single("inputEmPhoto"),
         if (error) throw error;
 
       })
-    db.query('INSERT INTO employee (Employee_name,Employee_password,Employee_phone,Employee_address,Employee_date_of_birth,Employee_lgbt,Employee_Photo,Employee_email,Employee_status) VALUES(?,?,?,?,?,?,?,?,?)',
-      [EmName, EmPasswordhash, EmPhone, EmAddress, date, Emlgbt, EmPhoto, Email, Emstatus], (error, results, fields) => {
+    db.query('INSERT INTO employee (Employee_name,Employee_password,Employee_phone,Employee_address,Employee_date_of_birth,Employee_lgbt,Employee_Photo,Employee_email) VALUES(?,?,?,?,?,?,?,?)',
+      [EmName, EmPasswordhash, EmPhone, EmAddress, date, Emlgbt, EmPhoto, Email], (error, results, fields) => {
         if (error) throw error;
 
         return res.render('employees/register', { error: false, data: results, message: "create success" })
