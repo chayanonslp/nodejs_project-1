@@ -20,6 +20,19 @@ var upload = multer({
   storage: storage
 });
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/Eqimage');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + ".jpg");
+  }
+});
+
+var Rqupload = multer({
+  storage:storage
+});
+
 // ****** จบการ upload รูปภาพ ***********/
 /* GET users listing. */
 // หน้าแรก employee /method get
@@ -176,7 +189,7 @@ router.post('/register', upload.single("inputEmPhoto"),
 );
 
 // เพิ่ม re_equipment equipment /method post
-router.post('/re_equipment',
+router.post('/re_equipment', Rqupload.single("EqPhoto"),
   [
     check('inputEquipment_name', 'ใส่ ยี่ห้อ').not().isEmpty(),
     check('Device_details', 'ใส่ รายละเอียดอุปกรณ์').not().isEmpty(),
@@ -193,10 +206,12 @@ router.post('/re_equipment',
     const Device_details = req.body.Device_details;
     const Equipmentnum = req.body.Equipmentnum;
     const Price = req.body.Price;
+    const EqPhoto = req.file.filename
+    console.log(EqPhoto)
     db.query(`SELECT Employee_id,Employee_name FROM employee WHERE Employee_id = ${db.escape(id)};`,
       (err, result) => {
-        db.query('INSERT INTO equipment (Equipment_name,Device_details,Equipmentnum,Price) VALUES(?,?,?,?)',
-          [Equipment_name, Device_details, Equipmentnum, Price], (error, results, fields) => {
+        db.query('INSERT INTO equipment (Equipment_name,Device_details,Equipmentnum,Price,Eq_image) VALUES(?,?,?,?,?)',
+          [Equipment_name, Device_details, Equipmentnum, Price,EqPhoto], (error, results, fields) => {
             if (error) throw error;
             db.query(`SELECT * FROM equipment`,
               (err, result_eq) => {
