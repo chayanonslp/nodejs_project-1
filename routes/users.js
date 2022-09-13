@@ -63,6 +63,25 @@ console.log(result)
 router.get('/register/s', function (req, res, next) {
   res.render('users/register');
 });
+router.get('/appointment/s/:useid', function (req, res, next) {
+const id = req.params.useid;
+
+const role = 1;
+db.query(`SELECT *
+FROM (hotify_repaiv INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id)
+WHERE User_id = ${db.escape(id)}; `,
+(err, result_hv) => {
+  if (err) {
+    console.log(err)
+  }
+
+
+  db.query(`SELECT * FROM users WHERE User_id = ${db.escape(id)};`,
+  (err, result) => {
+    return  res.render('users/appointment', { result,result_hv,role });
+  })
+})
+});
 // เพิ่ม Users
 router.post('/register',
   [
@@ -110,8 +129,8 @@ router.post('/notify_repairs', function (req, res, next) {
   const Eq_id = req.body.Equipment_id;
   const use_id = req.body.inputUseid;
   const Rdn = req.body.Repair_details_num;
-  const date = new Date();
-  const result = use_id;
+  const dates = new Date();
+  const date = dates.toLocaleString("th-TH");
   const role = 1;
   db.query(`INSERT INTO hotify_repaiv (Equipment_id,User_id ,Repair_details_num ,Repair_noticedate) VALUES(?,?,?,?)`,[Eq_id, use_id, Rdn, date], (error, results, fields) => {
     if (error) throw error;
@@ -121,8 +140,10 @@ router.post('/notify_repairs', function (req, res, next) {
       if (err) {
         console.log(err)
       }
+      db.query(`SELECT * FROM users WHERE User_id = ${db.escape(use_id)};`,
+  (err, result) => {
       return res.render('users/user', { result, result_eq, role });
-    })
+    }) })
 
   })
  

@@ -104,7 +104,7 @@ router.post('/login',
                           if (err) {
                             console.log(err)
                           }
-                          return res.render('users/user', {  token, result,result_eq, role });
+                          return res.render('users/user', { token, result, result_eq, role });
                         })
 
                     }
@@ -118,12 +118,19 @@ router.post('/login',
                       db.query(
                         `UPDATE employee SET Employee_login = now() WHERE Employee_id = '${result[0].Employee_id}'`
                       );
-                      return res.render('employees/employeepage', {
-                        token,
-                        result,
-                        role
-                      }
-                      );
+                      db.query(`SELECT hotify_repaiv.*,equipment.Eq_image,equipment.Equipment_name
+        FROM hotify_repaiv
+        INNER JOIN equipment ON equipment.Equipment_id=hotify_repaiv.Equipment_id WHERE Appointmentdate is NULL =Employee_id IS NULL`,
+                        (err, result_NR) => {
+                          return res.render('employees/employeepage', {
+                            token,
+                            result,
+                            result_NR,
+                            role
+                          }
+                          );
+                        })
+
                     }
 
                   )

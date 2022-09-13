@@ -22,26 +22,46 @@
           <%})%>
       </ul>
       <%}%>
-
+      <br><br>
         <form class="row g-3" action="/users/notify_repairs" method="post">
-          <div class="col-md-6">
-            <label for="Device_details" class="form-label">รายละเอียดอุปกรณ์ </label>
-            <input type="text" class="form-control" name="Repair_details_num" id="Repair_details_num" >
-            <input type="hidden" class="form-control" name="Equipment_id" id="Equipment_id" value="<%= result_eq[0].Equipment_id %>">
+          <div class="container contact">
+            <h1>แจ้งรายละเอียดอุปกรณ์</h1>
+            <br>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="contact-info">
+                  <h4>กรุณาตรวจสอบข้อมูลรายละเอียดให้ถูกต้องก่อนกดยืนยัน</h4>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="contact-form">
+                  <div class="form-group">
+                    <label class="control-label col-sm-7" for="Device_details">แจ้งรายละเอียดอุปกรณ์  :</label>
+                    <div class="col-sm-10">          
+                      <input type="text" class="form-control" name="Repair_details_num" id="Repair_details_num" >
+                    </div>
+                    <input type="hidden" class="form-control" name="Equipment_id" id="Equipment_id" value="<%= result_eq[0].Equipment_id %>">
             <input type="hidden" class="form-control" name="inputUseid" id="inputUseid" value="<%= result%>">
-            
-            
-          
-   
-          </div>
-            <button type="submit" onclick="AlertSuccess()" class="btn btn-primary" alerd>Sign in</button>
+                  </div>
+                  <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" onclick="AlertSuccess()" class="btn btn-primary" alerd>Sign in</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
+        <br><br>
+
+
+        <%- include("../footer") %>
 </body>
 
 </html>
 <script>
   function AlertSuccess() {
-    alert("แก้ไข สำเร็จ / Edit Success")
+    alert("แจ้งรายละเอียด สำเร็จ / Edit Success")
   }
 </script>

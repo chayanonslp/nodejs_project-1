@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>วันที่นัดหมาย
+  </title>
+</head>
+
+<body>
+  <%- include("../navbar") %>
+    <p><strong>รหัสแจ้งซ่อม: </strong>
+      <%=result_Hr[0].Hotify_repaiv_id%>
+    </p>
+    <p><strong>รหัสอุปกรณ์: </strong>
+      <%=result_Hr[0].Equipment_id%>
+    </p>
+    <p><strong>รหัสแจ้งซ่อม: </strong>
+      <%=result_Hr[0].User_id%>
+    </p>
+    <p><strong>วันที่แจ้งซ่อม: </strong>
+      <%=result_Hr[0].Repair_noticedate%>
+    </p>
+    <p><strong>นัดหมาย: </strong>
+                                                  <%if(!result_Hr[0].Appointmentdate){%>
+                                                  ว่าง                      
+                                                  <%}%>
+
+      <%=result_Hr[0].Appointmentdate%>
+    </p>
+   
+    <form class="row g-3" action="/employees/repair_record" method="post">
+
+ 
+          <div class="form-group">
+            <div class="input-box ">
+    <input type="date"id="Date" name="Date"value="">
+   <input type="hidden"id="Hotify_repaiv_id" name="Hotify_repaiv_id"value=" <%=result_Hr[0].Hotify_repaiv_id%>">
+  <input type="hidden"id="Employee_id" name="Employee_id"value="<%=result[0].Employee_id%>">
+  <input type="hidden"id="Repair_notice_date" name="Repair_notice_date"value="<%=result_Hr[0].Repair_noticedate%>">
+  
+
+                                            
+
+            </div>
+          </div>
+       
+        <br>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">ยืนยัน</button>
+        </div>
+      </div>
+
+
+    </form>
+</body>
+
+</html>
