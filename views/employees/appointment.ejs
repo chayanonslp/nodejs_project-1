@@ -24,33 +24,35 @@
       <%=result_Hr[0].Repair_noticedate%>
     </p>
     <p><strong>นัดหมาย: </strong>
-                                                  <%if(!result_Hr[0].Appointmentdate){%>
-                                                  ว่าง                      
-                                                  <%}%>
+      <%if(!result_Hr[0].Appointmentdate){%>
+        ว่าง
+        <%}%>
 
-      <%=result_Hr[0].Appointmentdate%>
+          <%=result_Hr[0].Appointmentdate%>
     </p>
-   
+
     <form class="row g-3" action="/employees/repair_record" method="post">
 
- 
-          <div class="form-group">
-            <div class="input-box ">
-    <input type="date"id="Date" name="Date"value="">
-   <input type="hidden"id="Hotify_repaiv_id" name="Hotify_repaiv_id"value=" <%=result_Hr[0].Hotify_repaiv_id%>">
-  <input type="hidden"id="Employee_id" name="Employee_id"value="<%=result[0].Employee_id%>">
-  <input type="hidden"id="Repair_notice_date" name="Repair_notice_date"value="<%=result_Hr[0].Repair_noticedate%>">
-  
 
-                                            
+      <div class="form-group">
+        <div class="input-box ">
+          <input type="date" id="Date" name="Date" value="">
+          <input type="hidden" id="Hotify_repaiv_id" name="Hotify_repaiv_id"
+            value=" <%=result_Hr[0].Hotify_repaiv_id%>">
+          <input type="hidden" id="Employee_id" name="Employee_id" value="<%=result[0].Employee_id%>">
+          <input type="hidden" id="Repair_notice_date" name="Repair_notice_date"
+            value="<%=result_Hr[0].Repair_noticedate%>">
 
-            </div>
-          </div>
-       
-        <br>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">ยืนยัน</button>
+
+
+
         </div>
+      </div>
+
+      <br>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">ยืนยัน</button>
+      </div>
       </div>
 
 
