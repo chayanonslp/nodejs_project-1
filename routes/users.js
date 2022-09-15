@@ -69,7 +69,7 @@ const id = req.params.useid;
 const role = 1;
 db.query(`SELECT *
 FROM (hotify_repaiv INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id)
-WHERE User_id = ${db.escape(id)}; `,
+WHERE User_id = ${db.escape(id)}and Employee_id `,
 (err, result_hv) => {
   if (err) {
     console.log(err)
