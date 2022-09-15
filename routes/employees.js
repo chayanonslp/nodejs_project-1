@@ -165,6 +165,33 @@ router.get('/appointment/s/:Hr_id/:em_id', function (req, res, next) {
     })
 
 });
+// หน้า view appointment ดูรายการที่นัดหมาย	  /method get
+router.get('/view_appointment/s/:em_id', function (req, res, next) {
+  const em_id = req.params.em_id;
+  db.query(`SELECT Employee_id,Employee_name FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        db.query(`SELECT *
+        FROM appointment inner JOIN hotify_repaiv ON appointment.Hotify_repaiv_id = hotify_repaiv.Hotify_repaiv_id
+         inner JOIN equipment
+          ON hotify_repaiv.Equipment_id = equipment.Equipment_id WHERE hotify_repaiv.Employee_id = ${db.escape(em_id)}`,
+      
+          (err, result_Hr) => {
+            if (err) {
+              console.log(err)
+            }
+            const role = 2;//role พนักงาน
+            return res.render('employees/view_appointment', { result, result_Hr, role });
+
+          })
+
+      }
+
+    })
+
+});
 
 // เพิ่ม register employee /method post
 router.post('/register', upload.single("inputEmPhoto"),

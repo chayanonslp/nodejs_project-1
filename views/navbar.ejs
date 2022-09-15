@@ -116,18 +116,6 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">รายงานการซ่อม</a>
                 </li>
-                <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Registers
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">User</a></li>
-              <li><a class="dropdown-item" href="#r">#</a></li>
-              <<li><hr class="dropdown-divider"></li>
-             <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>  -->
 
               </ul>
               <a class="navbar-brand" href="#">
@@ -139,7 +127,6 @@
         </nav>
         <% } %>
           <!--  แสดง navbar role ที่ 1 role User จบ -->
-
 
           <!--  แสดง navbar role ที่ 2 role Employee  -->
           <% if(locals.role===2){ %>
@@ -168,20 +155,11 @@
                         <h4>อุปกรณ์</h4>
                       </a>
                     </li>
-
-                    <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Registers
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">User</a></li>
-              <li><a class="dropdown-item" href="#r">#</a></li>
-              <li><hr class="dropdown-divider"></li>
-             <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>  -->
-
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/employees/view_appointment/s/<%= result[0].Employee_id %>">
+                        <h4>ดูการนัดหมาย</h4>
+                      </a>
+                    </li>
                   </ul>
                   <a class="navbar-brand" href="#">
                     <%= result[0].Employee_name %>
