@@ -12,131 +12,125 @@
 <html>
 
 <head>
-  <title>
+    <title>
 
-  </title>
+    </title>
 </head>
 <script>
-  $(function () {
-    $("#datepicker").datepicker({
-      language: 'th-th',
-      format: 'dd/mm/yyyy',
-      autoclose: true
+    $(function() {
+        $("#datepicker").datepicker({
+            language: 'th-th',
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
     });
-  });
 </script>
 
 <body>
 
-  <%- include("../navbar") %>
-    <% if(locals.errors){ %>
-      <ul class="alert alert-danger">
-        <% Object.values(errors).forEach(function(error){%>
-          <li>
-            <%= error.msg %>
-          </li>
-          <%})%>
-      </ul>
-      <%}%>
-        <br><br>
+    <%- include("../navbar") %>
+        <% if(locals.errors){ %>
+            <ul class="alert alert-danger">
+                <% Object.values(errors).forEach(function(error){%>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+                    <%})%>
+            </ul>
+            <%}%>
+                <br><br>
 
-        <div id="main-carousel" class="carousel slide" data-ride="carousel">
+                <div id="main-carousel" class="carousel slide" data-ride="carousel">
 
-          <section class="home__form">
-            <div class="container">
-              <div class="home__form-container text-center">
-                <h3>สมาชิกพนักงาน</h3>
-                <p>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</p>
-                <br>
-                <form class="row g-3" action="/employees/register" method="post" enctype="multipart/form-data">
+                    <section class="home__form">
+                        <div class="container">
+                            <div class="home__form-container text-center">
+                                <h3>สมาชิกพนักงาน</h3>
+                                <p>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</p>
+                                <br>
+                                <form class="row g-3" action="/employees/register" method="post" enctype="multipart/form-data">
 
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <h4>ชื่อ</h4>
-                        <div class="input-box ">
-                          <input placeholder="ชื่อ *" aria-label="Name" aria-describedby="name" class="form-control"
-                            name="inputEmName" id="inputEmName">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-group">
-                        <h4>รหัสผ่าน</h4>
-                        <div class="input-box ">
-                          <input placeholder="รหัสผ่าน *" aria-label="Password" aria-describedby="Password"
-                            type="password" class="form-control" name="inputEmPassword" id="inputEmPassword">
-                          <i class="fa fa-solid fa-key" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <h4>ชื่อ</h4>
+                                                <div class="input-box ">
+                                                    <input placeholder="ชื่อ *" aria-label="Name" aria-describedby="name" class="form-control" name="inputEmName" id="inputEmName">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <h4>รหัสผ่าน</h4>
+                                                <div class="input-box ">
+                                                    <input placeholder="รหัสผ่าน *" aria-label="Password" aria-describedby="Password" type="password" class="form-control" name="inputEmPassword" id="inputEmPassword">
+                                                    <i class="fa fa-solid fa-key" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <div class="col-12">
-                      <div class="form-group">
-                        <h4>เบอร์โทรศัพท์</h4>
-                        <div class="input-box ">
-                          <input aria-label="phone" aria-describedby="phone" placeholder="เบอร์โทรศัพท์ *" type="text"
-                            class="form-control" name="inputEmPhone" id="inputEmPhone">
-                          <i class="fa fa-phone" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <h4>เบอร์โทรศัพท์</h4>
+                                                <div class="input-box ">
+                                                    <input aria-label="phone" aria-describedby="phone" placeholder="เบอร์โทรศัพท์ *" type="text" class="form-control" name="inputEmPhone" id="inputEmPhone">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <div class="col-12">
-                      <div class="form-group">
-                        <h4>ที่อยู่</h4>
-                        <div class="input-box ">
-                          <input aria-label="phone" aria-describedby="phone" type="text" class="form-control"
-                            name="inputEmAddress" id="inputEmAddress" placeholder="ที่อยู่ *">
-                          <i class="fa fa-address-book" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-1">
-                      <label class="form-label">เพศ </label>
-                      <select name="inputEmlgbt" type="text" class="form-control" placeholder="เพศ *">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <h4>ที่อยู่</h4>
+                                                <div class="input-box ">
+                                                    <input aria-label="phone" aria-describedby="phone" type="text" class="form-control" name="inputEmAddress" id="inputEmAddress" placeholder="ที่อยู่ *">
+                                                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-label">เพศ </label>
+                                            <select name="inputEmlgbt" type="text" class="form-control" placeholder="เพศ *">
                         <option value="">--</option>
                         <option value="ชาย">ชาย</option>
                         <option value="หญิง">หญิง</option>
                       </select>
-                    </div>
-                    <div class="col-11">
-                      <div class="form-group">
-                        <h4>อีเมล</h4>
-                        <div class="input-box  ">
-                          <input placeholder="อีเมล *" aria-label="email" aria-describedby="email" type="email"
-                            class="form-control" name="inputEmail" id="inputEmail">
-                          <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="form-group">
+                                                <h4>อีเมล</h4>
+                                                <div class="input-box  ">
+                                                    <input placeholder="อีเมล *" aria-label="email" aria-describedby="email" type="email" class="form-control" name="inputEmail" id="inputEmail">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-7">
+                                            <div class="form-group">
+                                                <label for="inputEmPhoto" class="form-label">รูปภาพ</label>
+                                                <div class="input-box  ">
+                                                    <input placeholder="รูปภาพ//ต้องเป็นไฟล์" aria-label="email" aria-describedby="email" type="file" class="form-control" Name='inputEmPhoto' id="inputEmPhoto">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <br>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-
-                    <div class="col-7">
-                      <div class="form-group">
-                        <label for="inputEmPhoto" class="form-label">รูปภาพ</label>
-                        <div class="input-box  ">
-                          <input placeholder="รูปภาพ//ต้องเป็นไฟล์" aria-label="email" aria-describedby="email"
-                            type="file" class="form-control" Name='inputEmPhoto' id="inputEmPhoto">
-
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <br>
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary">ยืนยัน</button>
-                    </div>
-                  </div>
-
-
-                </form>
-              </div>
-            </div>
-          </section>
-        </div>
-        <%- include("../footer") %>
+                    </section>
+                </div>
+                <%- include("../footer") %>
 </body>
 
 </html>
