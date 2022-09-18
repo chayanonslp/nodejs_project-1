@@ -22,50 +22,62 @@
                         <th>ยี่ห้อ</th>
                         <th>รายละเอียดแจ้งซ่อม</th>
                         <th>วันที่แจ้งซ่อม</th>
-                        <th>วันนัดหมาย</th>
+                        <th>วันที่นัดซ่อม</th>
                         <th>รหัสพนักงาน(ช่างซ้อม)</th>
+                        <th>วันที่ออกใบเสร็จ</th>
+                        <th>สถานะ</th>
+                        <th>ชำระเงิน</th>
+
 
 
                     </tr>
                 </thead>
-                <% Object.values(result_hv).forEach(function(result_hvs){%>
+                <% Object.values(result_HR).forEach(function(result_HRs){%>
                     <tbody>
                         <tr>
                             <td>
-                                <%= result_hvs.Hotify_repaiv_id %>
+                                <%= result_HRs.Hotify_repaiv_id %>
                             </td>
                             <td>
-                                <%= result_hvs.Equipment_id %>
+                                <%= result_HRs.Equipment_id %>
                             </td>
                             <td>
-                                <img src="/Eqimage/<%= result_hvs.Eq_image %>" width="100" height="auto" class="img-fluid" />
+                                <img src="/Eqimage/<%= result_HRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
                             </td>
                             <td>
-                                <%= result_hvs.Equipment_name %>
+                                <%= result_HRs.Equipment_name %>
                             </td>
 
                             <td>
-                                <%= result_hvs.Repair_details_num %>
+                                <%= result_HRs.Repair_details_num %>
                             </td>
                             <td>
-                                <%= result_hvs.Repair_noticedate %>
+                                <%= result_HRs.Repair_noticedate %>
                             </td>
                             <td>
-                                <%if(!result_hvs.Appointmentdate){%>
+                                <%if(!result_HRs.Appointmentdate){%>
                                     วันที่นัดหมาย
                                     <%} %>
-                                        <%if(result_hvs.Appointmentdate){%>
-                                            <%= result_hvs.Appointmentdate %>
+                                        <%if(result_HRs.Appointmentdate){%>
+                                            <%= result_HRs.Appointmentdate %>
                                                 <%} %>
                             </td>
                             <td>
-                                <%if(!result_hvs.Employee_id){%>
+                                <%if(!result_HRs.Employee_id){%>
                                     ว่าง
                                     <%} %>
-                                        <%if(result_hvs.Employee_id ){%>
-                                            <%= result_hvs.Employee_id %>
-
+                                        <%if(result_HRs.Employee_id ){%>
+                                            <%= result_HRs.Employee_id %>
                                                 <%} %>
+                            </td>
+                            <td>
+                                <%= result_HRs.Repair_date %>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning badge-pill px-100  my-3"><%= result_HRs.statuse %></span>
+                            </td>
+                            <td>
+                                <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" aria-current="page" href="/users/confirm_repair/s/<%= result_HRs.Hotify_repaiv_id %>/<%= result[0].User_id %>">ชำระเงิน</a>
                             </td>
                         </tr>
                     </tbody>
