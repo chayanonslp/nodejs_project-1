@@ -1,0 +1,100 @@
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  
+  <!DOCTYPE html>
+  <html>
+  
+  <head>
+    <title>อุปกรณ์</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/equipment.css' />
+</head>
+
+<body>
+  <%- include("../navbar") %>
+    <div class="container">
+      <h1>ดูรายงานการซ่อม</h1>
+      <h5>กรุณาตรวจรายละเอียดการนัดหมาย</h5>
+      <div class="row">
+      
+          <div class="container mt-3 col-md-offset-1">
+    
+              <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col col-xs-6">
+                      <h3 class="panel-title">รายงานการซ่อม</h3>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          
+                        <th>รหัสแจ้งซ่อม</th>
+                        <th>รหัสอุปกรณ์</th>
+                        <th>อุปกรณ์</th>
+                        <th>ยี่ห้อ</th>
+                        <th>รายละเอียดแจ้งซ่อม</th>
+                        <th>วันที่แจ้งซ่อม</th>
+                        <th>วันนัดหมาย</th>
+                        
+                          
+                      </tr> 
+                    </thead>
+                    <% Object.values(result_NR).forEach(function(result_NRs){%>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <%= result_NRs.Hotify_repaiv_id %>
+            
+                          </td>
+                          <td>
+                            <%= result_NRs.Equipment_id %>
+                          </td>
+                          <td>
+                            <img src="/Eqimage/<%= result_NRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
+                          </td>
+                          <td>
+                            <%= result_NRs.Equipment_name %>
+                          </td>
+            
+                          <td>
+                            <%= result_NRs.Repair_details_num %>
+                          </td>
+                          <td>
+            
+                            <%= result_NRs.Repair_noticedate %>
+                          </td>
+                          <td>
+                            <%if(!result_NRs.Appointmentdate){%>
+                              ยังไม่มีการนัดหมาย
+                              <%} %>
+            
+                          </td>
+            
+                          
+                        </tr>
+            
+            
+                      </tbody>
+                      <%})%>
+                  </table>
+              
+                </div>
+    
+              </div>
+
+    <br><br>
+    <%- include("../footer") %>
+</body>
+
+</html>

@@ -6,37 +6,50 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= result[0].User_name %></title>
+
+<head>
+    <title>
+        <%= result[0].User_name %>
+    </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/Profile.css' />
-  </head>
-  <body>
+</head>
+
+<body>
     <%- include("../navbar") %>
-    
-    <br><br>
-    <div class="container ">
-      <div class="row">
+
+        <br><br>
         <div class="container ">
-           <div class="well profile">
-                <div class="col-sm-15">
-                    <div class="col-xs-12 col-sm-10">
-                        <h1><strong>ข้อมูลพนักงาน</strong></h1>
-                        <br>
-                        <p><strong>ชื่อ - สกุล : </strong> <%= result[0].User_name %> </p>
-                        <p><strong>อีเมล : </strong> <%= result[0].User_email %> </p>
-                        <p><strong>เบอร์โทรศัพท์ : </strong><%= result[0].User_phone %> </p>
-                        <p><strong>ที่อยู่ : </strong><%= result[0].User_address %> </p>
+            <div class="row">
+                <div class="container ">
+                    <div class="well profile">
+                        <div class="col-sm-15">
+                            <div class="col-xs-12 col-sm-10">
+                                <h1><strong>ข้อมูลส่วนตัว</strong></h1>
+                                <br>
+                                <p><strong>ชื่อ - สกุล : </strong>
+                                    <%= result[0].User_name %>
+                                </p>
+                                <p><strong>อีเมล : </strong>
+                                    <%= result[0].User_email %>
+                                </p>
+                                <p><strong>เบอร์โทรศัพท์ : </strong>
+                                    <%= result[0].User_phone %>
+                                </p>
+                                <p><strong>ที่อยู่ : </strong>
+                                    <%= result[0].User_address %>
+                                </p>
 
-                    </div>   
-                    <button type="submit" class="btn btn-primary  col-2 ">แก้ไขข้อมูล</button>          
-         
+                            </div>
+                            <button type="submit" class="btn btn-primary  col-2 ">แก้ไขข้อมูล</button>
 
-           </div>                 
-        </div>
-      </div>
-    </div>
-    <br><br>
-    <%- include("../footer") %>
-  </body>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <%- include("../footer") %>
+</body>
+
 </html>

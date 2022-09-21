@@ -222,12 +222,12 @@ router.get('/confirm_repair/s/:id/:em_id', function(req, res, next) {
 router.post('/register', upload.single("inputEmPhoto"),
 
     [
-        check('inputEmName', 'ใส่ ชื่อ').not().isEmpty(),
-        check('inputEmPassword', 'ใส่ Password').not().isEmpty(),
-        check('inputEmPhone', 'ใส่ Phone number').not().isEmpty(),
-        check('inputEmAddress', 'ใส่ ที่อยู่').not().isEmpty(),
+        check('inputEmName', 'กรอก ชื่อ').not().isEmpty(),
+        check('inputEmPassword', 'กรอก รหัสผ่าน').not().isEmpty(),
+        check('inputEmPhone', 'กรอก เบอร์โทร').not().isEmpty(),
+        check('inputEmAddress', 'กรอกที่อยู่').not().isEmpty(),
         check('inputEmlgbt', 'เลือกเพศ').not().isEmpty(),
-        check('inputEmail', 'ใส่ E-mail').not().isEmpty(),
+        check('inputEmail', 'กรอก E-mail').not().isEmpty(),
 
 
     ],
@@ -260,7 +260,7 @@ router.post('/register', upload.single("inputEmPhoto"),
         db.query('INSERT INTO employee (Employee_name,Employee_password,Employee_phone,Employee_address,Employee_date_of_birth,Employee_lgbt,Employee_Photo,Employee_email) VALUES(?,?,?,?,?,?,?,?)', [EmName, EmPasswordhash, EmPhone, EmAddress, date, Emlgbt, EmPhoto, Email], (error, results, fields) => {
             if (error) throw error;
 
-            return res.render('employees/register', { error: false, data: results, message: "create success" })
+            return res.render('logins', { error: false, data: results, message: "create success" })
 
         })
 

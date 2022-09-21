@@ -1,5 +1,9 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -11,14 +15,16 @@
     <title>อุปกรณ์</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/equipment.css' />
+
 </head>
 
 <body>
     <%- include("../navbar") %>
 
+
         <div class="container">
-            <h1>อุปกรณ์</h1>
-            <h5>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนทำการแจ้งข้อมูล</h5>
+            <h1>จัดการข้อมูลอุปกรณ์</h1>
+            <h5>กรุณาตรวจสอบข้อมูลให้ถูกต้อง ก่อนเพิ่มข้อมูล/แก้ไข</h5>
             <div class="row">
 
                 <div class="container mt-3 col-md-offset-1">
@@ -29,7 +35,12 @@
                                 <div class="col col-xs-6">
                                     <h3 class="panel-title">รายการอุปกรณ์</h3>
                                 </div>
+                                <div class="col col-xs-6 text-right">
 
+                                    <a type="text" href="/admins/admin_re_equipment/s/<%= result[0].Employee_id %>"
+                                        name="Employee_id" id="Employee_id "
+                                        class="btn btn-sm btn-primary btn-create">เพิ่มอุปกรณ์</a>
+                                </div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -45,17 +56,18 @@
                                         <th>ราคา</th>
                                         <th><em class="fa fa-cog"></em></th>
 
-
                                     </tr>
                                 </thead>
                                 <% Object.values(result_eq).forEach(function(result_eqs){%>
                                     <tbody>
                                         <tr>
+
                                             <td>
                                                 <%= result_eqs.Equipment_id %>
                                             </td>
                                             <td>
-                                                <img src="/Eqimage/<%= result_eqs.Eq_image %>" width="100" height="auto" class="img-fluid" />
+                                                <img src="/Eqimage/<%= result_eqs.Eq_image %>" width="100" height="auto"
+                                                    class="img-fluid" />
                                             </td>
                                             <td>
                                                 <%= result_eqs.Equipment_name %>
@@ -70,7 +82,10 @@
                                                 <%= result_eqs.Price %> บาท
                                             </td>
                                             <td>
-                                                <a type="button " class="btn btn-warning " href="/users/notify_repair/s/<%= result_eqs.Equipment_id %>/<%= result[0].User_id %>">แจ้งซ่อม</a>
+                                                <a type="button " class="btn btn-danger "
+                                                    href="/admins/de_equipment/s/<%= result_eqs.Equipment_id %>/<%= result[0].Employee_id %>">ลบ</a>
+                                                <a type="button " class="btn btn-warning "
+                                                    href="/admins/admin_edit_equipment/s/<%= result_eqs.Equipment_id %>/<%= result[0].Employee_id %>">แก้ไข</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -84,10 +99,8 @@
                 </div>
             </div>
         </div>
-
+        <br><br>
+        <%- include("../footer") %>
 </body>
-<footer>
-    <%- include("../footer") %>
-</footer>
 
 </html>

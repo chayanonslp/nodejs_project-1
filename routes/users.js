@@ -42,13 +42,13 @@ router.get('/useProfiles/:id', function(req, res, next) {
 
         })
 })
-router.get('/notify_repair/s/:id/:useid', function(req, res, next) {
+router.get('/notify_repair/s/:id/:use_id', function(req, res, next) {
     const id = req.params.id;
-    const useid = req.params.useid;
+    const use_id = req.params.use_id;
     const role = 1;
-    const result = useid;
-    console.log(result)
-    db.query(`SELECT * FROM users WHERE User_id = ${db.escape(useid)};`,
+    // const result = use_id;
+    // console.log(result)
+    db.query(`SELECT * FROM users WHERE User_id = ${db.escape(use_id)};`,
         (err, result) => {
             db.query(`SELECT Equipment_id FROM equipment WHERE Equipment_id = ${db.escape(id)};`,
                 (err, result_eq) => {
@@ -85,7 +85,7 @@ router.get('/appointment/s/:useid', function(req, res, next) {
                 })
         })
 });
-// หน้า confirm_repair /method get
+// หน้า view_expend /method get
 router.get('/view_expend/s/:use_id', function(req, res, next) {
     const use_id = req.params.use_id; //รหัส User_id:
     db.query(`SELECT * FROM users WHERE User_id = ${db.escape(use_id)};`,
@@ -103,6 +103,30 @@ router.get('/view_expend/s/:use_id', function(req, res, next) {
                         const role = 1; //role พนักงาน
                         console.log(result_HR)
                         return res.render('users/view_expend', { result, result_HR, role });
+
+                    })
+            }
+        });
+});
+// หน้า page_payment /method get
+router.get('/page_payment/s/:use_id', function(req, res, next) {
+    const use_id = req.params.use_id; //รหัส User_id:
+    console.log(use_id, 'use_id')
+    db.query(`SELECT * FROM users WHERE User_id = ${db.escape(use_id)};`,
+        (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                db.query(`SELECT * FROM appointment INNER JOIN hotify_repaiv on hotify_repaiv.Hotify_repaiv_id = appointment.Hotify_repaiv_id
+              INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
+              INNER JOIN payment_code ON hotify_repaiv.Hotify_repaiv_id = payment_code.Hotify_repaiv_id
+              WHERE hotify_repaiv.User_id = ${db.escape(use_id)} AND hotify_repaiv.statuse ='สำเร็จ' `,
+
+                    (err, result_HR) => {
+                        if (err) {}
+                        const role = 1; //role พนักงาน
+                        console.log(result_HR)
+                        return res.render('users/page_payment', { result, result_HR, role });
 
                     })
             }
@@ -135,11 +159,11 @@ router.get('/confirm_repair/s/:id/:use_id', function(req, res, next) {
 });
 // เพิ่ม Users
 router.post('/register', [
-        check('inputName', 'ใส่ ชื่อ').not().isEmpty(),
-        check('inputPassword', 'ใส่ Password').not().isEmpty(),
-        check('inputPhone', 'ใส่ Phone Number').not().isEmpty(),
-        check('inputEmail', 'ใส่ E-mail').not().isEmpty(),
-        check('inputAddress', 'ใส่ ที่อยู่').not().isEmpty(),
+        check('inputName', 'กรอก ชื่อ').not().isEmpty(),
+        check('inputPassword', 'กรอก รหัสผ่าน ').not().isEmpty(),
+        check('inputPhone', 'กรอก เบอร์โทร ').not().isEmpty(),
+        check('inputEmail', 'กรอก E-mail').not().isEmpty(),
+        check('inputAddress', 'กรอก ที่อยู่').not().isEmpty(),
 
     ],
     function(req, res, next) {
@@ -168,13 +192,13 @@ router.post('/register', [
         db.query('INSERT INTO users (User_name,User_password,User_phone,User_email,User_address) VALUES(?,?,?,?,?)', [Name, Passwordhash, Phone, Email, Address], (error, results, fields) => {
             if (error) throw error;
 
-            return res.render('users/register', { error: false, data: results, message: "create success" })
+            return res.render('logins', { error: false, data: results, message: "create success" })
 
         })
     }
 );
 
-router.post('/notify_repairs', function(req, res, next) {
+router.post('/notify_repair/s', function(req, res, next) {
     const Eq_id = req.body.Equipment_id;
     const use_id = req.body.inputUseid;
     const Rdn = req.body.Repair_details_num;
@@ -198,7 +222,38 @@ router.post('/notify_repairs', function(req, res, next) {
     })
 
 })
+const QRCode = require('qrcode')
+const generatePayload = require('promptpay-qr')
+const _ = require('lodash')
 
 
+router.post('/generateQR', (req, res) => {
+    const amount = parseFloat(_.get(req, ["body", "amount"]));
+    const mobileNumber = '0644580471';
+    const payload = generatePayload(mobileNumber, { amount });
+    const option = {
+        color: {
+            dark: '#000',
+            light: '#fff'
+        }
+    }
+    QRCode.toDataURL(payload, option, (err, url) => {
+        if (err) {
+            console.log('generate fail')
+            return res.status(400).json({
+                RespCode: 400,
+                RespMessage: 'bad : ' + err
+            })
+        } else {
+            return res.status(200).json({
+                RespCode: 200,
+                RespMessage: 'good',
+                Result: url
+
+            })
+        }
+
+    })
+})
 
 module.exports = router;

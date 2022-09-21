@@ -5,16 +5,17 @@
 <html>
 
 <head>
-    <title>ชำระเงิน</title>
+    <title>ค้างชำระ</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
     <%- include("../navbar") %>
         <div class="container mt-3">
-            <h2>ชำระเงิน</h2>
+            <h2>ค้างชำระ</h2>
             <div class="col col-xs-6 text-right">
-                <a type="text" href="/users/page_payment/s/<%= result[0].User_id %>" name="user_id" id="user_id " class="btn btn-sm btn-success btn-create">ชำระแล้ว</a>
+                <a type="text" href="/users/view_expend/s/<%= result[0].User_id %>" name="user_id" id="user_id " class="btn btn-sm btn-warning btn-create">ค้างชำระ</a>
+
 
             </div>
             <table class="table table-bordered">
@@ -31,8 +32,6 @@
                         <th>วันที่ออกใบเสร็จ</th>
                         <th>สถานะ</th>
                         <th>ชำระเงิน</th>
-
-
 
                     </tr>
                 </thead>
@@ -78,10 +77,10 @@
                                 <%= result_HRs.Repair_date %>
                             </td>
                             <td>
-                                <span class="btn btn-warning badge-pill px-100  my-auto"><%= result_HRs.statuse %></span>
+                                <span class="btn btn-success badge-pill px-4 float-right mt-3 mt-lg-0 my-3"><%= result_HRs.statuse %></span>
                             </td>
                             <td>
-                                <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" aria-current="page" href="/users/confirm_repair/s/<%= result_HRs.Hotify_repaiv_id %>/<%= result[0].User_id %>">ชำระเงิน</a>
+                                <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" aria-current="page" href="/users/confirm_repair/s/<%= result_HRs.Hotify_repaiv_id %>/<%= result[0].User_id %>">ใบเสร็จ</a>
                             </td>
                         </tr>
                     </tbody>

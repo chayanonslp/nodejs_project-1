@@ -1,5 +1,8 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -7,73 +10,106 @@
 <head>
     <title>อุปกรณ์</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/equipment.css' />
 </head>
 
 <body>
     <%- include("../navbar") %>
-        <div class="container mt-3">
-            <h2>อุปกรณ์</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>รหัสแจ้งซ่อม</th>
-                        <th>รหัสอุปกรณ์</th>
-                        <th>อุปกรณ์</th>
-                        <th>ยี่ห้อ</th>
-                        <th>รายละเอียดแจ้งซ่อม</th>
-                        <th>วันที่แจ้งซ่อม</th>
-                        <th>วันนัดหมาย</th>
-                        <th>รหัสพนักงาน(ช่างซ้อม)</th>
 
 
-                    </tr>
-                </thead>
-                <% Object.values(result_hv).forEach(function(result_hvs){%>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <%= result_hvs.Hotify_repaiv_id %>
-                            </td>
-                            <td>
-                                <%= result_hvs.Equipment_id %>
-                            </td>
-                            <td>
-                                <img src="/Eqimage/<%= result_hvs.Eq_image %>" width="100" height="auto" class="img-fluid" />
-                            </td>
-                            <td>
-                                <%= result_hvs.Equipment_name %>
-                            </td>
+        <div class="container">
+            <h1>รายการนัดหมาย</h1>
+            <h5>กรุณาตรวจรายละเอียดวันนัดหมาย</h5>
+            <div class="row">
 
-                            <td>
-                                <%= result_hvs.Repair_details_num %>
-                            </td>
-                            <td>
-                                <%= result_hvs.Repair_noticedate %>
-                            </td>
-                            <td>
-                                <%if(!result_hvs.Appointmentdate){%>
-                                    วันที่นัดหมาย
-                                    <%} %>
-                                        <%if(result_hvs.Appointmentdate){%>
-                                            <%= result_hvs.Appointmentdate %>
-                                                <%} %>
-                            </td>
-                            <td>
-                                <%if(!result_hvs.Employee_id){%>
-                                    ว่าง
-                                    <%} %>
-                                        <%if(result_hvs.Employee_id ){%>
-                                            <%= result_hvs.Employee_id %>
+                <div class="container mt-3 col-md-offset-1">
 
-                                                <%} %>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <%})%>
-            </table>
-        </div>
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">
+                                    <h3 class="panel-title">รายการนัดหมาย</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+
+                                        <th>รหัสแจ้งซ่อม</th>
+                                        <th>รหัสอุปกรณ์</th>
+                                        <th>อุปกรณ์</th>
+                                        <th>ยี่ห้อ</th>
+                                        <th>รายละเอียดแจ้งซ่อม</th>
+                                        <th>วันที่แจ้งซ่อม</th>
+                                        <th>วันนัดหมาย</th>
+                                        <th>รหัสพนักงาน(ช่างซ้อม)</th>
+
+
+                                    </tr>
+                                </thead>
+                                <% Object.values(result_hv).forEach(function(result_hvs){%>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                HCKlE00
+                                                <%= result_hvs.Hotify_repaiv_id %>
+                                            </td>
+                                            <td>
+                                                HCKlE00
+                                                <%= result_hvs.Equipment_id %>
+                                            </td>
+                                            <td>
+                                                <img src="/Eqimage/<%= result_hvs.Eq_image %>" width="100" height="auto" class="img-fluid" />
+                                            </td>
+                                            <td>
+                                                <%= result_hvs.Equipment_name %>
+                                            </td>
+
+                                            <td>
+                                                <%= result_hvs.Repair_details_num %>
+                                            </td>
+                                            <td>
+                                                <%= result_hvs.Repair_noticedate %>
+                                            </td>
+                                            <td>
+                                                <%if(!result_hvs.Appointmentdate){%>
+                                                    วันที่นัดหมาย
+                                                    <%} %>
+                                                        <%if(result_hvs.Appointmentdate){%>
+                                                            <%= result_hvs.Appointmentdate %>
+                                                                <%} %>
+                                            </td>
+                                            <td>
+
+                                                <%if(!result_hvs.Employee_id){%>
+                                                    ว่าง
+                                                    <%} %>
+                                                        <%if(result_hvs.Employee_id ){%>
+                                                            <%= result_hvs.Employee_id %>
+
+                                                                <%} %>
+
+
+
+
+                                            </td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                    <%})%>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <br><br>
+
 </body>
-<br><br>
-<%- include("../footer") %>
 
 </html>
