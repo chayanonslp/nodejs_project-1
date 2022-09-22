@@ -4,27 +4,24 @@ const db = require('../lib/connect')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 const JWT_SECRET =
     "goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
-//******upload รูปภาพ ***********/
-
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//         cb(null, './public/images');
-//   },
-//   filename: function (req, file, cb) {
-//         cb(null, Date.now() + ".jpg");
-//   }
-// });
-
-// var upload = multer({
-//   storage: storage
-// });
-
-// ****** จบการ upload รูปภาพ ***********/
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
+// DECLARING CUSTOM MIDDLEWARE
+const ifNotLoggedin = (req, res, next) => {
+    if (!req.session.isLoggedIn) {
+        return res.render('logins');
+    }
+    next();
+}
+const ifLoggedin = (req, res, next) => {
+        if (req.session.isLoggedIn) {
+            return res.redirect('/users/');
+        }
+        next();
+    }
+    /* GET home page. */
+router.get('/', ifNotLoggedin, function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 router.get('/login', function(req, res, next) {
@@ -91,7 +88,6 @@ router.post('/login', [
                             }
                             if (bResult === true) {
                                 if (result[0].role === 1) {
-                                    const role = result[0].role
                                     db.query(`SELECT * FROM users WHERE User_email = ${db.escape(email)};`,
                                         (err, result) => {
                                             token = jwt.sign({ id: result[0].User_id }, JWT_SECRET, { expiresIn: '1h' });
@@ -102,33 +98,27 @@ router.post('/login', [
                                                 (err, result_eq) => {
                                                     if (err) {
                                                         console.log(err)
+                                                    } else {
+                                                        req.session.isLoggedIn = true;
+                                                        req.session.userID = result[0].User_id;
+                                                        res.redirect('users');
                                                     }
-                                                    return res.render('users/user', { token, result, result_eq, role });
+
                                                 })
 
                                         }
                                     )
                                 }
                                 if (result[0].role === 2) {
-                                    const role = result[0].role
                                     db.query(`SELECT * FROM employee WHERE Employee_email = ${db.escape(email)};`,
                                         (err, result) => {
                                             token = jwt.sign({ id: result[0].Employee_id }, JWT_SECRET, { expiresIn: '1h' });
                                             db.query(
                                                 `UPDATE employee SET Employee_login = now() WHERE Employee_id = '${result[0].Employee_id}'`
                                             );
-                                            db.query(`SELECT hotify_repaiv.*,equipment.Eq_image,equipment.Equipment_name
-        FROM hotify_repaiv
-        INNER JOIN equipment ON equipment.Equipment_id=hotify_repaiv.Equipment_id WHERE Appointmentdate is NULL =Employee_id IS NULL`,
-                                                (err, result_NR) => {
-                                                    return res.render('employees/employeepage', {
-                                                        token,
-                                                        result,
-                                                        result_NR,
-                                                        role
-                                                    });
-                                                })
-
+                                            req.session.isLoggedIn = true;
+                                            req.session.userID = result[0].Employee_id;
+                                            res.redirect('employees');
                                         }
 
                                     )
@@ -168,12 +158,17 @@ router.post('/login', [
         }
     })
 
-router.get('/logout', function(req, res, next) {
-    const tokens = req.params.token
-    console.log(tokens)
-    const token = null;
-    console.log(token)
-    res.render('logins');
 
-})
+
+router.get('/logout', function(req, res, next) {
+        console.log(req.session)
+        req.session = null;
+        res.redirect('/');
+
+    })
+    // app.get('/logout',(req,res) => {
+    //     req.session.destroy();
+    //     res.redirect('/');
+    // });
+
 module.exports = router;

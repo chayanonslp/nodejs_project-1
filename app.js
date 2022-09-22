@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 var logger = require('morgan');
 var conDB = require('./lib/connect')
 var mysql = require('mysql');
@@ -18,10 +19,15 @@ var app = express();
 
 
 
-app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
+// app.use(session({
+//     secret: 'secret',
+//     resave: true,
+//     saveUninitialized: true
+// }));
+app.use(cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    maxAge: 3600 * 1000 // 1hr
 }));
 
 app.use(cors())

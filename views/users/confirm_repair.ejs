@@ -16,7 +16,7 @@
                     ใบเสร็จ
                     <small class="page-info">
      <i class="fa fa-angle-double-right text-80"></i>
-     รหัสการนัดหมาย:    <%=result_HR[0].Appointment_date_id%>
+     หมายเลขใบเสร็จ:    <%=result_HR[0].Payment_code_id%>
         </small>
                 </h1>
                 <div class="page-tools">
@@ -61,7 +61,8 @@
                                     <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-400">094-1764047 ,
                                                 083-2796566</b></div>
                                 </div>
-                                <div class="text-grey-m2"> <img id="imgqr" src="" style="width: 300px; object-fit: contain ;">
+                                <div class="text-grey-m2"> <img id="imgqr" src="" style="width: 150px; object-fit: contain ;">
+
                                 </div>
                             </div>
 
@@ -87,8 +88,13 @@
                                     </div>
 
                                     <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">สถานะ:</span>
+                                        <%if(result_HR[0].statuse === "สำเร็จ"){%>
+                                            <span class="badge badge-success badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                            <% }%>
+                                                <%if(result_HR[0].statuse === "ค้างชำระ"){%>
+                                                    <span class="badge badge-warning badge-pill px-25"> <%=result_HR[0].statuse%></span>
 
-                                        <span class="badge badge-success badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                    <% }%>
 
                                     </div>
                                     <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">วันที่ชำระเงิน:</span>
@@ -184,7 +190,13 @@
 
 
                             <input type="hidden" class="form-control" name="Employee_id" id="Employee_id" value="<%= result[0].Employee_id %>">
-                            <!-- <button type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" onclick="genQR()">ชำระเงิน</button> -->
+                            <%if(result_HR[0].statuse === "สำเร็จ"){%>
+                                <% }%>
+                                    <%if(result_HR[0].statuse === "ค้างชำระ"){%>
+                                        <button type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" onclick="genQR()">ชำระเงิน</button>
+                                        <a class="btn btn-secondary" href="/users/slip_record/s/ <%=result_HR[0].Payment_code_id%>">ส่งใบเสร็จ</a>
+                                        <% }%>
+
 
                         </div>
                     </div>

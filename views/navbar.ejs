@@ -14,12 +14,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
 <!-- ไม่มี result แสดง navbar 1 -->
 <% if(!locals.result){ %>
@@ -91,19 +86,16 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/users/<%= result[0].User_id %>">Home</a>
+                                    <a class="nav-link active" aria-current="page" href="/users">หน้าแรก</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/users/useProfiles/<%= result[0].User_id %>">Profile</a>
+                                    <a class="nav-link" href="/users/useProfiles">ข้อมูลส่วนตัว</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">แจ้งซ่อม</a>
+                                    <a class="nav-link active" aria-current="page" href="/users/appointment/s">ดูการนัดหมาย</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/users/appointment/s/<%= result[0].User_id %>">ดูการนัดหมาย</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/users/view_expend/s/<%= result[0].User_id %>">ชำระเงิน</a>
+                                    <a class="nav-link active" aria-current="page" href="/users/view_expend/s">ชำระเงิน</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="#">รายงานการซ่อม</a>
@@ -132,22 +124,22 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="/employees/<%= result[0].Employee_id %>">
+                                            <a class="nav-link active" aria-current="page" href="/employees">
                                                 <h4>หน้าแรก</h4>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/employees/emProfiles/<%= result[0].Employee_id %>">
+                                            <a class="nav-link active" href="/employees/emProfiles">
                                                 <h4>ข้อมูลพนักงาน</h4>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/employees/equipment/s/<%= result[0].Employee_id %>">
+                                            <a class="nav-link active" href="/employees/equipment/s">
                                                 <h4>อุปกรณ์</h4>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/employees/view_appointment/s/<%= result[0].Employee_id %>">
+                                            <a class="nav-link active" href="/employees/view_appointment/s">
                                                 <h4>ดูการนัดหมาย</h4>
                                             </a>
                                         </li>
@@ -211,7 +203,7 @@
                                         <style>
                                             body {
                                                 font-family: 'IBM Plex Sans Thai Looped', sans-serif;
-                                                font-size: 30px;
+                                                font-size: auto;
                                             }
                                             
                                             h3 {

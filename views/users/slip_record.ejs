@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel='stylesheet' href='/stylesheets/slip_record.css' />
+<%- include("../navbar") %>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <form action="/users/slip_record/s" method="post" enctype="multipart/form-data">
+            <main class="main_full">
+                <div class="container">
+                    <div class="panel">
+                        <div class="button_outer">
+                            <div class="btn_upload">
+                                <input type="file" id="upload_file" name="slip_Photo"> Upload Image
+                            </div>
+                            <div class="processing_bar"></div>
+                            <div class="success_box"></div>
+                        </div>
+                    </div>
+                    <div class="error_msg"></div>
+                    <div class="uploaded_file_view" id="uploaded_view">
+                        <span class="file_remove">X</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h4>รหัสชำระเงิน(เลขใบเสร็จ)
+
+
+                        </h4>
+                        <div class="input-box ">
+                            <input type="text" class="form-control" Name='slip_Payment_code_id' id="slip_Payment_code_id" value=" <%=result_all[0].Payment_code_id%>">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h4>รหัสสมาชิก</h4>
+                        <div class="input-box ">
+                            <input type="text" class="form-control" Name='slip_User_id' id="slip_User_id" value=" <%=result_all[0].User_id%>">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h4>รหัสอุปกรณ์</h4>
+                        <div class="input-box ">
+                            <input type="text" class="form-control" Name='slip_Equipment_id' id="slip_Equipment_id" value=" <%=result_all[0].Equipment_id%>">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h4>รหัสแจ้งซ่อม</h4>
+                        <div class="input-box ">
+                            <input type="text" class="form-control" Name='slip_Hotify_repaiv_id' id="slip_Hotify_repaiv_id" value=" <%=result_all[0].Hotify_repaiv_id%>">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h4>รหัสพนักงาน</h4>
+                        <div class="input-box ">
+                            <input type="text" class="form-control" Name='slip_Employee_id' id="slip_Employee_id" value=" <%=result_all[0].Employee_id%>">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h4>รหัสวันนัดหมาย</h4>
+                        <div class="input-box ">
+                            <input type="text" class="form-control" Name='slip_Appointment_date_id' id="slip_Appointment_date_id" value=" <%=result_all[0].Appointment_date_id%>">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn-success btn_upload">ยืนยัน</button>
+                </div>
+            </main>
+
+        </form>
+    </body>
+
+</html>
+<script>
+    var btnUpload = $("#upload_file"),
+        btnOuter = $(".button_outer");
+    btnUpload.on("change", function(e) {
+        var ext = btnUpload.val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            $(".error_msg").text("Not an Image...");
+        } else {
+            $(".error_msg").text("");
+            btnOuter.addClass("file_uploading");
+            setTimeout(function() {
+                btnOuter.addClass("file_uploaded");
+            }, 3000);
+            var uploadedFile = URL.createObjectURL(e.target.files[0]);
+            setTimeout(function() {
+                $("#uploaded_view").append('<img src="' + uploadedFile + '" />').addClass("show");
+            }, 3500);
+        }
+    });
+    $(".file_remove").on("click", function(e) {
+        $("#uploaded_view").removeClass("show");
+        $("#uploaded_view").find("img").remove();
+        btnOuter.removeClass("file_uploading");
+        btnOuter.removeClass("file_uploaded");
+    });
+</script>
