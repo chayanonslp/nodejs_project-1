@@ -99,7 +99,7 @@ router.get('/view_expend/s', ifNotLoggedin, function(req, res, next) {
                 db.query(`SELECT * FROM appointment INNER JOIN hotify_repaiv on hotify_repaiv.Hotify_repaiv_id = appointment.Hotify_repaiv_id
                 INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
                 INNER JOIN payment_code ON hotify_repaiv.Hotify_repaiv_id = payment_code.Hotify_repaiv_id
-                WHERE hotify_repaiv.User_id = '${db.escape(use_id)}' AND payment_code.statuse ='ค้างชำระ'`,
+                WHERE hotify_repaiv.User_id = '${db.escape(use_id)}' AND payment_code.statuse ='ค้างชำระ' OR payment_code.statuse ='รอตรวจสอบ'`,
 
                     (err, result_HR) => {
                         if (err) {}
@@ -297,10 +297,13 @@ router.post('/slip_record/s', upload.single("slip_Photo"), ifNotLoggedin,
         const slip_Equipment_id = req.body.slip_Equipment_id
         const slip_Hotify_repaiv_id = req.body.slip_Hotify_repaiv_id
         const slip_Appointment_date_id = req.body.slip_Appointment_date_id
-
+        const statuse = "รอตรวจสอบ"
         console.log(slip_Appointment_date_id)
         db.query('INSERT INTO slip_record (slip_Payment_code_id,slip_User_id,slip_Equipment_id,slip_Hotify_repaiv_id,slip_Employee_id,slip_Appointment_date_id,slip) VALUES(?,?,?,?,?,?,?)', [slip_Payment_code_id, slip_User_id, slip_Equipment_id, slip_Hotify_repaiv_id, slip_Employee_id, slip_Appointment_date_id, slip_Photo], (error, results, fields) => {
             if (error) throw error;
+            db.query(
+                `UPDATE payment_code SET statuse ='${statuse}' WHERE Payment_code_id = '${slip_Payment_code_id}'`
+            );
             res.redirect('/users/view_expend/s')
         })
 

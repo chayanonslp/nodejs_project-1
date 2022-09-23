@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel='stylesheet' href='/stylesheets/style.css' />
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แจ้งชำระเงิน</title>
+    <title>ตรวจสอบ</title>
 </head>
 
 <body>
@@ -64,6 +65,9 @@
                                 <div class="text-grey-m2"> <img id="imgqr" src="" style="width: 150px; object-fit: contain ;">
 
                                 </div>
+
+
+
                             </div>
 
                             <!-- /.col -->
@@ -84,26 +88,14 @@
                                         <%=result_HR[0].Repair_date%>
                                     </div>
                                     <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">วันที่แจ้งซ่อม:</span>
-                                        <%=result_HR[0].Repair_notice_date%>
+                                        <%=result_HR[0].Repair_noticedate%>
                                     </div>
 
                                     <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">สถานะ:</span>
-                                        <%if(result_HR[0].statuse === "สำเร็จ"){%>
-                                            <span class="badge badge-success badge-pill px-25"> <%=result_HR[0].statuse%></span>
-                                            <% }%>
-                                                <%if(result_HR[0].statuse === "ค้างชำระ"){%>
-                                                    <span class="badge badge-warning badge-pill px-25"> <%=result_HR[0].statuse%></span>
 
-                                                    <% }%>
+                                        <span class="btn btn-secondary badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                    </div>
 
-                                    </div>
-                                    <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">วันที่ชำระเงิน:</span>
-                                        <%if(!result_HR[0].Repair_notice_date){%>
-                                            dfdsf
-                                            <%}else{%>
-                                                วันที่
-                                                <%}%>
-                                    </div>
 
                                 </div>
 
@@ -164,24 +156,6 @@
                                         <input type="hidden" name="Price" id="Price" value="<%=result_HR[0].Price%>">
                                     </div>
                                 </div>
-
-                                <!-- <div class="row my-2">
-                                    <div class="col-7 text-right">
-                                        ภาษี (10%)
-                                    </div>
-                                    <div class="col-5">
-                                        <span class="text-110 text-secondary-d1">$225</span>
-                                    </div>
-                                </div>
-
-                                <div class="row my-2 align-items-center bgc-primary-l3 p-2">
-                                    <div class="col-7 text-right">
-                                        จำนวนเงินทั้งหมด
-                                    </div>
-                                    <div class="col-5">
-                                        <span class="text-150 text-success-d3 opacity-2">$2,475</span>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                         <hr />
@@ -189,6 +163,15 @@
                             <span class="text-secondary-d1 text-105">Thank you for your business / ขอบคุณสำหรับธุรกิจของคุณ</span>
 
 
+                            <div>
+                                <img src="/slip_Photo/<%= result_HR[0].slip%>" width="500" height="auto" class="img-fluid" />
+
+                            </div>
+                            <form action="/employees/up_statuse/s" method="post">
+                                <input type="text" name="Payment_code_id" value=" <%=result_HR[0].Payment_code_id%>">
+                                <a type="submit" href="/employees/slip_record/s" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-3">ยกเลิก</a>
+                                <button type="submit" class="btn btn-success  px-4 float-right mt-3 mt-lg-3">บันทึก</button>
+                            </form>
                             <input type="hidden" class="form-control" name="Employee_id" id="Employee_id" value="<%= result[0].Employee_id %>">
                             <%if(result_HR[0].statuse === "สำเร็จ"){%>
                                 <% }%>
@@ -202,17 +185,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        </div>
-
-        <div>
-
-            <input type="hidden" id="amount" placeholder="amount" value="<%=result_HR[0].Price%>">
-
-            <!-- <button onclick="genQR()">Generate</button> -->
-        </div>
-
 
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script>
