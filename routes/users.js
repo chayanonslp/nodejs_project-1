@@ -176,7 +176,7 @@ router.get('/slip_record/s/:id', ifNotLoggedin, function(req, res, next) {
         });
 });
 // เพิ่ม Users
-router.post('/register', ifNotLoggedin, [
+router.post('/register', [
         check('inputName', 'กรอก ชื่อ').not().isEmpty(),
         check('inputPassword', 'กรอก รหัสผ่าน ').not().isEmpty(),
         check('inputPhone', 'กรอก เบอร์โทร ').not().isEmpty(),

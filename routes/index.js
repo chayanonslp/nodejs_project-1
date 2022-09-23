@@ -21,7 +21,7 @@ const ifLoggedin = (req, res, next) => {
         next();
     }
     /* GET home page. */
-router.get('/', ifNotLoggedin, function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 router.get('/login', function(req, res, next) {
