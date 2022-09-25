@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
 
-
+<link rel='stylesheet' href='/stylesheets/style.css' />
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +10,7 @@
     </title>
 </head>
 
-<body>
+<body class="body">
 
     <%- include("../navbar") %>
         <% if(locals.errors){ %>
@@ -40,6 +40,23 @@
                                         <div class="form-group col-md-12">
                                             <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
                                         </div>
+
+                                        <label class="control-label col-sm-7" for="Device_details">ตำบล  :</label>
+                                        <div class="form-group col-md-12">
+                                            <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
+                                        </div>
+                                        <label class="control-label col-sm-7" for="Device_details">อำเภอ  :</label>
+                                        <div class="form-group col-md-12">
+                                            <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
+                                        </div>
+                                        <label class="control-label col-sm-7" for="Device_details">จังหวัด  :</label>
+                                        <div class="form-group col-md-12">
+                                            <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
+                                        </div>
+                                        <label class="control-label col-sm-7" for="Device_details">เบอร์โทร ติดต่อ  :</label>
+                                        <div class="form-group col-md-12">
+                                            <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
+                                        </div>
                                         <input type="hidden" class="form-control" name="Equipment_id" id="Equipment_id" value="<%= result_eq[0].Equipment_id %>">
                                     </div>
                                     <div class="form-group">
@@ -52,12 +69,7 @@
                         </div>
                     </div>
                 </form>
-
-
 </body>
-<footer>
-    <%- include("../footer") %>
-</footer>
 
 </html>
 <script>

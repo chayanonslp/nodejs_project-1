@@ -1,17 +1,18 @@
 body {
     font-family: 'IBM Plex Sans Thai Looped', sans-serif;
     font-size: 30px;
-  }
+}
 
-  h3 {
-    font-family: 'Bai Jamjuree',
-      sans-serif;
-  }
+h3 {
+    font-family: 'Bai Jamjuree', sans-serif;
+    text-align: center;
+}
 
-  .our-team-main {
+.our-team-main {
     width: 100%;
-    height: auto;
-    border-bottom: 5px #323233 solid;
+    height: 300px;
+    border: 1px solid #797979;
+    border-bottom: 5px #797979 solid;
     background: #fff;
     text-align: center;
     border-radius: 10px;
@@ -19,25 +20,25 @@ body {
     position: relative;
     transition: 0.5s;
     margin-bottom: 28px;
-  }
+}
 
+.our-team-main img {
+    border-radius: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #bbbbbb;
+    width: auto;
+}
 
-  .our-team-main img {
-    border-radius: 50%;
-    margin-bottom: 20px;
-    width: 90px;
-  }
-
-  .our-team-main h3 {
-    font-size: 20px;
+.our-team-main h3 {
+    font-size: auto;
     font-weight: 700;
-  }
+}
 
-  .our-team-main p {
+.our-team-main p {
     margin-bottom: 0;
-  }
+}
 
-  .team-back {
+.team-back {
     width: 100%;
     height: auto;
     position: absolute;
@@ -46,10 +47,9 @@ body {
     padding: 5px 15px 0 15px;
     text-align: left;
     background: #fff;
+}
 
-  }
-
-  .team-front {
+.team-front {
     width: 100%;
     height: auto;
     position: relative;
@@ -58,14 +58,14 @@ body {
     padding: 15px;
     bottom: 0px;
     transition: all 0.5s ease;
-  }
+}
 
-  .our-team-main:hover .team-front {
+.our-team-main:hover .team-front {
     bottom: -200px;
     transition: all 0.5s ease;
-  }
+}
 
-  .our-team-main:hover {
+.our-team-main:hover {
     border-color: #777;
     transition: 0.5s;
-  }
+}

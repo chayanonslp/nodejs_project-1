@@ -33,6 +33,15 @@ router.get('/', ifNotLoggedin, function(req, res, next) {
             }
         })
 })
+router.get('/homepage/s', ifNotLoggedin, function(req, res, next) {
+    const id = req.session.userID;
+    const role = 1;
+    db.query(`SELECT * FROM users WHERE User_id = ${db.escape(id)};`,
+        (err, result) => {
+            return res.render('users/homepage', { result, role, });
+
+        })
+})
 
 router.get('/useProfiles', ifNotLoggedin, function(req, res, next) {
     const id = req.session.userID;

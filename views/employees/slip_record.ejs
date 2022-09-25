@@ -1,4 +1,8 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 
 
 <!DOCTYPE html>
@@ -7,94 +11,117 @@
 <head>
     <title>ชำระเงิน</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/equipment.css' />
 </head>
 
-<body>
+<body class="body">
     <%- include("../navbar") %>
-        <div class="container mt-3">
-            <h2>ชำระเงิน</h2>
-            <div class="col col-xs-6 text-right">
-                <a type="text" href="#" name="user_id" id="user_id " class="btn btn-sm btn-success btn-create">ชำระแล้ว</a>
-
-            </div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>รหัสแจ้งซ่อม</th>
-                        <th>รหัสอุปกรณ์</th>
-                        <th>อุปกรณ์</th>
-                        <th>ยี่ห้อ</th>
-                        <th>รายละเอียดแจ้งซ่อม</th>
-                        <th>วันที่แจ้งซ่อม</th>
-                        <th>วันที่นัดซ่อม</th>
-                        <th>รหัสพนักงาน(ช่างซ้อม)</th>
-                        <th>วันที่ออกใบเสร็จ</th>
-                        <th>สถานะ</th>
-                        <th>ชำระเงิน</th>
 
 
+        <div class="container">
+            <h1>รายการชำระเงิน</h1>
+            <h5>กรุณาตรวจรายละเอียดการชำระเงินให้เรียบร้อย</h5>
+            <div class="row">
 
-                    </tr>
-                </thead>
-                <% Object.values(result_HR).forEach(function(result_HRs){%>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <%= result_HRs.Hotify_repaiv_id %>
-                            </td>
-                            <td>
-                                <%= result_HRs.Equipment_id %>
-                            </td>
-                            <td>
-                                <img src="/Eqimage/<%= result_HRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
-                            </td>
-                            <td>
-                                <%= result_HRs.Equipment_name %>
-                            </td>
+                <div class="container mt-3 col-md-offset-1">
 
-                            <td>
-                                <%= result_HRs.Repair_details_num %>
-                            </td>
-                            <td>
-                                <%= result_HRs.Repair_noticedate %>
-                            </td>
-                            <td>
-                                <%if(!result_HRs.Appointmentdate){%>
-                                    วันที่นัดหมาย
-                                    <%} %>
-                                        <%if(result_HRs.Appointmentdate){%>
-                                            <%= result_HRs.Appointmentdate %>
-                                                <%} %>
-                            </td>
-                            <td>
-                                <%if(!result_HRs.Employee_id){%>
-                                    ว่าง
-                                    <%} %>
-                                        <%if(result_HRs.Employee_id ){%>
-                                            <%= result_HRs.Employee_id %>
-                                                <%} %>
-                            </td>
-                            <td>
-                                <%= result_HRs.Repair_date %>
-                            </td>
-                            <td>
-                                <%if (result_HRs.statuse === "รอตรวจสอบ"){ %>
-                                    <span class="btn btn-secondary badge-pill px-100  my-auto"><%= result_HRs.statuse %></span>
-                                    <%} %>
-                                        <%if(result_HRs.statuse ==="ค้างชำระ"){ %>
-                                            <span class="btn btn-warning badge-pill px-100  my-auto"><%= result_HRs.statuse %></span>
-                                            <%} %>
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">
+                                    <h3 class="panel-title">รายการชำระเงิน</h3>
+                                </div>
+                                <div class="col col-xs-6 text-right">
+                                    <a type="text" href="#" name="user_id" id="user_id " class="btn btn-sm btn-success btn-create">ประวัติการชำระ</a>
 
-                            </td>
-                            <td>
-                                <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" aria-current="page" href="/employees/slip_view/s/<%= result_HRs.Payment_code_id %>">ตรวจสอบ</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <%})%>
-            </table>
-        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+
+                                        <th>รหัสแจ้งซ่อม</th>
+                                        <th>รหัสอุปกรณ์</th>
+                                        <th>อุปกรณ์</th>
+                                        <th>ยี่ห้อ</th>
+                                        <th>รายละเอียดแจ้งซ่อม</th>
+                                        <th>วันที่แจ้งซ่อม</th>
+                                        <th>วันที่นัดซ่อม</th>
+                                        <th>รหัสพนักงาน(ช่างซ้อม)</th>
+                                        <th>วันที่ออกใบเสร็จ</th>
+                                        <th>สถานะ</th>
+                                        <th>ชำระเงิน</th>
+
+
+                                    </tr>
+                                </thead>
+                                <% Object.values(result_HR).forEach(function(result_HRs){%>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <%= result_HRs.Hotify_repaiv_id %>
+                                            </td>
+                                            <td>
+                                                <%= result_HRs.Equipment_id %>
+                                            </td>
+                                            <td>
+                                                <img src="/Eqimage/<%= result_HRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
+                                            </td>
+                                            <td>
+                                                <%= result_HRs.Equipment_name %>
+                                            </td>
+
+                                            <td>
+                                                <%= result_HRs.Repair_details_num %>
+                                            </td>
+                                            <td>
+                                                <%= result_HRs.Repair_noticedate %>
+                                            </td>
+                                            <td>
+                                                <%if(!result_HRs.Appointmentdate){%>
+                                                    วันที่นัดหมาย
+                                                    <%} %>
+                                                        <%if(result_HRs.Appointmentdate){%>
+                                                            <%= result_HRs.Appointmentdate %>
+                                                                <%} %>
+                                            </td>
+                                            <td>
+                                                <%if(!result_HRs.Employee_id){%>
+                                                    ว่าง
+                                                    <%} %>
+                                                        <%if(result_HRs.Employee_id ){%>
+                                                            <%= result_HRs.Employee_id %>
+                                                                <%} %>
+                                            </td>
+                                            <td>
+                                                <%= result_HRs.Repair_date %>
+                                            </td>
+                                            <td>
+                                                <%if (result_HRs.statuse==="รอตรวจสอบ" ){ %>
+                                                    <span class="btn btn-secondary badge-pill px-100  my-auto">
+                                                        <%= result_HRs.statuse %>
+                                                    </span>
+                                                    <%} %>
+                                                        <%if(result_HRs.statuse==="ค้างชำระ" ){ %>
+                                                            <span class="btn btn-warning badge-pill px-100  my-auto">
+                                                                <%= result_HRs.statuse %>
+                                                            </span>
+                                                            <%} %>
+
+                                            </td>
+                                            <td>
+                                                <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" aria-current="page" href="/employees/slip_view/s/<%= result_HRs.Payment_code_id %>">ตรวจสอบ</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <%})%>
+                            </table>
+
+                        </div>
+
+                    </div>
 </body>
-
 
 </html>

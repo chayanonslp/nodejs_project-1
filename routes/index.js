@@ -101,7 +101,7 @@ router.post('/login', [
                                                     } else {
                                                         req.session.isLoggedIn = true;
                                                         req.session.userID = result[0].User_id;
-                                                        res.redirect('users');
+                                                        res.redirect('users/homepage/s');
                                                     }
 
                                                 })

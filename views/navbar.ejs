@@ -14,199 +14,207 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
-<!-- ไม่มี result แสดง navbar 1 -->
-<% if(!locals.result){ %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
-            <i class="fa-solid fa-washing-machine"></i>
-            <!--  <a class="navbar-brand" href="#">Navbar</a> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<link rel='stylesheet' href='/stylesheets/trueindexs.css' />
+
+
+<header class="fixed-top">
+    <!-- ไม่มี result แสดง navbar 1 -->
+    <% if(!locals.result){ %>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><img src="/images/1022.png " width="50px" height="auto" class="img-fluid" /></a>
+                <i class="fa-solid fa-washing-machine"></i>
+                <!--  <a class="navbar-brand" href="#">Navbar</a> -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">
-                            <h4>หน้าแรก</h4>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/login">
-                            <h4>เข้าสู่ระบบ</h4>
-                        </a>
-                        <!-- <a class="nav-link" href="/users/page/s">pages</a> -->
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <h4>สมัครสมาชิก</h4>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item nav-link" href="/users/register/s">
-                                    <h5>สมาชิกผู้ใช้งาน</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item nav-link" href="/employees/register/s">
-                                    <h5>สมาชิกพนักงาน</h5>
-                                </a>
-                            </li>
-                            <!-- <li><hr class="dropdown-divider"></li>
-           <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                        </ul>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li> -->
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">
+                                <h4>หน้าแรก</h4>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/login">
+                                <h4>เข้าสู่ระบบ</h4>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <h4>สมัครสมาชิก</h4>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item nav-link" href="/users/register/s">
+                                        <h5>สมาชิกผู้ใช้งาน</h5>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link" href="/employees/register/s">
+                                        <h5>สมาชิกพนักงาน</h5>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
             </div>
-        </div>
 
-    </nav>
-    <% } %>
-        <!-- ไม่มี result แสดง navbar 1 -->
-        <!-- มี result แสดง navbar 2 -->
-        <% if(locals.result){ %>
-            <!--  แสดง navbar role ที่ 1 role User -->
-            <% if(locals.role===1){ %>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
+        </nav>
+        <% } %>
+            <!-- ไม่มี result แสดง navbar 1 -->
+            <!-- มี result แสดง navbar 2 -->
+            <% if(locals.result){ %>
+                <!--  แสดง navbar role ที่ 1 role User -->
+                <% if(locals.role===1){ %>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/users">หน้าแรก</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/users/useProfiles">ข้อมูลส่วนตัว</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/users/appointment/s">ดูการนัดหมาย</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/users/view_expend/s">ชำระเงิน</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">รายงานการซ่อม</a>
-                                </li>
-
-                            </ul>
-                            <a class="navbar-brand" href="#">
-                                <%= result[0].User_name %>
-                            </a>
-                            <a type="button" class="btn btn-danger d-flex" href="/logout">Logout</a>
-                        </div>
-                    </div>
-                </nav>
-                <% } %>
-                    <!--  แสดง navbar role ที่ 1 role User จบ -->
-
-                    <!--  แสดง navbar role ที่ 2 role Employee  -->
-                    <% if(locals.role===2){ %>
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <div class="container-fluid">
-
-                                <a class="navbar-brand" href="#"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
+                            <h4 class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="/employees">
-                                                <h4>หน้าแรก</h4>
-                                            </a>
+                                            <a class="nav-link active" aria-current="page" href="/users/homepage/s">หน้าแรก</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/employees/emProfiles">
-                                                <h4>ข้อมูลพนักงาน</h4>
-                                            </a>
+                                            <a class="nav-link active" href="/users/useProfiles">ข้อมูลส่วนตัว</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/employees/equipment/s">
-                                                <h4>อุปกรณ์</h4>
-                                            </a>
+                                            <a class="nav-link active" href="/users">แจ้ง
+                                    </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/employees/view_appointment/s">
-                                                <h4>ดูการนัดหมาย</h4>
-                                            </a>
+                                            <a class="nav-link active" aria-current="page" href="/users/appointment/s">ดูการนัดหมาย</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="/users/view_expend/s">ชำระเงิน</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">รายงานการซ่อม</a>
+                                        </li>
+
                                     </ul>
                                     <a class="navbar-brand" href="#">
-                                        <%= result[0].Employee_name %>
+                                        <%= result[0].User_name %>
                                     </a>
                                     <a type="button" class="btn btn-danger d-flex" href="/logout">Logout</a>
-
                                 </div>
-                            </div>
+                            </h4>
+                        </div>
+                    </nav>
+                    <% } %>
+                        <!--  แสดง navbar role ที่ 1 role User จบ -->
 
-                        </nav>
-                        <% } %>
-                            <!--  แสดง navbar role ที่ 3 role admin จบ -->
-                            <% if(locals.role===3){ %>
-                                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                    <div class="container-fluid">
+                        <!--  แสดง navbar role ที่ 2 role Employee  -->
+                        <% if(locals.role===2){ %>
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <div class="container-fluid">
 
-                                        <a class="navbar-brand" href="#"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
-                                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                      <span class="navbar-toggler-icon"></span>
-                                    </button>
+                                    <img src="/images/1022.png " width="35" class="img-fluid" />
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                                    <h4 class="collapse navbar-collapse" id="navbarSupportedContent">
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="/admins/admin_equipment/s/<%= result[0].Employee_id %>">จัดการข้อมูลอุปกรณ์</a>
+                                                    <a class="nav-link active" aria-current="page" href="/employees">
+                                                        <h4>หน้าแรก</h4>
+                                                    </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="/admins/admin_view_appointment/s/<%= result[0].Employee_id %>">ดูการนัดหมายการซ่อม</a>
+                                                    <a class="nav-link active" href="/employees/emProfiles">
+                                                        <h4>ข้อมูลพนักงาน</h4>
+                                                    </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="/admins/admin_employeepage/s/<%= result[0].Employee_id %>">ดูรายงานการซ่อม</a>
-                                                </li>
-
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="#">ข้อมูลพนักงาน</a>
+                                                    <a class="nav-link active" href="/employees/equipment/s">
+                                                        <h4>อุปกรณ์</h4>
+                                                    </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="#">สมาชิกผู้ใช่งาน</a>
+                                                    <a class="nav-link active" href="/employees/view_appointment/s">
+                                                        <h4>ดูการนัดหมาย</h4>
+                                                    </a>
                                                 </li>
-
-
-
                                             </ul>
-                                            <a class="navbar-brand" href="#">
-                                                <%= result[0].Employee_name %>
-                                            </a>
-                                            <a type="button" class="btn btn-danger d-flex" href="/logout">Logout</a>
+                                            <ul class="navbar-nav me-3 mb-2 mb-lg-0">
+                                                <li class="nav-item">
+                                                    <a class="navbar-brand" href="#">
+                                                        <%= result[0].Employee_name %>
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                            <a type="button" class="btn btn-danger " href="/logout">Logout</a>
                                         </div>
-                                    </div>
-                                </nav>
-                                <% } %>
-                                    <!--  แสดง navbar role ที่ 3 role admin จบ -->
+
+                                    </h4>
+                                </div>
+
+                            </nav>
+                            <% } %>
+                                <!--  แสดง navbar role ที่ 3 role admin จบ -->
+                                <% if(locals.role===3){ %>
+                                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                        <div class="container-fluid">
+
+                                            <a class="navbar-brand" href="#"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
+                                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                      <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_equipment/s/<%= result[0].Employee_id %>">จัดการข้อมูลอุปกรณ์</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_view_appointment/s/<%= result[0].Employee_id %>">ดูการนัดหมายการซ่อม</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_employeepage/s/<%= result[0].Employee_id %>">ดูรายงานการซ่อม</a>
+                                                    </li>
+
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" aria-current="page" href="#">ข้อมูลพนักงาน</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" aria-current="page" href="#">สมาชิกผู้ใช่งาน</a>
+                                                    </li>
+
+
+
+                                                </ul>
+                                                <a class="navbar-brand" href="#">
+                                                    <%= result[0].Employee_name %>
+                                                </a>
+                                                <a type="button" class="btn btn-danger d-flex" href="/logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </nav>
                                     <% } %>
-                                        <!-- มี result แสดง navbar 2 -->
+                                        <!--  แสดง navbar role ที่ 3 role admin จบ -->
+                                        <% } %>
+                                            <!-- มี result แสดง navbar 2 -->
 
 
+</header>
 
-
-                                        <style>
-                                            body {
-                                                font-family: 'IBM Plex Sans Thai Looped', sans-serif;
-                                                font-size: auto;
-                                            }
-                                            
-                                            h3 {
-                                                font-family: 'Bai Jamjuree', sans-serif;
-                                            }
-                                        </style>
+<style>
+    body {
+        font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+        font-size: auto;
+    }
+    
+    h3 {
+        font-family: 'Bai Jamjuree', sans-serif;
+    }
+</style>

@@ -1,19 +1,14 @@
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/equipment.css' />
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>อุปกรณ์</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/equipment.css' />
+
 </head>
 
-<body>
+<body class="body">
     <%- include("../navbar") %>
 
         <div class="container">
@@ -70,7 +65,7 @@
                                                 <%= result_eqs.Price %> บาท
                                             </td>
                                             <td>
-                                                <a type="button " class="btn btn-warning " href="/users/notify_repair/s/<%= result_eqs.Equipment_id %>">แจ้งซ่อม</a>
+                                                <a type="button " class="btn btn-warning " href="/users/notify_repair/s/<%= result_eqs.Equipment_id %>">แจ้งซ่อม    <%= result_eqs.Equipment_id %></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -86,8 +81,5 @@
         </div>
 
 </body>
-<footer>
-    <%- include("../footer") %>
-</footer>
 
 </html>

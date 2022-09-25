@@ -1,17 +1,20 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/slip_record.css' />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
-<link rel='stylesheet' href='/stylesheets/slip_record.css' />
-<%- include("../navbar") %>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ส่งใบเสร็จ</title>
+</head>
 
-    <body>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<body class="body">
+    <%- include("../navbar") %>
+
         <form action="/users/slip_record/s" method="post" enctype="multipart/form-data">
             <main class="main_full">
                 <div class="container">
@@ -92,7 +95,7 @@
             </main>
 
         </form>
-    </body>
+</body>
 
 </html>
 <script>
