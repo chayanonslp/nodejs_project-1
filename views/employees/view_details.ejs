@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <%- include("../navbar") %>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+
+                        <h5>ตำบล:</h5>
+                        <div class="card-body">
+                            <%=result_HR[0].hr_parish%>
+                        </div>
+                        <h5>อำเภอ:</h5>
+                        <div class="card-body">
+                            <%=result_HR[0].hr_district%>
+                        </div>
+                        <h5>จังหวัด:</h5>
+                        <div class="card-body">
+                            <%=result_HR[0].hr_province%>
+                        </div>
+                        <h5>เบอร์โทร ติดต่อ: </h5>
+                        <div class="card-body">
+                            <%=result_HR[0].hr_contactnum%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a type="button " class="btn btn-primary" href="/employees/air_parts/s/<%= result_HR[0].Hotify_repaiv_id %>">แจ้งใบเสร็จ
+</body>
+
+</html>

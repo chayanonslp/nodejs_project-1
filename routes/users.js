@@ -144,7 +144,6 @@ router.get('/page_payment/s', ifNotLoggedin, function(req, res, next) {
 router.get('/confirm_repair/s/:id', ifNotLoggedin, function(req, res, next) {
     const id = req.params.id; //รหัสวันนัดหมาย Appointment_date_id
     const use_id = req.session.userID; //รหัสพนักงาน Employee_id
-    console.log(id, use_id)
     db.query(`SELECT * FROM users WHERE User_id = ${db.escape(use_id)};`,
         (err, result) => {
             if (err) {
@@ -155,11 +154,33 @@ router.get('/confirm_repair/s/:id', ifNotLoggedin, function(req, res, next) {
                 INNER JOIN payment_code ON hotify_repaiv.Hotify_repaiv_id = payment_code.Hotify_repaiv_id
                 WHERE hotify_repaiv.Hotify_repaiv_id =${db.escape(id)}`,
                     (err, result_HR) => {
-                        if (err) {}
+                        if (err) throw err
                         const role = 1; //role พนักงาน
                         const date = new Date().toLocaleString("th-TH");
-                        console.log(result_HR)
-                        return res.render('users/confirm_repair', { result, result_HR, role, date });
+
+                        const he_id = result_HR[0].Hotify_repaiv_id;
+                        db.query(`SELECT * FROM air_parts WHERE  Hotify_repaiv_id =${db.escape(he_id)}`,
+                            (err, result_AP) => {
+                                function ap_price_sum() {
+                                    if (result_AP) {
+                                        const numbers = [];
+                                        result_AP.forEach(function(APs) {
+                                            numbers.push(APs.ap_price * APs.ap_quantity) //ราคา คูณจำนวน
+                                        })
+                                        return numbers;
+
+                                    }
+
+                                }
+                                const number = ap_price_sum()
+                                let sum = 0; //รวมยอด
+                                for (let i = 0; i < number.length; i++) {
+                                    sum += number[i]
+                                }
+
+                                return res.render('users/confirm_repair', { result, result_HR, result_AP, sum, role, date });
+                            })
+
 
                     })
             }
@@ -226,25 +247,19 @@ router.post('/register', [
 );
 
 router.post('/notify_repair/s', ifNotLoggedin, function(req, res, next) {
-    const Eq_id = req.body.Equipment_id;
     const use_id = req.session.userID;
+    const Eq_id = req.body.Equipment_id;
     const Rdn = req.body.Repair_details_num;
     const dates = new Date();
+    const hr_parish = req.body.hr_parish; //ตำบล 
+    const hr_district = req.body.hr_district; //อำเภอ  
+    const hr_province = req.body.hr_province; //จังหวัด  
+    const hr_contactnum = req.body.hr_contactnum; //เบอร์โทร ติดต่อ 
     const date = dates.toLocaleString("th-TH");
-    const role = 1;
-    db.query(`INSERT INTO hotify_repaiv (Equipment_id,User_id ,Repair_details_num ,Repair_noticedate) VALUES(?,?,?,?)`, [Eq_id, use_id, Rdn, date], (error, results, fields) => {
+    console.log(hr_district)
+    db.query(`INSERT INTO hotify_repaiv (Equipment_id,User_id ,Repair_details_num ,Repair_noticedate,hr_parish,hr_district,hr_province,hr_contactnum) VALUES(?,?,?,?,?,?,?,?)`, [Eq_id, use_id, Rdn, date, hr_parish, hr_district, hr_province, hr_contactnum], (error, results, fields) => {
         if (error) throw error;
-
-        db.query(`SELECT * FROM equipment`,
-            (err, result_eq) => {
-                if (err) {
-                    console.log(err)
-                }
-                db.query(`SELECT * FROM users WHERE User_id = ${db.escape(use_id)};`,
-                    (err, result) => {
-                        res.redirect('/users', );
-                    })
-            })
+        res.redirect('/users', );
 
     })
 
@@ -317,4 +332,19 @@ router.post('/slip_record/s', upload.single("slip_Photo"), ifNotLoggedin,
         })
 
     });
+// edit profile /User
+router.post('/profile_user/edit', ifNotLoggedin, function(req, res, next) {
+
+    const User_id = req.session.userID;
+    const User_name = req.body.User_name;
+    const User_email = req.body.User_email;
+    const User_phone = req.body.User_phone;
+    const User_address = req.body.User_address;
+
+    db.query(`UPDATE users set User_name = ? , User_email = ? , User_phone = ? , User_address = ? WHERE User_id = '${User_id}'`, [User_name, User_email, User_phone, User_address], (err, res, fields) => {
+        if (err) throw err
+
+    })
+    res.redirect('/users/useProfiles');
+});
 module.exports = router;

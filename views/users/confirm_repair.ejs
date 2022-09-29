@@ -129,52 +129,90 @@
                                                                                 <% }%>
 
                                                         </div>
-                                                        <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
-                                                            <span class="text-600 text-90">วันที่ชำระเงิน:</span>
-                                                            <%if(!result_HR[0].Repair_notice_date){%>
-                                                                dfdsf
-                                                                <%}else{%>
-                                                                    วันที่
-                                                                    <%}%>
-                                                        </div>
-
                                                     </div>
-
-
                                                 </div>
                                                 <!-- /.col -->
                                             </div>
 
-                                            <div class="mt-4">
-                                                <div class="row text-600 text-blue bgc-default-tp1 py-25">
-                                                    <div class="d-none d-sm-block col-1">#</div>
-                                                    <div class="col-9 col-sm-5"> รหัสอุปกรณ์
+                                            <div class="mt-4 ">
+                                                <div class="card">
+                                                    <div class="card-body ">
+                                                        <div class="row text-600 text-blue bgc-default-tp1 py-25">
+                                                            <div class="d-none d-sm-block col-1">#</div>
+                                                            <div class="col-9 col-sm-4"> รหัสอุปกรณ์
+                                                            </div>
+                                                            <div class="d-none d-sm-block col-3 col-sm-1">
+
+                                                            </div>
+                                                            <div class="d-none d-sm-block col-3 col-sm-1">จำนวน
+
+                                                            </div>
+                                                            <div class="d-none d-sm-block col-sm-1">ราคา</div>
+
+                                                            <div class="d-none d-sm-block col-sm-1">รวม</div>
+                                                            <div class="d-none d-sm-block col-sm-2"></div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="text-95 text-secondary-d3">
+                                                            <div class="row mb-2 mb-sm-0 py-25">
+                                                                <div class="d-none d-sm-block col-1">1
+
+                                                                </div>
+                                                                <div class="col-9 col-sm-5">
+                                                                    <%=result_HR[0].Equipment_name%>
+
+                                                                </div>
+                                                                <div class="d-none d-sm-block col-3 col-sm-1">
+                                                                    <!-- จำนวน -->
+                                                                </div>
+                                                                <div class="d-none d-sm-block col-1 text-95">
+                                                                    <%=result_HR[0].Price%>
+                                                                </div>
+                                                                <div class="col-1 text-secondary-d2">
+                                                                    <%=result_HR[0].Price%>
+                                                                </div>
+                                                                <div class="col-1 text-secondary-d2">
+                                                                    บาท
+                                                                </div>
+                                                            </div>
+
+                                                            <% Object.values(result_AP).forEach(function(result_APs, index){ %>
+                                                                <div class="text-95 text-secondary-d3">
+                                                                    <div class="row mb-2 mb-sm-0 py-25">
+
+                                                                        <div class="d-none d-sm-block col-1">
+                                                                            <%= index+2%>
+                                                                        </div>
+                                                                        <div class="col-9 col-sm-5">
+                                                                            <%=result_APs.ap_air_parts%>
+                                                                                <!-- อะไหล่อุปกรณ์ -->
+                                                                        </div>
+                                                                        <div class="d-none d-sm-block col-3 col-sm-1">
+                                                                            <%=result_APs.ap_quantity%>
+                                                                                <!-- จำนวน -->
+                                                                        </div>
+                                                                        <div class="d-none d-sm-block col-1 text-95">
+                                                                            <%=result_APs.ap_price%>
+                                                                                <!-- ราคา -->
+                                                                        </div>
+
+                                                                        <div class="col-1 text-secondary-d2">
+                                                                            <%const ap_price = result_APs.ap_price * result_APs.ap_quantity%>
+                                                                                <%=ap_price%>
+
+                                                                        </div>
+                                                                        <div class="col-1 text-secondary-d2">
+                                                                            บาท
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <% })%>
+
+                                                        </div>
                                                     </div>
-                                                    <div class="d-none d-sm-block col-4 col-sm-2">จำนวน</div>
-                                                    <div class="d-none d-sm-block col-sm-2"></div>
-                                                    <div class="col-2">ราคา</div>
                                                 </div>
 
-                                                <div class="text-95 text-secondary-d3">
-                                                    <div class="row mb-2 mb-sm-0 py-25">
-                                                        <div class="d-none d-sm-block col-1">1</div>
-                                                        <div class="col-9 col-sm-5">
-                                                            <%=result_HR[0].Equipment_name%>
-
-                                                        </div>
-                                                        <div class="d-none d-sm-block col-2">
-                                                            <!-- <%=result_HR[0].Equipmentnum%> -->
-                                                        </div>
-                                                        <div class="d-none d-sm-block col-2 text-95">
-                                                        </div>
-                                                        <div class="col-2 text-secondary-d2">
-                                                            <%=result_HR[0].Price%> บาท
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
 
                                             <div class="row border-b-2 brc-default-l2"></div>
@@ -194,29 +232,12 @@
                                                         </div>
                                                         <div class="col-5">
                                                             <span class="text-120 text-secondary-d1">
-                                                                <%=result_HR[0].Price%> บาท
+                                                                <%=sum +result_HR[0].Price%> บาท
                                                             </span>
                                                             <input type="hidden" name="Price" id="Price" value="<%=result_HR[0].Price%>">
                                                         </div>
                                                     </div>
 
-                                                    <!-- <div class="row my-2">
-                                    <div class="col-7 text-right">
-                                        ภาษี (10%)
-                                    </div>
-                                    <div class="col-5">
-                                        <span class="text-110 text-secondary-d1">$225</span>
-                                    </div>
-                                </div>
-
-                                <div class="row my-2 align-items-center bgc-primary-l3 p-2">
-                                    <div class="col-7 text-right">
-                                        จำนวนเงินทั้งหมด
-                                    </div>
-                                    <div class="col-5">
-                                        <span class="text-150 text-success-d3 opacity-2">$2,475</span>
-                                    </div>
-                                </div> -->
                                                 </div>
                                             </div>
                                             <hr />
@@ -252,7 +273,7 @@
 
         <div>
 
-            <input type="hidden" id="amount" placeholder="amount" value="<%=result_HR[0].Price%>">
+            <input type="hidden" id="amount" placeholder="amount" value="<%=sum +result_HR[0].Price%>">
 
             <!-- <button onclick="genQR()">Generate</button> -->
         </div>

@@ -29,3 +29,8 @@ span.tags {
 .dropdown-menu .divider {
     background: none;
 }
+
+.column {
+    float: left;
+    width: 50%;
+}

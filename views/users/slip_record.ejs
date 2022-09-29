@@ -18,79 +18,43 @@
         <form action="/users/slip_record/s" method="post" enctype="multipart/form-data">
             <main class="main_full">
                 <div class="container">
-                    <div class="panel">
-                        <div class="button_outer">
-                            <div class="btn_upload">
-                                <input type="file" id="upload_file" name="slip_Photo"> Upload Image
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="panel">
+                                <div class="button_outer">
+                                    <div class="btn_upload">
+                                        <input type="file" id="upload_file" name="slip_Photo"> Upload Image
+                                    </div>
+                                    <div class="processing_bar"></div>
+                                    <div class="success_box"></div>
+                                </div>
                             </div>
-                            <div class="processing_bar"></div>
-                            <div class="success_box"></div>
-                        </div>
-                    </div>
-                    <div class="error_msg"></div>
-                    <div class="uploaded_file_view" id="uploaded_view">
-                        <span class="file_remove">X</span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <h4>รหัสชำระเงิน(เลขใบเสร็จ)
+                            <div class="error_msg"></div>
+                            <div class="uploaded_file_view" id="uploaded_view">
+                                <span class="file_remove">X</span>
+                                <button type="submit" class="btn btn-success btn-sm">ยืนยัน</button>
 
-
-                        </h4>
-                        <div class="input-box ">
-                            <input type="text" class="form-control" Name='slip_Payment_code_id' id="slip_Payment_code_id" value=" <%=result_all[0].Payment_code_id%>">
+                            </div>
 
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <h4>รหัสสมาชิก</h4>
-                        <div class="input-box ">
-                            <input type="text" class="form-control" Name='slip_User_id' id="slip_User_id" value=" <%=result_all[0].User_id%>">
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <h4>รหัสอุปกรณ์</h4>
-                        <div class="input-box ">
-                            <input type="text" class="form-control" Name='slip_Equipment_id' id="slip_Equipment_id" value=" <%=result_all[0].Equipment_id%>">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <h4>รหัสแจ้งซ่อม</h4>
-                        <div class="input-box ">
-                            <input type="text" class="form-control" Name='slip_Hotify_repaiv_id' id="slip_Hotify_repaiv_id" value=" <%=result_all[0].Hotify_repaiv_id%>">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <h4>รหัสพนักงาน</h4>
-                        <div class="input-box ">
-                            <input type="text" class="form-control" Name='slip_Employee_id' id="slip_Employee_id" value=" <%=result_all[0].Employee_id%>">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <h4>รหัสวันนัดหมาย</h4>
-                        <div class="input-box ">
-                            <input type="text" class="form-control" Name='slip_Appointment_date_id' id="slip_Appointment_date_id" value=" <%=result_all[0].Appointment_date_id%>">
-
-                        </div>
-                    </div>
-                </div>
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn-success btn_upload">ยืนยัน</button>
+
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <div class="input-box ">
+                            <input type="hidden" Name='slip_Payment_code_id' id="slip_Payment_code_id" value=" <%=result_all[0].Payment_code_id%>">
+                            <input type="hidden" Name='slip_User_id' id="slip_User_id" value=" <%=result_all[0].User_id%>">
+                            <input type="hidden" Name='slip_Equipment_id' id="slip_Equipment_id" value=" <%=result_all[0].Equipment_id%>">
+                            <input type="hidden" Name='slip_Hotify_repaiv_id' id="slip_Hotify_repaiv_id" value=" <%=result_all[0].Hotify_repaiv_id%>">
+                            <input type="hidden" Name='slip_Appointment_date_id' id="slip_Appointment_date_id" value=" <%=result_all[0].Appointment_date_id%>">
+                            <input type="hidden" Name='slip_Employee_id' id="slip_Employee_id" value=" <%=result_all[0].Employee_id%>">
+
+                        </div>
+                    </div>
                 </div>
             </main>
 

@@ -70,7 +70,11 @@
                                             </td>
 
                                             <td>
-                                                <%= result_NRs.Repair_details_num %>
+                                                <a type="button" style="color: black; text-decoration: none" href="/employees/view_details/s/<%= result_NRs.Hotify_repaiv_id %>">
+                                                    <%= result_NRs.Repair_details_num %>
+                                                </a>
+
+
                                             </td>
                                             <td>
                                                 <%= result_NRs.Repair_notice_date %>
@@ -85,7 +89,8 @@
 
                                             <td>
                                                 <div class="col-12">
-                                                    <a type="button " class="btn btn-primary" href="/employees/confirm_repair/s/<%= result_NRs.Appointment_date_id %>">แจ้งใบเสร็จ
+                                                    <!-- <a type="button " class="btn btn-primary" href="/employees/confirm_repair/s/<%= result_NRs.Appointment_date_id %>">แจ้งใบเสร็จ -->
+                                                    </a> <a type="button " class="btn btn-primary" href="/employees/air_parts/s/<%= result_NRs.Appointment_date_id %>">แจ้งใบเสร็จ
                         </a>
                                                 </div>
                                             </td>
