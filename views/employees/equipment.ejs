@@ -17,15 +17,12 @@
 
 <body class="body">
     <%- include("../navbar") %>
-
-
-        <div class="container">
-            <h1>อุปกรณ์</h1>
-            <h5>กรุณาตรวจสอบข้อมูลให้ถูกต้อง ก่อนเพิ่มข้อมูล/แก้ไข</h5>
-            <div class="row">
+        <div class="container card">
+            <div class="card-body">
+                <h1>อุปกรณ์</h1>
+                <h5>กรุณาตรวจสอบข้อมูลให้ถูกต้อง ก่อนเพิ่มข้อมูล/แก้ไข</h5>
 
                 <div class="container mt-3 col-md-offset-1">
-
                     <div class="panel panel-default panel-table">
                         <div class="panel-heading">
                             <div class="row">
@@ -33,7 +30,6 @@
                                     <h3 class="panel-title">รายการอุปกรณ์</h3>
                                 </div>
                                 <div class="col col-xs-6 text-right">
-
                                     <a type="text" href="/employees/re_equipment/s" name="Employee_id" id="Employee_id " class="btn btn-sm btn-primary btn-create">เพิ่มอุปกรณ์</a>
                                 </div>
                             </div>
@@ -42,7 +38,6 @@
                             <table class="table table-striped table-bordered table-list">
                                 <thead>
                                     <tr>
-
                                         <th>#</th>
                                         <th>รูปอุปกรณ์</th>
                                         <th>ยี่ห้ออุปกรณ์</th>
@@ -50,7 +45,6 @@
                                         <th>จำนวน</th>
                                         <th>ราคา</th>
                                         <th><em class="fa fa-cog"></em></th>
-
                                     </tr>
                                 </thead>
                                 <% Object.values(result_eq).forEach(function(result_eqs){%>
@@ -83,15 +77,11 @@
                                     </tbody>
                                     <%})%>
                             </table>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-        <br><br>
 
 </body>
 

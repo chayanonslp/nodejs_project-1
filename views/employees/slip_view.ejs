@@ -12,7 +12,7 @@
 
 <body class="body">
     <%- include("../navbar") %>
-        <div class="">
+        <div class="container">
             <div class="card-body">
                 <div class="page-content container card">
                     <br>
@@ -26,7 +26,7 @@
                             ใบเสร็จ
                             <small class="page-info">
      <i class="fa fa-angle-double-right text-80"></i>
-     หมายเลขใบเสร็จ:    <%=result_HR[0].Payment_code_id%>
+     หมายเลขใบเสร็จ:<%=result_HR[0].Payment_code_id%>
         </small>
                         </h1>
                         <div class="page-tools">
@@ -100,7 +100,15 @@
 
                                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">สถานะ:</span>
 
-                                                <span class="btn btn-secondary badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                <%if(result_HR[0].statuse==='สำเร็จ'){%>
+                                                    <span class="btn btn-success badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                    <%}%>
+                                                        <%if(result_HR[0].statuse==='รอตรวจสอบ'){%>
+                                                            <span class="btn btn-secondary badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                            <%}%>
+                                                                <%if(result_HR[0].statuse==='ค้างชำระ'){%>
+                                                                    <span class="btn btn-warning badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                                    <%}%>
                                             </div>
 
 
@@ -211,33 +219,27 @@
                                     </div>
                                 </div>
                                 <hr />
-                                <div>
-                                    <span class="text-secondary-d1 text-105">Thank you for your business / ขอบคุณสำหรับธุรกิจของคุณ</span>
+                                <span class="text-secondary-d1 text-105">Thank you for your business / ขอบคุณสำหรับธุรกิจของคุณ</span>
 
-
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="center">
-                                                <img src="/slip_Photo/<%= result_HR[0].slip%>" width="500" height="auto" class="img-fluid center" />
-                                            </div>
+                                <div class="">
+                                    <div class="card-body">
+                                        <div class="center">
+                                            <img src="/slip_Photo/<%= result_HR[0].slip%>" width="300" height="auto" class="rounded mx-auto d-block" />
                                         </div>
                                     </div>
-                                    <form action="/employees/up_statuse/s" method="post">
-                                        <input type="hidden" name="Payment_code_id" value=" <%=result_HR[0].Payment_code_id%>">
-                                        <a type="submit" href="/employees/slip_record/s" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-3">ยกเลิก</a>
-                                        <button type="submit" class="btn btn-success  px-4 float-right mt-3 mt-lg-3">บันทึก</button>
-                                    </form>
-                                    <input type="hidden" class="form-control" name="Employee_id" id="Employee_id" value="<%= result[0].Employee_id %>">
-                                    <%if(result_HR[0].statuse === "สำเร็จ"){%>
-                                        <% }%>
-                                            <%if(result_HR[0].statuse === "ค้างชำระ"){%>
-                                                <button type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" onclick="genQR()">ชำระเงิน</button>
-                                                <br>
-                                                <a class="btn btn-secondary" href="/users/slip_record/s/<%=result_HR[0].Payment_code_id%>">ส่งใบเสร็จ</a>
-                                                <% }%>
-
-
                                 </div>
+                                <input type="hidden" class="form-control" name="Employee_id" id="Employee_id" value="<%= result[0].Employee_id %>">
+                                <%if(result_HR[0].statuse === "สำเร็จ"){%>
+                                    <% }%>
+                                        <%if(result_HR[0].statuse === "รอตรวจสอบ"){%>
+                                            <form action="/employees/up_statuse/s" method="post">
+                                                <input type="hidden" name="Payment_code_id" value=" <%=result_HR[0].Payment_code_id%>">
+                                                <a type="submit" href="/employees/slip_record/s" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-3">ยกเลิก</a>
+                                                <button type="submit" class="btn btn-success  px-4 float-right mt-3 mt-lg-3">บันทึก</button>
+                                            </form>
+                                            <% }%>
+
+
                             </div>
                         </div>
                     </div>

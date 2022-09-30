@@ -3,6 +3,7 @@ var router = express.Router();
 const db = require('../lib/connect.js')
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const date = require('date-and-time')
 var multer = require('multer');
 const {
     check,
@@ -250,14 +251,14 @@ router.post('/notify_repair/s', ifNotLoggedin, function(req, res, next) {
     const use_id = req.session.userID;
     const Eq_id = req.body.Equipment_id;
     const Rdn = req.body.Repair_details_num;
-    const dates = new Date();
+    const now = new Date();
+    const dateTH = date.format(now, 'DD/MM/YYYY HH:mm');
     const hr_parish = req.body.hr_parish; //ตำบล 
     const hr_district = req.body.hr_district; //อำเภอ  
     const hr_province = req.body.hr_province; //จังหวัด  
     const hr_contactnum = req.body.hr_contactnum; //เบอร์โทร ติดต่อ 
-    const date = dates.toLocaleString("th-TH");
-    console.log(hr_district)
-    db.query(`INSERT INTO hotify_repaiv (Equipment_id,User_id ,Repair_details_num ,Repair_noticedate,hr_parish,hr_district,hr_province,hr_contactnum) VALUES(?,?,?,?,?,?,?,?)`, [Eq_id, use_id, Rdn, date, hr_parish, hr_district, hr_province, hr_contactnum], (error, results, fields) => {
+
+    db.query(`INSERT INTO hotify_repaiv (Equipment_id,User_id ,Repair_details_num ,Repair_noticedate,hr_parish,hr_district,hr_province,hr_contactnum) VALUES(?,?,?,?,?,?,?,?)`, [Eq_id, use_id, Rdn, dateTH, hr_parish, hr_district, hr_province, hr_contactnum], (error, results, fields) => {
         if (error) throw error;
         res.redirect('/users', );
 

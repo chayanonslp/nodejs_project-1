@@ -3,6 +3,7 @@ var router = express.Router();
 const db = require('../lib/connect.js')
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const date = require('date-and-time')
 const { ResultWithContext } = require('express-validator/src/chain/context-runner-impl.js');
 var multer = require('multer');
 //******upload รูปภาพ ***********/
@@ -41,8 +42,11 @@ const ifNotLoggedin = (req, res, next) => {
         }
         next();
     }
-    /* GET users listing. */
-    // หน้าแรก employee /method get
+    /* GET employee */
+    /* GET employee */
+    /* GET employee */
+
+// หน้าแรก employee /method get
 router.get('/', ifNotLoggedin, function(req, res, next) {
     console.log(req.session)
     const id = req.session.userID;
@@ -261,18 +265,16 @@ router.get('/slip_record/s', ifNotLoggedin, function(req, res, next) {
 router.get('/slip_view/s/:id', ifNotLoggedin, function(req, res, next) {
     const em_id = req.session.userID; //รหัสพนักงาน Employee_id
     const id = req.params.id
-    console.log(id)
     const role = 2
     db.query(`SELECT * FROM payment_code INNER JOIN hotify_repaiv on hotify_repaiv.Payment_code_id = payment_code.Payment_code_id
     INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
      INNER JOIN slip_record ON slip_record.slip_Payment_code_id = payment_code.Payment_code_id
-    WHERE hotify_repaiv.Employee_id = ${db.escape(em_id)} AND payment_code.statuse ='รอตรวจสอบ'AND payment_code.Payment_code_id= ${db.escape(id)}`,
+    WHERE hotify_repaiv.Employee_id = ${db.escape(em_id)} AND payment_code.statuse ='รอตรวจสอบ'or payment_code.statuse ='สำเร็จ'AND payment_code.Payment_code_id= ${db.escape(id)}`,
         (err, result_HR) => {
             if (err) throw err
             db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
                 (err, result) => {
-                    if (err) throw err
-                    console.log(result_HR)
+                    if (err) throw err;
                     const he_id = result_HR[0].Hotify_repaiv_id;
                     db.query(`SELECT * FROM air_parts WHERE  Hotify_repaiv_id =${db.escape(he_id)}`,
                         (err, result_AP) => {
@@ -291,15 +293,48 @@ router.get('/slip_view/s/:id', ifNotLoggedin, function(req, res, next) {
                                 sum += number[i]
                             }
                             return res.render('employees/slip_view', { result, result_HR, role, result_AP, sum });
-
                         })
                 })
-        })
+        });
+});
+router.get('/slip_views/s/:id', ifNotLoggedin, function(req, res, next) {
+    const em_id = req.session.userID; //รหัสพนักงาน Employee_id
+    const id = req.params.id
+    const role = 2
+    db.query(`SELECT * FROM payment_code INNER JOIN hotify_repaiv on hotify_repaiv.Payment_code_id = payment_code.Payment_code_id
+    INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
+     INNER JOIN slip_record ON slip_record.slip_Payment_code_id = payment_code.Payment_code_id
+    WHERE hotify_repaiv.Employee_id = ${db.escape(em_id)} AND payment_code.statuse ='รอตรวจสอบ`,
+        (err, result_HR) => {
+            if (err) throw err
+            db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
+                (err, result) => {
+                    if (err) throw err;
+                    const he_id = result_HR[0].Hotify_repaiv_id;
+                    db.query(`SELECT * FROM air_parts WHERE  Hotify_repaiv_id =${db.escape(he_id)}`,
+                        (err, result_AP) => {
+                            function ap_price_sum() {
+                                if (result_AP) {
+                                    const numbers = [];
+                                    result_AP.forEach(function(APs) {
+                                        numbers.push(APs.ap_price * APs.ap_quantity) //ราคา คูณจำนวน
+                                    })
+                                    return numbers;
+                                }
+                            }
+                            const number = ap_price_sum()
+                            let sum = 0
+                            for (let i = 0; i < number.length; i++) {
+                                sum += number[i]
+                            }
+                            return res.render('employees/slip_view', { result, result_HR, role, result_AP, sum });
+                        })
+                })
+        });
 });
 router.get('/air_parts/s/:id', ifNotLoggedin, function(req, res, next) {
     const em_id = req.session.userID; //รหัสพนักงาน Employee_id
     const Ad_id = req.params.id
-    const date = new Date().toLocaleString("th-TH");
     const role = 2
     db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
         (err, result) => {
@@ -332,7 +367,7 @@ router.get('/air_parts/s/:id', ifNotLoggedin, function(req, res, next) {
                                     sum += number[i]
                                 }
 
-                                return res.render('employees/air_parts', { result, result_HR, result_AP, sum, role, date });
+                                return res.render('employees/air_parts', { result, result_HR, result_AP, sum, role });
                             })
                     })
             }
@@ -367,6 +402,25 @@ router.post('/air_part/s',
             })
     }
 );
+router.get('/service/s', ifNotLoggedin, function(req, res, next) {
+    const role = 2
+    const em_id = req.session.userID; //รหัสพนักงาน Employee_id
+    db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
+        (err, result) => {
+            db.query(`SELECT * FROM payment_code INNER JOIN hotify_repaiv on hotify_repaiv.Payment_code_id = payment_code.Payment_code_id
+            INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
+            WHERE hotify_repaiv.Employee_id = ${db.escape(em_id)} AND payment_code.statuse ='สำเร็จ'`,
+
+                (err, result_HR) => {
+                    return res.render('employees/view_service', { role, result, result_HR })
+                })
+        })
+})
+
+/* POST employee */
+/* POST employee */
+/* POST employee */
+
 // เพิ่ม register employee /method post
 router.post('/register', upload.single("inputEmPhoto"),
 
@@ -418,7 +472,7 @@ router.post('/register', upload.single("inputEmPhoto"),
 );
 
 // เพิ่ม re_equipment equipment /method post
-router.post('/re_equipment', Rqupload.single("EqPhoto"), [
+router.post('/re_equipment', ifNotLoggedin, Rqupload.single("EqPhoto"), [
         check('inputEquipment_name', 'ใส่ ยี่ห้อ').not().isEmpty(),
         check('Device_details', 'ใส่ รายละเอียดอุปกรณ์').not().isEmpty(),
         check('Equipmentnum', 'ใส่จำนวน อุปกรณ์ ').not().isEmpty(),
@@ -427,35 +481,21 @@ router.post('/re_equipment', Rqupload.single("EqPhoto"), [
     function(req, res, next) {
         const results = validationResult(req);
         var errors = results.errors;
-        const id = req.session.userID;
-        const role = 2;
-
         const Equipment_name = req.body.inputEquipment_name;
         const Device_details = req.body.Device_details;
         const Equipmentnum = req.body.Equipmentnum;
         const Price = req.body.Price;
         const EqPhoto = req.file.filename
-        console.log(EqPhoto)
-        db.query(`SELECT Employee_id, Employee_name FROM employee WHERE Employee_id = $ { db.escape(id) };`,
-            (err, result) => {
-                db.query('INSERT INTO equipment (Equipment_name,Device_details,Equipmentnum,Price,Eq_image) VALUES(?,?,?,?,?)', [Equipment_name, Device_details, Equipmentnum, Price, EqPhoto], (error, results, fields) => {
-                    if (error) throw error;
-                    db.query(`
-                                SELECT * FROM equipment `,
-                        (err, result_eq) => {
-                            return res.render('employees/equipment', { error: false, data: results, result, result_eq, role })
-                        });
-
-
-                })
-            })
-
+        db.query('INSERT INTO equipment (Equipment_name,Device_details,Equipmentnum,Price,Eq_image) VALUES(?,?,?,?,?)', [Equipment_name, Device_details, Equipmentnum, Price, EqPhoto], (error, results, fields) => {
+            if (error) throw error;
+            res.redirect('/employees/equipment/s')
+        })
     });
 
 // ลบ equipment อุปกรณ์ /method get
 router.get('/de_equipment/s/:id', ifNotLoggedin, function(req, res, next) {
     const id = req.params.id;
-    db.query(`DELETE FROM equipment WHERE Equipment_id = $ { db.escape(id) }`, (err, results) => {
+    db.query(`DELETE FROM equipment WHERE Equipment_id = ${db.escape(id) }`, (err, results) => {
         if (err) {
             console.log(err);
         } else {
@@ -483,13 +523,7 @@ router.post('/equipment/s', ifNotLoggedin, function(req, res, next) {
 });
 
 router.post('/repair_record', ifNotLoggedin,
-    // [
-    //   check('Repair_record_id ', '1 ').not().isEmpty(),
-    //   check('Hotify_repaiv_id', '2').not().isEmpty(),
-    //   check('Employee_id', '3 ').not().isEmpty(),
-    //   check('Repair_date', '4').not().isEmpty(),
-    //   check('Device_details', '5').not().isEmpty(),
-    // ],
+
     function(req, res, next) {
         const results = validationResult(req);
         var errors = results.errors;
@@ -498,23 +532,28 @@ router.post('/repair_record', ifNotLoggedin,
         const Repair_notice_date = req.body.Repair_notice_date;
         const Amdate = req.body.Date;
         // แปลง วัน/เดือน/ปี 
-        let today = new Date(Amdate);
-        const Appoint_ment_date = today.toLocaleString("th-TH");
+        let today = new Date(Amdate).toLocaleDateString();
+
+        const Appoint_ment_date = today.toLocaleString("th-TH", );
+        console.log(Appoint_ment_date)
         db.query('INSERT INTO appointment ( Hotify_repaiv_id, Employee_id, Repair_notice_date,Appoint_ment_date) VALUES(?,?,?,?)', [Hotify_repaiv_id, Employee_id, Repair_notice_date, Appoint_ment_date], (error, results, fields) => {
             if (error) throw error;
             db.query(`UPDATE hotify_repaiv SET Appointmentdate = "${(Appoint_ment_date)}", Employee_id = "${(Employee_id)}"WHERE Hotify_repaiv_id = ${db.escape(Hotify_repaiv_id) }`)
-
             res.redirect('/employees')
+
         })
+
     });
 router.post('/confirm_repair', ifNotLoggedin,
     function(req, res, next) {
         const Hotify_repaiv_id = req.body.Hotify_repaiv_id;
-        const Repair_date = req.body.date;
+        const now = new Date();
         const Equipment_num = 'ว่าง'
         const Repair_cost = req.body.Price;
         const status = req.body.status;
         const em_id = req.session.userID;
+        const Repair_date = date.format(now, 'DD/MM/YYYY HH:mm');
+        console.log(Repair_date)
         db.query('INSERT INTO payment_code ( Hotify_repaiv_id, Repair_date, Equipment_num,Repair_cost,statuse) VALUES(?,?,?,?,?)', [Hotify_repaiv_id, Repair_date, Equipment_num, Repair_cost, status], (error, results, fields) => {
             if (error) throw error;
 
@@ -525,18 +564,16 @@ router.post('/confirm_repair', ifNotLoggedin,
                         `UPDATE hotify_repaiv SET Payment_code_id = '${result[0].Payment_code_id}' WHERE Hotify_repaiv_id = '${Hotify_repaiv_id}'`
                     );
                 })
-            res.redirect('view_appointment/s');
-
-
 
         });
+        res.redirect('view_appointment/s');
     });
 router.post('/up_statuse/s', ifNotLoggedin,
         function(req, res, next) {
             const id = req.body.Payment_code_id
             console.log(id)
             const statuse = "สำเร็จ";
-            db.query(`UPDATE payment_code SET statuse = "${statuse}" WHERE Payment_code_id = $ { id };`,
+            db.query(`UPDATE payment_code SET statuse = "${statuse}" WHERE Payment_code_id = ${id};`,
                 (err, result) => {
                     if (err) throw err
                     res.redirect('/employees/slip_record/s');
@@ -546,7 +583,7 @@ router.post('/up_statuse/s', ifNotLoggedin,
     // res.redirect('view_appointment/s');
 
 
-// edit profile /User
+// edit profile /employees
 router.post('/profile_employees/edit', ifNotLoggedin, function(req, res, next) {
     const employees_id = req.session.userID;
     const Employee_name = req.body.Employee_name;
@@ -554,7 +591,8 @@ router.post('/profile_employees/edit', ifNotLoggedin, function(req, res, next) {
     const Employee_phone = req.body.Employee_phone;
     const Employee_address = req.body.Employee_address;
     const Employee_lgbt = req.body.Employee_lgbt
-    db.query(`UPDATE employee set Employee_name = ? , Employee_email = ? , Employee_phone = ? , Employee_address = ? ,Employee_lgbt  = ? WHERE Employee_id = '${employees_id}'`, [Employee_name, Employee_email, Employee_phone, Employee_address, Employee_lgbt], (err, res, fields) => {
+    db.query(`UPDATE employee set Employee_name = ? , Employee_email = ? , Employee_phone = ? , Employee_address = ? ,Employee_lgbt  = ?
+     WHERE Employee_id = '${employees_id}'`, [Employee_name, Employee_email, Employee_phone, Employee_address, Employee_lgbt], (err, res, fields) => {
         if (err) throw err;
 
 

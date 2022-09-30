@@ -97,10 +97,6 @@
                                         <li class="nav-item">
                                             <a class="nav-link active" aria-current="page" href="/users/view_expend/s">ชำระเงิน</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="#">รายงานการซ่อม</a>
-                                        </li>
-
                                     </ul>
                                     <a class="navbar-brand" href="#">
                                         <%= result[0].User_name %>
@@ -114,14 +110,13 @@
                         <!--  แสดง navbar role ที่ 1 role User จบ -->
 
                         <!--  แสดง navbar role ที่ 2 role Employee  -->
-                        <% if(locals.role===2){ %>
+                        <% if(locals.role === 2){ %>
                             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                                 <div class="container-fluid">
-
                                     <img src="/images/1022.png " width="35" class="img-fluid" />
                                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
+                                    <span class="navbar-toggler-icon"></span>
+                                    </button>
                                     <h4 class="collapse navbar-collapse" id="navbarSupportedContent">
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -143,6 +138,11 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active" href="/employees/view_appointment/s">
                                                         <h4>ดูการนัดหมาย</h4>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" href="/employees/service/s">
+                                                        <h4>ประวัติบริการ</h4>
                                                     </a>
                                                 </li>
                                             </ul>

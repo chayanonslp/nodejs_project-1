@@ -11,60 +11,56 @@
 </head>
 
 <body class="body">
-
     <%- include("../navbar") %>
-        <% if(locals.errors){ %>
-            <ul class="alert alert-danger">
-                <% Object.values(errors).forEach(function(error){%>
-                    <li>
-                        <%= error.msg %>
-                    </li>
-                    <%})%>
-            </ul>
-            <%}%>
-                <br><br>
-                <form class="row g-3" action="/users/notify_repair/s" method="post">
-                    <div class="container contact">
-                        <h1>แจ้งรายละเอียดอุปกรณ์</h1>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="contact-info">
-                                    <h4>กรุณาตรวจสอบข้อมูลรายละเอียดให้ถูกต้องก่อนกดยืนยัน</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="contact-form">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-7" for="Device_details">แจ้งรายละเอียดอุปกรณ์  :</label>
-                                        <div class="form-group col-md-12">
-                                            <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
-                                        </div>
-                                        <label class="control-label col-sm-7" for="Device_details">ตำบล  :</label>
-                                        <div class="form-group col-md-12">
-                                            <input cols="40" rows="5" type="text" class="form-control" name="hr_parish" id="hr_parish">
-                                        </div>
-                                        <label class="control-label col-sm-7" for="Device_details">อำเภอ  :</label>
-                                        <div class="form-group col-md-12">
-                                            <input cols="40" rows="5" type="text" class="form-control" name="hr_district" id="hr_district"> </div>
-                                        <label class="control-label col-sm-7" for="Device_details">จังหวัด  :</label>
-                                        <div class="form-group col-md-12">
-                                            <input cols="40" rows="5" type="text" class="form-control" name="hr_province" id="hr_province"> </div>
-                                        <label class="control-label col-sm-7" for="Device_details">เบอร์โทร ติดต่อ  :</label>
-                                        <div class="form-group col-md-12">
-                                            <input cols="40" rows="5" type="text" class="form-control" name="hr_contactnum" id="hr_contactnum" maxlength="10"> </div>
-                                        <input type="hidden" class="form-control" name="Equipment_id" id="Equipment_id" value="<%=result_eq[0].Equipment_id %>">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3" action="/users/notify_repair/s" method="post">
+                        <div class="container contact">
+                            <h1>แจ้งรายละเอียดอุปกรณ์</h1>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="contact-info">
+                                        <h4>กรุณาตรวจสอบข้อมูลรายละเอียดให้ถูกต้องก่อนกดยืนยัน</h4>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" onclick="AlertSuccess()" class="btn btn-primary" alerd>ยืนยัน</button>
+                                </div>
+                                <div class="col-md-9 card">
+                                    <div class=" card-body">
+                                        <div class="contact-form">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-7" for="Device_details">แจ้งรายละเอียดอุปกรณ์  :</label>
+                                                <div class="form-group col-md-12">
+                                                    <textarea cols="40" rows="5" type="text" class="form-control" name="Repair_details_num" id="Repair_details_num"></textarea>
+                                                </div>
+                                                <label class="control-label col-sm-7" for="Device_details">ตำบล  :</label>
+                                                <div class="form-group col-md-12">
+                                                    <input cols="40" rows="5" type="text" class="form-control" name="hr_parish" id="hr_parish">
+                                                </div>
+                                                <label class="control-label col-sm-7" for="Device_details">อำเภอ  :</label>
+                                                <div class="form-group col-md-12">
+                                                    <input cols="40" rows="5" type="text" class="form-control" name="hr_district" id="hr_district"> </div>
+                                                <label class="control-label col-sm-7" for="Device_details">จังหวัด  :</label>
+                                                <div class="form-group col-md-12">
+                                                    <input cols="40" rows="5" type="text" class="form-control" name="hr_province" id="hr_province"> </div>
+                                                <label class="control-label col-sm-7" for="Device_details">เบอร์โทร ติดต่อ  :</label>
+                                                <div class="form-group col-md-12">
+                                                    <input cols="40" rows="5" type="text" class="form-control" name="hr_contactnum" id="hr_contactnum" maxlength="10"> </div>
+                                                <input type="hidden" class="form-control" name="Equipment_id" id="Equipment_id" value="<%=result_eq[0].Equipment_id %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" onclick="AlertSuccess()" class="btn btn-primary" alerd>ยืนยัน</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>

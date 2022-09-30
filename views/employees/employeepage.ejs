@@ -17,90 +17,98 @@
 <body class="body">
     <%- include("../navbar") %>
         <div class="container">
-            <h1>รายการแจ้งซ้อมอุปกรณ์</h1>
-            <h5>กรุณาตรวจรายละเอียดการแจ้งและทำการวันเวลาที่นัดหมาย</h5>
-            <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h1>รายการแจ้งซ้อมอุปกรณ์</h1>
+                    <h5>กรุณาตรวจรายละเอียดการแจ้งและทำการวันเวลาที่นัดหมาย</h5>
 
-                <div class="container mt-3 col-md-offset-1">
 
-                    <div class="panel panel-default panel-table">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col col-xs-6">
-                                    <h3 class="panel-title">รายการแจ้งซ้อม</h3>
+                    <div class="row">
+                        <div class="container mt-3 col-md-offset-1">
+                            <div class="panel panel-default panel-table">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col col-xs-6">
+                                            <h3 class="panel-title">รายการแจ้งซ้อม</h3>
+                                        </div>
+
+                                    </div>
                                 </div>
+                                <div class="panel-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
 
+                                                <th>รหัสแจ้งซ่อม</th>
+                                                <th>รหัสอุปกรณ์</th>
+                                                <th>อุปกรณ์</th>
+                                                <th>ยี่ห้อ</th>
+                                                <th>รายละเอียดแจ้งซ่อม</th>
+                                                <th>วันที่แจ้งซ่อม</th>
+                                                <th>วันนัดหมาย</th>
+                                                <th><em class="fa fa-cog"></em></th>
+
+                                            </tr>
+                                        </thead>
+                                        <% Object.values(result_NR).forEach(function(result_NRs){%>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <%= result_NRs.Hotify_repaiv_id %>
+
+                                                    </td>
+                                                    <td>
+                                                        <%= result_NRs.Equipment_id %>
+                                                    </td>
+                                                    <td>
+                                                        <img src="/Eqimage/<%= result_NRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
+                                                    </td>
+                                                    <td>
+                                                        <%= result_NRs.Equipment_name %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= result_NRs.Repair_details_num %>
+                                                    </td>
+                                                    <td>
+                                                        <%= result_NRs.Repair_noticedate %>
+                                                    </td>
+                                                    <td>
+                                                        <%if(!result_NRs.Appointmentdate){%>
+                                                            วันที่นัดหมาย
+                                                            <%} %>
+
+                                                    </td>
+
+                                                    <td>
+
+                                                        <div class="col-12">
+                                                            <a type="button " class="btn btn-primary" href="/employees/appointment/s/<%= result_NRs.Hotify_repaiv_id %>">รับงาน
+                                                             </a>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                            <%})%>
+
+                                    </table>
+                                    <% if (!result_NR[0]){ %>
+                                        <div class="card-body">
+                                            <h3 class="panel-title">ไม่มี การแจ้ง</h3>
+
+                                        </div>
+                                        <% } %>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-
-                                        <th>รหัสแจ้งซ่อม</th>
-                                        <th>รหัสอุปกรณ์</th>
-                                        <th>อุปกรณ์</th>
-                                        <th>ยี่ห้อ</th>
-                                        <th>รายละเอียดแจ้งซ่อม</th>
-                                        <th>วันที่แจ้งซ่อม</th>
-                                        <th>วันนัดหมาย</th>
-                                        <th><em class="fa fa-cog"></em></th>
-
-                                    </tr>
-                                </thead>
-                                <% Object.values(result_NR).forEach(function(result_NRs){%>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <%= result_NRs.Hotify_repaiv_id %>
-
-                                            </td>
-                                            <td>
-                                                <%= result_NRs.Equipment_id %>
-                                            </td>
-                                            <td>
-                                                <img src="/Eqimage/<%= result_NRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
-                                            </td>
-                                            <td>
-                                                <%= result_NRs.Equipment_name %>
-                                            </td>
-
-                                            <td>
-                                                <%= result_NRs.Repair_details_num %>
-                                            </td>
-                                            <td>
-
-                                                <%= result_NRs.Repair_noticedate %>
-                                            </td>
-                                            <td>
-                                                <%if(!result_NRs.Appointmentdate){%>
-                                                    วันที่นัดหมาย
-                                                    <%} %>
-
-                                            </td>
-
-                                            <td>
-
-                                                <div class="col-12">
-                                                    </a>
-
-                                                    <a type="button " class="btn btn-primary" href="/employees/appointment/s/<%= result_NRs.Hotify_repaiv_id %>">รับงาน
-                              </a>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-
-
-                                    </tbody>
-                                    <%})%>
-                            </table>
-
-                        </div>
-
                     </div>
+                </div>
+            </div>
 
-
+        </div>
 </body>
 
 
