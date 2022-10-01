@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="body">
+<body class="body" style="background-color: #e0e0e0;">
     <%- include("../navbar") %>
         <div class="container">
             <div class="card">
@@ -34,7 +34,7 @@
                                 <div class="panel-body">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th>รหัสแจ้งซ่อม</th>
                                                 <th>รหัสอุปกรณ์</th>
                                                 <th>อุปกรณ์</th>
@@ -47,13 +47,13 @@
                                         </thead>
                                         <% Object.values(result_hv).forEach(function(result_hvs){%>
                                             <tbody>
-                                                <tr>
+                                                <tr class="text-center">
                                                     <td>
-                                                        HCKlE00
+
                                                         <%= result_hvs.Hotify_repaiv_id %>
                                                     </td>
                                                     <td>
-                                                        HCKlE00
+
                                                         <%= result_hvs.Equipment_id %>
                                                     </td>
                                                     <td>

@@ -11,83 +11,92 @@
 
 <body class="body">
     <%- include("../navbar") %>
-        <br>
-        <div class="container contact">
-            <h1>รายการแจ้งซ้อม</h1>
-            <br>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="contact-info">
-                        <h4>กรุณาตรวจรายละเอียดการแจ้งและทำการวันเวลาที่นัดหมาย</h4>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="contact-form">
-                        <div class="form-group col-md-6">
-                            <p><strong>รหัสแจ้งซ่อม :  </strong> HCKlE00
-                                <%=result_Hr[0].Hotify_repaiv_id%>
-                            </p>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <section class="vh-200" style="background-color: #e0e0e0;">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-6 mb-4 mb-lg-0">
+                                    <div class="card mb-3" style="border-radius: .5rem;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                                <img src="/images/1022.png" alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                                                <h5>รายการแจ้งซ้อม</h5>
+                                                <p>กรุณาตรวจรายละเอียดการแจ้งและทำการวันเวลาที่นัดหมาย</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body p-4">
+                                                    <h6>
+                                                        <strong>รหัสลูกค้า  </strong>
+                                                        <%=result_Hr[0].User_id%>
+                                                    </h6>
+                                                    <hr class="mt-0 mb-4">
+                                                    <div class="row pt-1">
+                                                        <div class="col-6 mb-3">
+                                                            <h6>รหัสอุปกรณ์</h6>
+                                                            <p class="text-muted">
+                                                                <%=result_Hr[0].Hotify_repaiv_id%>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-6 mb-3">
+                                                            <h6> รหัสแจ้งซ่อม</h6>
+                                                            <p class="text-muted">
+                                                                <%=result_Hr[0].Equipment_id%>
+                                                            </p>
+                                                        </div>
+                                                    </div>
 
-                        </div>
-                        <div class="form-group col-md-6">
-                            <p><strong>รหัสอุปกรณ์ : </strong> HCKlE00
-                                <%=result_Hr[0].Equipment_id%>
-                            </p>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <p><strong>รหัสแจ้งซ่อม : </strong>
-                                <%=result_Hr[0].User_id%>
-                            </p>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <p><strong> วันที่แจ้งซ่อม : </strong>
-                                <%=result_Hr[0].Repair_noticedate%>
-                            </p>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <p><strong>นัดหมาย : </strong>
-                                <%if(!result_Hr[0].Appointmentdate){%>
-                                    ว่าง
-                                    <%}%>
+                                                    <hr class="mt-0 mb-4">
+                                                    <div class="row pt-1">
+                                                        <div class="col-6 mb-3">
+                                                            <h6>วันที่แจ้งซ่อม</h6>
+                                                            <p class="text-muted">
+                                                                <%=result_Hr[0].Repair_noticedate%>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-6 mb-3">
+                                                            <h6>นัดหมายเวลา </h6>
+                                                            <form class="row g-3" action="/employees/repair_record" method="post">
+                                                                <div class="form-group">
+                                                                    <div class="input-box col-sm-15 ">
+                                                                        <input type="date" class="form-control" id="Date" name="Date" value="">
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" class="form-control" id="Hotify_repaiv_id" name="Hotify_repaiv_id" value=" <%=result_Hr[0].Hotify_repaiv_id%>">
+                                                                <input type="hidden" class="form-control" id="Employee_id" name="Employee_id" value="<%=result[0].Employee_id%>">
+                                                                <input type="hidden" class="form-control" id="Repair_notice_date" name="Repair_notice_date" value="<%=result_Hr[0].Repair_noticedate%>">
 
-                                        <%=result_Hr[0].Appointmentdate%>
-                            </p>
-
-                        </div>
-
-
-                        <form class="row g-3" action="/employees/repair_record" method="post">
-                            <div class="form-group col-md-6">
-                                <label class="control-label col-sm-6" for="Price"><strong>นัดหมายเวลา :</strong> </label>
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <div class="input-box ">
-                                            <input type="date" class="form-control" id="Date" name="Date" value="">
-                                            <input type="hidden" class="form-control" id="Hotify_repaiv_id" name="Hotify_repaiv_id" value=" <%=result_Hr[0].Hotify_repaiv_id%>">
-                                            <input type="hidden" class="form-control" id="Employee_id" name="Employee_id" value="<%=result[0].Employee_id%>">
-                                            <input type="hidden" class="form-control" id="Repair_notice_date" name="Repair_notice_date" value="<%=result_Hr[0].Repair_noticedate%>">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                                        <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">ยืนยัน</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
-
-
-
 </body>
-<footer id="footer">
-    <%- include("../footer") %>
-</footer>
+
 
 </html>
+<style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #7a7a7a;
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right bottom, #7a7a7a(246, 211, 101, 1), #7a7a7a(253, 160, 133, 1));
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right bottom, #7a7a7a(246, 211, 101, 1), #7a7a7a(253, 160, 133, 1))
+    }
+</style>

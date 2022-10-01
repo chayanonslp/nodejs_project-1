@@ -261,15 +261,53 @@ router.get('/slip_record/s', ifNotLoggedin, function(req, res, next) {
                 })
         })
 });
-// หน้า /slip_record/s /method get
+// หน้า /slip_record/s /method get รอตรวจสอบ
 router.get('/slip_view/s/:id', ifNotLoggedin, function(req, res, next) {
     const em_id = req.session.userID; //รหัสพนักงาน Employee_id
     const id = req.params.id
+    console.log(id)
     const role = 2
     db.query(`SELECT * FROM payment_code INNER JOIN hotify_repaiv on hotify_repaiv.Payment_code_id = payment_code.Payment_code_id
     INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
      INNER JOIN slip_record ON slip_record.slip_Payment_code_id = payment_code.Payment_code_id
-    WHERE hotify_repaiv.Employee_id = ${db.escape(em_id)} AND payment_code.statuse ='รอตรวจสอบ'or payment_code.statuse ='สำเร็จ'AND payment_code.Payment_code_id= ${db.escape(id)}`,
+    WHERE payment_code.statuse ='รอตรวจสอบ'AND payment_code.Payment_code_id= ${db.escape(id)} AND hotify_repaiv.Employee_id = ${db.escape(em_id)}`,
+        (err, result_HR) => {
+            if (err) throw err
+            db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
+                (err, result) => {
+                    if (err) throw err;
+                    const he_id = result_HR[0].Hotify_repaiv_id;
+                    db.query(`SELECT * FROM air_parts WHERE  Hotify_repaiv_id =${db.escape(he_id)}`,
+                        (err, result_AP) => {
+                            function ap_price_sum() {
+                                if (result_AP) {
+                                    const numbers = [];
+                                    result_AP.forEach(function(APs) {
+                                        numbers.push(APs.ap_price * APs.ap_quantity) //ราคา คูณจำนวน
+                                    })
+                                    return numbers;
+                                }
+                            }
+                            const number = ap_price_sum()
+                            let sum = 0
+                            for (let i = 0; i < number.length; i++) {
+                                sum += number[i]
+                            }
+                            return res.render('employees/slip_view', { result, result_HR, role, result_AP, sum });
+                        })
+                })
+        });
+});
+// หน้า /slip_record/s /method get สำเร็จ
+router.get('/slip_view2/s/:id', ifNotLoggedin, function(req, res, next) {
+    const em_id = req.session.userID; //รหัสพนักงาน Employee_id
+    const id = req.params.id
+    console.log(id)
+    const role = 2
+    db.query(`SELECT * FROM payment_code INNER JOIN hotify_repaiv on hotify_repaiv.Payment_code_id = payment_code.Payment_code_id
+    INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
+     INNER JOIN slip_record ON slip_record.slip_Payment_code_id = payment_code.Payment_code_id
+    WHERE payment_code.statuse ='สำเร็จ'AND payment_code.Payment_code_id= ${db.escape(id)} AND hotify_repaiv.Employee_id = ${db.escape(em_id)}`,
         (err, result_HR) => {
             if (err) throw err
             db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,

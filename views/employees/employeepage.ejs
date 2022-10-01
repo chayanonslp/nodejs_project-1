@@ -14,7 +14,7 @@
     <link rel='stylesheet' href='/stylesheets/equipment.css' />
 </head>
 
-<body class="body">
+<body class="body" style="background-color: #e0e0e0;">
     <%- include("../navbar") %>
         <div class="container">
             <div class="card">
@@ -37,7 +37,7 @@
                                 <div class="panel-body">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
 
                                                 <th>รหัสแจ้งซ่อม</th>
                                                 <th>รหัสอุปกรณ์</th>
@@ -52,7 +52,7 @@
                                         </thead>
                                         <% Object.values(result_NR).forEach(function(result_NRs){%>
                                             <tbody>
-                                                <tr>
+                                                <tr class="text-center">
                                                     <td>
                                                         <%= result_NRs.Hotify_repaiv_id %>
 

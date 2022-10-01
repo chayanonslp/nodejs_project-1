@@ -10,7 +10,7 @@
     <title>ตรวจสอบ</title>
 </head>
 
-<body class="body">
+<body class="body" style="background-color: #e0e0e0;">
     <%- include("../navbar") %>
         <div class="container">
             <div class="card-body">
@@ -224,7 +224,8 @@
                                 <div class="">
                                     <div class="card-body">
                                         <div class="center">
-                                            <img src="/slip_Photo/<%= result_HR[0].slip%>" width="300" height="auto" class="rounded mx-auto d-block" />
+                                            <%= result_HR[0].slip%>
+                                                <img src="/slip_Photo/<%= result_HR[0].slip%>" width="300" height="auto" class="rounded mx-auto d-block" />
                                         </div>
                                     </div>
                                 </div>

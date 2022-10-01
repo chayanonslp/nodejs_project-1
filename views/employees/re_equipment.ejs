@@ -12,74 +12,71 @@
     </title>
 </head>
 
-<body class="body">
-
+<body class="body" style="background-color: #e0e0e0;">
     <%- include("../navbar") %>
-        <% if(locals.errors){ %>
-            <ul class="alert alert-danger">
-                <% Object.values(errors).forEach(function(error){%>
-                    <li>
-                        <%= error.msg %>
-                    </li>
-                    <%})%>
-            </ul>
-            <%}%>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3" action="/employees/re_equipment" method="post" enctype="multipart/form-data">
+                        <div class="container contact">
 
-                <br>
-                <form class="row g-3" action="/employees/re_equipment" method="post" enctype="multipart/form-data">
-                    <div class="container contact">
-                        <h1>เพิ่มอุปกรณ์</h1>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="contact-info">
-                                    <h4>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</h4>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="contact-info">
+                                        <h1>เพิ่มอุปกรณ์</h1>
+                                        <h4>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="contact-form">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmPhoto" class="form-label">รูปภาพ อุปกรณ์ :</label>
-                                        <input placeholder="รูปภาพ" aria-label="email" aria-describedby="email" type="file" class="form-control" Name='EqPhoto' id="EqPhoto">
+                                <div class="col-md-8 card " style="background-color: #e9e8e8;">
+                                    <div class="contact-form card-body">
+                                        <div class="form-group col-md-5">
+                                            <label for="inputEmPhoto" class="form-label">รูปภาพ อุปกรณ์ :</label>
+                                            <input placeholder="รูปภาพ" aria-label="email" aria-describedby="email" type="file" class="form-control" Name='EqPhoto' id="EqPhoto">
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="inputEquipment_name">ยี่ห้อ :</label>
-                                        <div class="col-sm-10">
-                                            <input type="Name" class="form-control" name="inputEquipment_name" id="inputEmName">
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-7" for="Device_details">รายละเอียดอุปกรณ์ :</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="Device_details" id="Device_details">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-5">
+                                                <label class="control-label col-sm-10" for="inputEquipment_name">ยี่ห้อ</label>
+                                                <div class="col-sm-10">
+                                                    <input type="Name" class="form-control" name="inputEquipment_name" id="inputEmName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-7" for="Device_details">รายละเอียดอุปกรณ์ :</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="Device_details" id="Device_details">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="Equipmentnum">จำนวน :</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="Equipmentnum" id="Equipmentnum" placeholder="Number">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <label class="control-label col-sm-10" for="Equipmentnum">จำนวน</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="Equipmentnum" id="Equipmentnum" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label class="control-label col-sm-10" for="Price">ราคา</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="Price" id="Price" placeholder="">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="Price">ราคา :</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="Price" id="Price" placeholder="1234 Main St">
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="Employee_id" id="Employee_id " value="<%= result[0].Employee_id %>">
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-primary  ">ยืนยัน</button>
+                                        <input type="hidden" name="Employee_id" id="Employee_id " value="<%= result[0].Employee_id %>">
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary  ">ยืนยัน</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
     <title>อุปกรณ์</title>
 </head>
 
-<body class="body">
+<body class="body" style="background-color: #e0e0e0;">
     <%- include("../navbar") %>
         <div class="container">
             <div class="card">
@@ -33,7 +33,7 @@
                                 <div class="panel-body">
                                     <table class="table table-striped table-bordered table-list">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
 
                                                 <th>#</th>
                                                 <th>รูปอุปกรณ์</th>
@@ -48,7 +48,7 @@
                                         </thead>
                                         <% Object.values(result_eq).forEach(function(result_eqs){%>
                                             <tbody>
-                                                <tr>
+                                                <tr class="text-center">
                                                     <td>
                                                         <%= result_eqs.Equipment_id %>
                                                     </td>
