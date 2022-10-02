@@ -201,7 +201,7 @@ router.get('/slip_record/s/:id', ifNotLoggedin, function(req, res, next) {
                 (err, result_all) => {
                     if (err) throw err;
                     console.log(result_all)
-                    res.render('users/slip_record', { result, result_all, role });
+                    return res.render('users/slip_record', { result, result_all, role });
                 })
 
         });

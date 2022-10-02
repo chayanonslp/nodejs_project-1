@@ -7,7 +7,6 @@
 
 
 <body>
-
     <%- include("../navbar") %>
         <% if(locals.errors){ %>
             <ul class="alert alert-danger">
@@ -19,56 +18,60 @@
             </ul>
             <%}%>
                 <br>
-                <form class="row g-3" action="/admins/admin_equipment/s" method="post">
-                    <div class="container contact">
-                        <h1>แก้ไขข้อมูล</h1>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="contact-info">
-                                    <h4>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <form class="row g-3" action="/admins/admin_equipment/s" method="post">
+                            <div class="container contact">
+                                <h1>แก้ไขข้อมูล</h1>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="contact-info">
+                                            <h4>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="contact-form">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="inputEquipment_name">ยี่ห้อ :</label>
+                                                <div class="col-sm-10">
+                                                    <input type="Name" class="form-control" name="inputEquipment_name" id="inputEmName" value="<%=result_eq[0].Equipment_name%>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-7" for="Device_details">รายละเอียดอุปกรณ์ :</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="Device_details" id="Device_details" value="<%=result_eq[0].Device_details%>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="Equipmentnum">จำนวน :</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="Equipmentnum" id="Equipmentnum" placeholder="จำนวน" value="<%=result_eq[0].Equipmentnum%>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="Price">ราคา :</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="Price" id="Price" value="<%=result_eq[0].Price%>" placeholder="1234 Main St">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="Equipment_id" id="Equipment_id " value="<%=result_eq[0].Equipment_id%>">
+                                            <!--ส่ง id อุปกรณ์ -->
+                                            <input type="hidden" name="Employee_id" id="Employee_id " value="<%= result[0].Employee_id %>">
+                                            <!--ส่ง id พนักงาน -->
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" onclick="AlertSuccess()" class="btn btn-primary">ยืนยัน</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-9">
-                                <div class="contact-form">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="inputEquipment_name">ยี่ห้อ :</label>
-                                        <div class="col-sm-10">
-                                            <input type="Name" class="form-control" name="inputEquipment_name" id="inputEmName" value="<%=result_eq[0].Equipment_name%>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-7" for="Device_details">รายละเอียดอุปกรณ์ :</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="Device_details" id="Device_details" value="<%=result_eq[0].Device_details%>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="Equipmentnum">จำนวน :</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="Equipmentnum" id="Equipmentnum" placeholder="จำนวน" value="<%=result_eq[0].Equipmentnum%>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="Price">ราคา :</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="Price" id="Price" value="<%=result_eq[0].Price%>" placeholder="1234 Main St">
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="Equipment_id" id="Equipment_id " value="<%=result_eq[0].Equipment_id%>">
-                                    <!--ส่ง id อุปกรณ์ -->
-                                    <input type="hidden" name="Employee_id" id="Employee_id " value="<%= result[0].Employee_id %>">
-                                    <!--ส่ง id พนักงาน -->
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" onclick="AlertSuccess()" class="btn btn-primary">ยืนยัน</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
                 <br><br>
 
                 <%- include("../footer") %>

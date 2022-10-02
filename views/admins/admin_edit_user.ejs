@@ -1,0 +1,70 @@
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= result[0].User_name %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/Profile.css' />
+</head>
+
+<body style="background-color: #e0e0e0;">
+    <%- include("../navbar") %>
+        <br><br>
+        <div class="container ">
+            <div class="row">
+                <div class="container ">
+                    <div class="profile">
+                        <div class="card  bg-light mb-3">
+                            <div class="card-body">
+                                <div class="col-sm-15">
+                                    <form action="/admins/admin_user/s" method="post">
+                                        <div class="col-xs-12 col-sm-10">
+                                            <h1><strong>ข้อมูลส่วนตัว</strong></h1>
+                                            <br>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputName">ชื่อ-สกุล</label>
+                                                            <input type="text" class="form-control" id="inputName" name="User_name" value="<%= result_edit_user[0].User_name %>" maxlength="50">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputEmail4">Email</label>
+                                                            <input type="email" class="form-control" id="inputEmail4" name="User_email" value="<%= result_edit_user[0].User_email %>" maxlength="20">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputAddress">ที่อยู่</label>
+                                                        <input type="text" class="form-control" id="inputAddress" name="User_address" value="<%= result_edit_user[0].User_address %>" maxlength="255">
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputPhone">เบอร์โทรศัพท์</label>
+                                                            <input type="text" class="form-control" id="inputPhone" name="User_phone" value="<%= result_edit_user[0].User_phone %>" maxlength="10">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="User_id" value="<%= result_edit_user[0].User_id %>">
+                                                <input type="hidden" name="email" value="<%= result_edit_user[0].User_email %>">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary col-2 ">แก้ไขข้อมูล</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>อุปกรณ์</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/equipment.css' />
+
+</head>
+
+<body>
+    <%- include("../navbar") %>
+
+        <br><br>
+        <div class="card">
+          <div class="card-body">
+        <div class="container">
+            <h1>ข้อมูลพนักงาน</h1>
+            <h5>กรุณาตรวจสอบข้อมูลให้ถูกต้อง ลบ/แก้ไข</h5>
+            <div class="row">
+
+                <div class="container mt-3 col-md-offset-1">
+
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">
+                                    <h3 class="panel-title">ข้อมูลพนักงาน</h3>
+                                </div>
+                        
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered table-list">
+                                <thead>
+                                    <tr>
+
+                                        <th>รหัสพนักงาน</th>
+                                        <th>ชื่อพนักงาน </th>
+                                        <th>เบอร์โทรศัพท์</th>
+                                        <th>ที่อยู่</th>
+                                        <th>เพศ</th>
+                                        <th><em class="fa fa-cog"></em></th>
+
+                                    </tr>
+                                </thead>
+                                <% Object.values(result_edit_ep).forEach(function(result_edit_ep){%>
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <%= result_edit_ep.Employee_id  %>
+                                        </td>
+                                        <td>
+                                          <%= result_edit_ep.Employee_name %>
+                                        </td>
+                                        <td>
+                                          <%= result_edit_ep.Employee_phone %>
+                                        </td>
+                                        <td>
+                                          <%= result_edit_ep.Employee_address %>
+                                        </td>
+                                        <td>
+                                          <%= result_edit_ep.Employee_lgbt %> 
+                                        </td>
+                                        <td>
+                                          <a type="button " class="btn btn-danger "
+                                            href="/admins/ep_employees/s/<%= result_edit_ep.Employee_id %>/<%= result[0].Employee_id %>">ลบ</a>
+                                            <a type="button " class="btn btn-warning "
+                                            href="/admins/admin_edit_employees/s/<%= result_edit_ep.Employee_id %>">แก้ไข</a>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                    <%})%>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <br><br>
+        <%- include("../footer") %>
+</body>
+
+</html>

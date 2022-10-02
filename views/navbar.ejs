@@ -159,14 +159,12 @@
 
                                     </h4>
                                 </div>
-
                             </nav>
                             <% } %>
                                 <!--  แสดง navbar role ที่ 3 role admin จบ -->
                                 <% if(locals.role===3){ %>
                                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                                         <div class="container-fluid">
-
                                             <a class="navbar-brand" href="#"><img src="/images/1022.png " width="50" height="auto" class="img-fluid" /></a>
                                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                       <span class="navbar-toggler-icon"></span>
@@ -174,23 +172,21 @@
                                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                                     <li class="nav-item">
-                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_equipment/s/<%= result[0].Employee_id %>">จัดการข้อมูลอุปกรณ์</a>
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_equipment/s">จัดการข้อมูลอุปกรณ์</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_view_appointment/s/<%= result[0].Employee_id %>">ดูการนัดหมายการซ่อม</a>
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_service/s">ดูรายงานการซ่อม </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_employeepage/s/<%= result[0].Employee_id %>">ดูรายงานการซ่อม</a>
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_employeepage/s">ดูการนัดหมายการซ่อม</a>
                                                     </li>
 
                                                     <li class="nav-item">
-                                                        <a class="nav-link active" aria-current="page" href="#">ข้อมูลพนักงาน</a>
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_employees/s">ข้อมูลพนักงาน</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link active" aria-current="page" href="#">สมาชิกผู้ใช่งาน</a>
+                                                        <a class="nav-link active" aria-current="page" href="/admins/admin_user/s">สมาชิกผู้ใช่งาน</a>
                                                     </li>
-
-
 
                                                 </ul>
                                                 <a class="navbar-brand" href="#">

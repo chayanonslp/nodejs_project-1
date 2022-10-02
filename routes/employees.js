@@ -635,6 +635,10 @@ router.post('/profile_employees/edit', ifNotLoggedin, function(req, res, next) {
 
 
     })
+    db.query(`UPDATE email_pass set  Employee_email = ?
+    WHERE Employee_id = '${Employee_email}'`, [Employee_email], (err, res, fields) => {
+
+    })
     res.redirect('/employees/emProfiles');
 });
 

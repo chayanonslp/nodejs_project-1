@@ -10,8 +10,11 @@
     <title>ตรวจสอบ</title>
 </head>
 
-<body class="body" style="background-color: #e0e0e0;">
+<body>
+
     <%- include("../navbar") %>
+        <br><br>
+
         <div class="container">
             <div class="card-body">
                 <div class="page-content container card">
@@ -20,15 +23,18 @@
                         <img src="/images/1022.png  ">
 
                     </div>
-
-                    <div class="page-header text-blue-d2">
+                    <div class="col-md-6">
                         <h1 class="page-title text-secondary-d1">
                             ใบเสร็จ
                             <small class="page-info">
-     <i class="fa fa-angle-double-right text-80"></i>
-     หมายเลขใบเสร็จ:<%=result_HR[0].Payment_code_id%>
-        </small>
+                                <i class="fa fa-angle-double-right text-80"></i>
+                                หมายเลขใบเสร็จ:<%=result_HR[0].Payment_code_id%>
+                            </small>
                         </h1>
+
+                    </div>
+                    <div class="page-header text-blue-d2">
+
                         <div class="page-tools">
                             <div class="action-buttons">
                                 <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print" onclick="window.print()" id="print">
@@ -67,7 +73,7 @@
                                                 Line : 094-1764047
                                             </div>
                                             <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-400">094-1764047 ,
-                                                083-2796566</b></div>
+                                                    083-2796566</b></div>
                                         </div>
                                         <!-- <div class="text-grey-m2"> <img id="imgqr" src="" style="width: 150px; object-fit: contain ;">
 
@@ -86,28 +92,38 @@
                                                 ใบแจ้งหนี้
                                             </div>
 
-                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">รหัสแจ้งซ่อม:</span> #
+                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
+                                                <span class="text-600 text-90">รหัสแจ้งซ่อม:</span> #
                                                 <%=result_HR[0].Hotify_repaiv_id%>
 
                                             </div>
 
-                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">วันที่ออกใบเสร็จ:</span>
+                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
+                                                <span class="text-600 text-90">วันที่ออกใบเสร็จ:</span>
                                                 <%=result_HR[0].Repair_date%>
                                             </div>
-                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">วันที่แจ้งซ่อม:</span>
+                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
+                                                <span class="text-600 text-90">วันที่แจ้งซ่อม:</span>
                                                 <%=result_HR[0].Repair_noticedate%>
                                             </div>
 
-                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">สถานะ:</span>
+                                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
+                                                <span class="text-600 text-90">สถานะ:</span>
 
                                                 <%if(result_HR[0].statuse==='สำเร็จ'){%>
-                                                    <span class="btn btn-success badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                    <span class="btn btn-success badge-pill px-25">
+                                                        <%=result_HR[0].statuse%>
+                                                    </span>
                                                     <%}%>
                                                         <%if(result_HR[0].statuse==='รอตรวจสอบ'){%>
-                                                            <span class="btn btn-secondary badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                            <span class="btn btn-secondary badge-pill px-25">
+                                                                <%=result_HR[0].statuse%>
+                                                            </span>
                                                             <%}%>
                                                                 <%if(result_HR[0].statuse==='ค้างชำระ'){%>
-                                                                    <span class="btn btn-warning badge-pill px-25"> <%=result_HR[0].statuse%></span>
+                                                                    <span class="btn btn-warning badge-pill px-25">
+                                                                        <%=result_HR[0].statuse%>
+                                                                    </span>
                                                                     <%}%>
                                             </div>
 
@@ -125,16 +141,16 @@
                                             <div class="d-none d-sm-block col-1">#</div>
                                             <div class="col-9 col-sm-4"> รหัสอุปกรณ์
                                             </div>
-                                            <div class="d-none d-sm-block col-3 col-sm-1">
+                                            <div class="d-none d-sm-block col-1 col-sm-1">
 
                                             </div>
-                                            <div class="d-none d-sm-block col-3 col-sm-1">จำนวน
+                                            <div class="d-none d-sm-block col-4 col-sm-2">จำนวน
 
                                             </div>
-                                            <div class="d-none d-sm-block col-sm-1">ราคา</div>
+                                            <div class="d-none d-sm-block col-sm-2">ราคา</div>
 
-                                            <div class="d-none d-sm-block col-sm-1">รวม</div>
-                                            <div class="d-none d-sm-block col-sm-2"></div>
+                                            <div class="d-none d-sm-block col-sm-2">รวม</div>
+
                                         </div>
                                         <hr />
                                         <div class="text-95 text-secondary-d3">
@@ -146,20 +162,20 @@
                                                     <%=result_HR[0].Equipment_name%>
 
                                                 </div>
-                                                <div class="d-none d-sm-block col-3 col-sm-1">
+                                                <div class="d-none d-sm-block col-2 col-sm-1">
                                                     <!-- จำนวน -->
                                                 </div>
-                                                <div class="d-none d-sm-block col-1 text-95">
+                                                <div class="d-none d-sm-block col-sm-2 text-95">
                                                     <%=result_HR[0].Price%>
                                                 </div>
-                                                <div class="col-1 text-secondary-d2">
+                                                <div class="d-none d-sm-block col-sm-1">
                                                     <%=result_HR[0].Price%>
                                                 </div>
+
                                                 <div class="col-1 text-secondary-d2">
-                                                    บาท
+                                                    <h3>บาท</h3>
                                                 </div>
                                             </div>
-
                                             <% Object.values(result_AP).forEach(function(result_APs, index){ %>
                                                 <div class="text-95 text-secondary-d3">
                                                     <div class="row mb-2 mb-sm-0 py-25">
@@ -175,18 +191,19 @@
                                                             <%=result_APs.ap_quantity%>
                                                                 <!-- จำนวน -->
                                                         </div>
-                                                        <div class="d-none d-sm-block col-1 text-95">
+                                                        <div class="d-none d-sm-block col-2 text-95">
                                                             <%=result_APs.ap_price%>
                                                                 <!-- ราคา -->
                                                         </div>
 
                                                         <div class="col-1 text-secondary-d2">
-                                                            <%const ap_price = result_APs.ap_price * result_APs.ap_quantity%>
+                                                            <%const ap_price=result_APs.ap_price *
+                                                                result_APs.ap_quantity%>
                                                                 <%=ap_price%>
 
                                                         </div>
-                                                        <div class="col-1 text-secondary-d2">
-                                                            บาท
+                                                        <div class="col-1 text-secondary-d1">
+                                                            <h3>บาท</h3>
 
                                                         </div>
                                                     </div>
@@ -212,26 +229,30 @@
                                                 ยอดรวม
                                             </div>
                                             <div class="col-5">
-                                                <span class="text-120 text-secondary-d1"><%=sum +result_HR[0].Price%> บาท</span>
+                                                <span class="text-120 text-secondary-d1">
+                                                    <%=sum +result_HR[0].Price%> บาท
+                                                </span>
                                                 <input type="hidden" name="Price" id="Price" value="<%=sum +result_HR[0].Price%>">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <hr />
-                                <span class="text-secondary-d1 text-105">Thank you for your business / ขอบคุณสำหรับธุรกิจของคุณ</span>
+                                <span class="text-secondary-d1 text-105">Thank you for your business /
+                                    ขอบคุณสำหรับธุรกิจของคุณ</span>
 
-                                <div class="">
+                                <div class="hidden">
                                     <div class="card-body">
-                                        <div class="center">
-                                            <img src="/slip_Photo/<%=result_HR[0].slip%>" width="300" height="auto" class="rounded mx-auto d-block" />
+                                        <div class="center" type="hidden">
+
+                                            <img src="/slip_Photo/<%= result_HR[0].slip%>" width="300" height="auto" class="rounded mx-auto d-block" />
                                         </div>
                                     </div>
                                 </div>
                                 <input type="hidden" class="form-control" name="Employee_id" id="Employee_id" value="<%= result[0].Employee_id %>">
-                                <%if(result_HR[0].statuse === "สำเร็จ"){%>
+                                <%if(result_HR[0].statuse==="สำเร็จ" ){%>
                                     <% }%>
-                                        <%if(result_HR[0].statuse === "รอตรวจสอบ"){%>
+                                        <%if(result_HR[0].statuse==="รอตรวจสอบ" ){%>
                                             <form action="/employees/up_statuse/s" method="post">
                                                 <input type="hidden" name="Payment_code_id" value=" <%=result_HR[0].Payment_code_id%>">
                                                 <a type="submit" href="/employees/slip_record/s" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-3">ยกเลิก</a>

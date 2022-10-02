@@ -125,26 +125,18 @@ router.post('/login', [
                                 }
                                 if (result[0].role === 3) {
                                     const role = result[0].role
-                                    db.query(`SELECT * FROM employee WHERE Employee_email = ${db.escape(email)};`,
+                                    db.query(`SELECT * FROM employee WHERE Employee_email = ${db.escape(email) };`,
                                         (err, result) => {
                                             token = jwt.sign({ id: result[0].Employee_id }, JWT_SECRET, { expiresIn: '1h' });
-                                            db.query(
-                                                `UPDATE employee SET Employee_login = now() WHERE Employee_id = '${result[0].Employee_id}'`
-                                            );
-                                            db.query(`SELECT * FROM equipment`,
-                                                (err, result_eq) => {
-                                                    return res.render('admins/admin_equipment', {
-                                                        token,
-                                                        result,
-                                                        result_eq,
-                                                        role
-                                                    })
-                                                });
+                                            db.query(`
+                                                UPDATE employee SET Employee_login = now() WHERE Employee_id = '${result[0].Employee_id}'`);
+                                            req.session.isLoggedIn = true;
+                                            req.session.userID = result[0].Employee_id;
+                                            res.redirect('admins/admin_equipment/s');
                                         }
 
                                     )
                                 }
-
                             }
 
                         }
