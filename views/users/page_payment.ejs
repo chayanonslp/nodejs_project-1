@@ -33,10 +33,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body ">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th>รหัสแจ้งซ่อม</th>
                                                 <th>รหัสอุปกรณ์</th>
                                                 <th>อุปกรณ์</th>
@@ -52,7 +52,7 @@
                                         </thead>
                                         <% Object.values(result_HR).forEach(function(result_HRs){%>
                                             <tbody>
-                                                <tr>
+                                                <tr class="text-center">
                                                     <td>
                                                         <%= result_HRs.Hotify_repaiv_id %>
                                                     </td>
@@ -63,7 +63,9 @@
                                                         <img src="/Eqimage/<%= result_HRs.Eq_image %>" width="100" height="auto" class="img-fluid" />
                                                     </td>
                                                     <td>
-                                                        <%= result_HRs.Equipment_name %>
+                                                        <p style="text-align:justify;">
+                                                            <%= result_HRs.Equipment_name %>
+                                                        </p>
                                                     </td>
 
                                                     <td>
@@ -95,7 +97,7 @@
                                                         <span class="btn btn-success badge-pill px-4 float-right mt-3 mt-lg-0 my-3"><%= result_HRs.statuse %></span>
                                                     </td>
                                                     <td>
-                                                        <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" aria-current="page" href="/users/confirm_repair/s/<%= result_HRs.Hotify_repaiv_id %>">ใบเสร็จ</a>
+                                                        <a type="submit" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-0" href="/users/confirm_repair/s/<%= result_HRs.Hotify_repaiv_id %>">ใบเสร็จ</a>
                                                     </td>
                                                 </tr>
                                             </tbody>

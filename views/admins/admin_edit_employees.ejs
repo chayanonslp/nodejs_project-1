@@ -15,34 +15,35 @@
 
 </head>
 
-<body style="background-color: #e0e0e0;">
-    <%- include("../navbar") %>
-        <div class="container profile">
+<body>
+    <%- include("../navbar") %><br><br>
+        <div class="container profile b">
             <div class="card  bg-light mb-3">
                 <div class="card-body">
                     <form action="/admins/admin_employees/edit" method="post">
                         <div class="col-sm-15 ">
                             <div class="col-xs-12 col-sm-10 card ">
-                                <h1><strong>ข้อมูลพนักงาน</strong></h1>
-                                <hr>
                                 <div class="card-body">
-                                    <img src="/image/<%= result_edit_ep[0].Employee_Photo %>" class="rounded mx-auto d-block" width="200px" height="auto" alt="...">
-                                </div>
-                                <hr>
-                                <form>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputName">ชื่อ-สกุล </label>
-                                            <input type="text" class="form-control" id="inputName" name="Employee_name" value="<%= result_edit_ep[0].Employee_name %>" maxlength="50">
-                                        </div>
+                                    <h1><strong>ข้อมูลพนักงาน</strong></h1>
+                                    <hr>
+                                    <div class="card-body">
+                                        <img src="/image/<%= result_edit_ep[0].Employee_Photo %>" class="rounded mx-auto d-block" width="200px" height="auto" alt="...">
+                                    </div>
+                                    <hr>
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputName">ชื่อ-สกุล </label>
+                                                <input type="text" class="form-control" id="inputName" name="Employee_name" value="<%= result_edit_ep[0].Employee_name %>" maxlength="50">
+                                            </div>
 
-                                        <div class="form-group col-md-4">
-                                            <label for="inputEmail4">E-Mail</label>
-                                            <input type="email" class="form-control" id="inputEmail4" name="Employee_email" value="<%= result_edit_ep[0].Employee_email %>" maxlength="20">
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputState">เพศ</label>
-                                            <select id="inputState" class="form-control" name="Employee_lgbt">
+                                            <div class="form-group col-md-4">
+                                                <label for="inputEmail4">E-Mail</label>
+                                                <input type="email" class="form-control" id="inputEmail4" name="Employee_email" value="<%= result_edit_ep[0].Employee_email %>" maxlength="20">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputState">เพศ</label>
+                                                <select id="inputState" class="form-control" name="Employee_lgbt">
                                                               <option selected><%= result_edit_ep[0].Employee_lgbt %></option>
                                                               <%if(result_edit_ep[0].Employee_lgbt==="ชาย"){ %>
                                                               <option>หญิง</option>
@@ -51,21 +52,22 @@
                                                                 <option>ชาย</option>
                                                                 <%} %>
                                                     </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-2">
-                                            <label for="inputphone">เบอร์โทรศัพท์ </label>
-                                            <input type="text" class="form-control" id="inputphone" name="Employee_phone" value="<%= result_edit_ep[0].Employee_phone %>" maxlength="10">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <label for="inputphone">เบอร์โทรศัพท์ </label>
+                                                <input type="text" class="form-control" id="inputphone" name="Employee_phone" value="<%= result_edit_ep[0].Employee_phone %>" maxlength="10">
+                                            </div>
+                                            <div class="form-group col-md-10">
+                                                <label for="inputAddress">ที่อยู่</label>
+                                                <input type="text" class="form-control" id="inputAddress" name="Employee_address" value="<%= result_edit_ep[0].Employee_address %>" maxlength="255">
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-10">
-                                            <label for="inputAddress">ที่อยู่</label>
-                                            <input type="text" class="form-control" id="inputAddress" name="Employee_address" value="<%= result_edit_ep[0].Employee_address %>" maxlength="255">
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="Employee_id" value="<%= result_edit_ep[0].Employee_id %>">
-                                    <input type="hidden" name="email" value="<%= result_edit_ep[0].Employee_email %>">
-                                </form>
+                                        <input type="hidden" name="Employee_id" value="<%= result_edit_ep[0].Employee_id %>">
+                                        <input type="hidden" name="email" value="<%= result_edit_ep[0].Employee_email %>">
+                                    </form>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary  col-2 ">แก้ไขข้อมูล</button>
                         </div>

@@ -374,15 +374,15 @@ router.get('/air_parts/s/:id', ifNotLoggedin, function(req, res, next) {
     const em_id = req.session.userID; //รหัสพนักงาน Employee_id
     const Ad_id = req.params.id
     const role = 2
+    console.log(em_id, Ad_id)
     db.query(`SELECT * FROM employee WHERE Employee_id = ${db.escape(em_id)};`,
         (err, result) => {
             if (err) {
                 console.log(err)
             } else {
                 db.query(`SELECT * FROM appointment INNER JOIN hotify_repaiv on hotify_repaiv.Hotify_repaiv_id = appointment.Hotify_repaiv_id
-                INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
-                WHERE appointment.Appointment_date_id =${db.escape(Ad_id)}`,
-
+                    INNER JOIN equipment ON hotify_repaiv.Equipment_id = equipment.Equipment_id
+                    WHERE appointment.Appointment_date_id =${db.escape(Ad_id)}`,
                     (err, result_HR) => {
                         if (err) throw err
                         const he_id = result_HR[0].Hotify_repaiv_id;
@@ -415,6 +415,7 @@ router.get('/air_parts/s/:id', ifNotLoggedin, function(req, res, next) {
 router.get('/air_parts/del/:id/:id2', ifNotLoggedin, function(req, res, next) {
     const ap_id = req.params.id
     const id = req.params.id2
+    console.log(id)
     db.query(`DELETE FROM air_parts WHERE ap_id = ${db.escape(ap_id)}`, (err, results) => {
         if (err) throw err
         res.redirect(`/employees/air_parts/s/${id}`);
@@ -454,6 +455,7 @@ router.get('/service/s', ifNotLoggedin, function(req, res, next) {
                 })
         })
 })
+
 
 /* POST employee */
 /* POST employee */
@@ -624,6 +626,7 @@ router.post('/up_statuse/s', ifNotLoggedin,
 // edit profile /employees
 router.post('/profile_employees/edit', ifNotLoggedin, function(req, res, next) {
     const employees_id = req.session.userID;
+    const email = req.body.email;
     const Employee_name = req.body.Employee_name;
     const Employee_email = req.body.Employee_email;
     const Employee_phone = req.body.Employee_phone;
@@ -632,14 +635,19 @@ router.post('/profile_employees/edit', ifNotLoggedin, function(req, res, next) {
     db.query(`UPDATE employee set Employee_name = ? , Employee_email = ? , Employee_phone = ? , Employee_address = ? ,Employee_lgbt  = ?
      WHERE Employee_id = '${employees_id}'`, [Employee_name, Employee_email, Employee_phone, Employee_address, Employee_lgbt], (err, res, fields) => {
         if (err) throw err;
-
-
     })
-    db.query(`UPDATE email_pass set  Employee_email = ?
-    WHERE Employee_id = '${Employee_email}'`, [Employee_email], (err, res, fields) => {
-
-    })
-    res.redirect('/employees/emProfiles');
+    db.query(`SELECT id FROM email_pass WHERE email = ${db.escape(email)}`,
+        (err, result) => {
+            if (err) throw err
+            console.log(result[0])
+            const id_ep = result[0].id;
+            db.query(`UPDATE email_pass set email = ? 
+          WHERE id = '${id_ep}'`, [Employee_email], (err, res, fields) => {
+                if (err) throw err
+                console.log(err)
+            });
+            res.redirect(`/employees/emProfiles`)
+        });
 });
 
 module.exports = router;

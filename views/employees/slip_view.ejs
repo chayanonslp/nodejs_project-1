@@ -234,8 +234,15 @@
                                         <%if(result_HR[0].statuse === "รอตรวจสอบ"){%>
                                             <form action="/employees/up_statuse/s" method="post">
                                                 <input type="hidden" name="Payment_code_id" value=" <%=result_HR[0].Payment_code_id%>">
-                                                <a type="submit" href="/employees/slip_record/s" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-3">ยกเลิก</a>
-                                                <button type="submit" class="btn btn-success  px-4 float-right mt-3 mt-lg-3">บันทึก</button>
+                                                <div class="form-row">
+                                                    <div class="form-group col-10">
+                                                        <button type="submit" class="btn btn-success  px-4 float-right mt-3 mt-lg-3">บันทึก</button>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <a type="submit" href="/employees/slip_record/s" class="btn btn-info btn-bold px-4 float-right mt-2 mt-lg-3">ยกเลิก</a>
+
+                                                    </div>
+                                                </div>
                                             </form>
                                             <% }%>
 

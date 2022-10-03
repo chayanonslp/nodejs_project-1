@@ -15,7 +15,7 @@
     <%- include("../navbar") %>
         <br><br>
 
-        <div class="container">
+        <div class="container b">
             <div class="card-body">
                 <div class="page-content container card">
                     <br>
@@ -142,10 +142,8 @@
                                             <div class="col-9 col-sm-4"> รหัสอุปกรณ์
                                             </div>
                                             <div class="d-none d-sm-block col-1 col-sm-1">
-
                                             </div>
                                             <div class="d-none d-sm-block col-4 col-sm-2">จำนวน
-
                                             </div>
                                             <div class="d-none d-sm-block col-sm-2">ราคา</div>
 
@@ -165,6 +163,9 @@
                                                 <div class="d-none d-sm-block col-2 col-sm-1">
                                                     <!-- จำนวน -->
                                                 </div>
+                                                <div class="d-none d-sm-block col-2 col-sm-1">
+
+                                                </div>
                                                 <div class="d-none d-sm-block col-sm-2 text-95">
                                                     <%=result_HR[0].Price%>
                                                 </div>
@@ -173,12 +174,12 @@
                                                 </div>
 
                                                 <div class="col-1 text-secondary-d2">
-                                                    <h3>บาท</h3>
+                                                    บาท
                                                 </div>
                                             </div>
                                             <% Object.values(result_AP).forEach(function(result_APs, index){ %>
                                                 <div class="text-95 text-secondary-d3">
-                                                    <div class="row mb-2 mb-sm-0 py-25">
+                                                    <div class="row mb-2 mb-sm-0 py-25 font-size:100px">
 
                                                         <div class="d-none d-sm-block col-1">
                                                             <%= index+2%>
@@ -191,19 +192,21 @@
                                                             <%=result_APs.ap_quantity%>
                                                                 <!-- จำนวน -->
                                                         </div>
-                                                        <div class="d-none d-sm-block col-2 text-95">
+                                                        <div class="d-none d-sm-block col-2 col-sm-1">
+
+                                                        </div>
+                                                        <div class="d-none d-sm-block col-2 text-100">
                                                             <%=result_APs.ap_price%>
                                                                 <!-- ราคา -->
                                                         </div>
 
-                                                        <div class="col-1 text-secondary-d2">
-                                                            <%const ap_price=result_APs.ap_price *
-                                                                result_APs.ap_quantity%>
+                                                        <div class="col-1 text-secondary-d2  ">
+                                                            <%const ap_price = result_APs.ap_price*result_APs.ap_quantity%>
                                                                 <%=ap_price%>
 
                                                         </div>
                                                         <div class="col-1 text-secondary-d1">
-                                                            <h3>บาท</h3>
+                                                            บาท
 
                                                         </div>
                                                     </div>

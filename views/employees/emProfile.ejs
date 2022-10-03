@@ -61,7 +61,8 @@
                                         <div class="form-group col-md-10">
                                             <label for="inputAddress">ที่อยู่</label>
                                             <input type="text" class="form-control" id="inputAddress" name="Employee_address" value="<%= result[0].Employee_address %>" maxlength="255">
-                                        </div>
+
+                                        </div> <input type="hidden" name="email" value="<%= result[0].Employee_email %>">
                                     </div>
                                 </form>
                             </div>

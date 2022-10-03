@@ -2,6 +2,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 
@@ -158,7 +159,7 @@
                                                                             </div>
                                                                             <div class="col-1 text-secondary-d2">
 
-                                                                                <a type="button" style="color: red;" href="/employees/air_parts/del/<%=result_APs.ap_id%>/<%=result_HR[0].Hotify_repaiv_id%>">x  </a>
+                                                                                <a type="button" style="color: red;" href="/employees/air_parts/del/<%=result_APs.ap_id%>/<%=result_HR[0].Appointment_date_id%>">x </a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -199,24 +200,37 @@
                                                             <input type="hidden" class="form-control" name="Price" id="Price" value=" <%=result_HR[0].Price%>">
                                                             <button type="submit" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0 " id="payment">แจ้งชำระ</button>
                                                         </form>
-                                                        <form action="/employees/air_part/s" method="post">
-                                                            <div class="form-group input-group mb-3 ">
-                                                                <h5>อุปกรณ์</h5>
-                                                                <div>
-                                                                    <input type="text" placeholder="อุปกรณ์ *" class="form-control" style="width:250px;" name="ap_air_parts" id="ap_air_parts">
+                                                        <div class="container ">
+                                                            <div style="background-color: #e0e0e0;" class="card col-md-8">
+                                                                <div class="card-body">
+                                                                    <form action="/employees/air_part/s" method="post">
+                                                                        <div class="form-group input-group mb-3 ">
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-">
+                                                                                    <h5>อุปกรณ์</h5>
+
+                                                                                    <input type="text" placeholder="อุปกรณ์ *" class="form-control" style="width:250px;" name="ap_air_parts" maxlength="20">
+                                                                                </div>
+                                                                                <div class="form-group ">
+                                                                                    <h5>จำนวน</h5>
+                                                                                    <div class="input-box ">
+                                                                                        <input type="text" placeholder="จำนวน *" class="form-control" style="width:100px;" name="ap_quantity" maxlength="5">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group col-2">
+                                                                                    <h5>ราคา</h5>
+                                                                                    <div class="input-box ">
+                                                                                        <input type="text" placeholder="ราคา *" class="form-control" style="width:100px;" name="ap_price" maxlength="6">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <input type="hidden" name="Hotify_repaiv_id" value="<%=result_HR[0].Hotify_repaiv_id%>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-info">อุปกรณ์</button>
+                                                                    </form>
                                                                 </div>
-                                                                <h5>จำนวน</h5>
-                                                                <div class="input-box ">
-                                                                    <input type="text" placeholder="จำนวน *" class="form-control" style="width:100px;" name="ap_quantity" id="ap_quantity">
-                                                                </div>
-                                                                <h5>ราคา</h5>
-                                                                <div class="input-box ">
-                                                                    <input type="text" placeholder="ราคา *" class="form-control" style="width:100px;" name="ap_price" id="ap_price">
-                                                                </div>
-                                                                <input type="hidden" name="Hotify_repaiv_id" value="<%=result_HR[0].Hotify_repaiv_id%>">
                                                             </div>
-                                                            <button type="submit" class="btn btn-info">อุปกรณ์</button>
-                                                        </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

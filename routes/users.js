@@ -337,6 +337,7 @@ router.post('/slip_record/s', upload.single("slip_Photo"), ifNotLoggedin,
 router.post('/profile_user/edit', ifNotLoggedin, function(req, res, next) {
 
     const User_id = req.session.userID;
+    const email = req.body.email;
     const User_name = req.body.User_name;
     const User_email = req.body.User_email;
     const User_phone = req.body.User_phone;
@@ -346,6 +347,17 @@ router.post('/profile_user/edit', ifNotLoggedin, function(req, res, next) {
         if (err) throw err
 
     })
-    res.redirect('/users/useProfiles');
+    db.query(`SELECT id FROM email_pass WHERE email = ${db.escape(email)}`,
+        (err, result) => {
+            if (err) throw err
+            console.log(result[0])
+            const id_ep = result[0].id;
+            db.query(`UPDATE email_pass set email = ? 
+          WHERE id = '${id_ep}'`, [User_email], (err, res, fields) => {
+                if (err) throw err
+                console.log(err)
+            });
+            res.redirect(`/users/useProfiles`)
+        });
 });
 module.exports = router;
